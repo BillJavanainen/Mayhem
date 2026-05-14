@@ -6,72 +6,84 @@
 <title>Mayhem On Water Incident Report Timeline</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f3ee;--surface:#eeece7;--surface2:#e8e6e0;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.13);--text:#1a1c1e;--muted:#7a7870;--dim:#b0ae a8;}
+:root{--bg:#f2f0ea;--surface:#e8e6df;--surface2:#dddbd3;--border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.15);--text:#1c1e20;--muted:#7c7a72;--dim:#b5b3aa;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;min-height:100vh;padding:2.5rem 2rem 3rem;}
-body::before{content:'';}
-.page{position:relative;z-index:0;max-width:1340px;margin:0 auto;}
-.hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border2);}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;min-height:100vh;padding:2rem 2rem 3rem;}
+.page{max-width:1400px;margin:0 auto;}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border2);}
 .hdr-left{display:flex;flex-direction:column;gap:0.3rem;}
 .hdr-eyebrow{font-size:10px;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;}
 .hdr-title{font-family:'JetBrains Mono',monospace;font-size:1.35rem;font-weight:500;line-height:1.3;letter-spacing:-0.01em;}
 .hdr-title em{color:#e24b4a;font-style:normal;}
 .hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem;}
-.hdr-date{font-size:11px;color:var(--muted);letter-spacing:0.1em;}
-.hdr-boats{font-size:12px;color:var(--text);}
-.legend{display:flex;gap:0;flex-wrap:wrap;margin-bottom:1.5rem;}
-.legend-group{display:flex;align-items:center;gap:10px;margin-right:24px;flex-wrap:wrap;}
-.leg-sep{width:1px;height:14px;background:var(--border2);margin-right:24px;align-self:center;}
+.hdr-meta{font-size:11px;color:var(--muted);letter-spacing:0.08em;}
+
+/* DAY TABS */
+.day-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid var(--border2);}
+.day-tab{padding:8px 20px;font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;cursor:pointer;border:none;background:transparent;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.12s;}
+.day-tab:hover{color:var(--text);}
+.day-tab.active{color:#e24b4a;border-bottom-color:#e24b4a;font-weight:500;}
+
+/* LEGEND */
+.legend{display:flex;gap:0;flex-wrap:wrap;margin-bottom:1.25rem;}
+.legend-group{display:flex;align-items:center;gap:10px;margin-right:22px;flex-wrap:wrap;}
+.leg-sep{width:1px;height:14px;background:var(--border2);margin-right:22px;align-self:center;}
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
 .lsw{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
 .lcircle{border-radius:50%;flex-shrink:0;border:1.5px solid rgba(242,240,234,0.7);}
-.controls{display:flex;align-items:center;gap:7px;margin-bottom:1.5rem;flex-wrap:wrap;}
+
+/* CONTROLS */
+.controls{display:flex;align-items:center;gap:7px;margin-bottom:1.25rem;flex-wrap:wrap;}
 .ctrl-label{font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-right:2px;}
 .btn{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 12px;border-radius:2px;cursor:pointer;transition:all 0.12s;letter-spacing:0.04em;}
 .btn:hover{color:var(--text);border-color:rgba(0,0,0,0.35);}
 .btn.on{background:rgba(0,0,0,0.07);color:var(--text);border-color:rgba(0,0,0,0.3);}
 .ctrl-sep{width:1px;height:18px;background:var(--border2);margin:0 2px;}
 .search-wrap{position:relative;margin-left:auto;}
-.search-wrap input{background:var(--surface);border:1px solid var(--border2);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px 5px 28px;border-radius:2px;width:200px;outline:none;transition:border-color 0.12s;}
+.search-wrap input{background:var(--surface);border:1px solid var(--border2);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px 5px 28px;border-radius:2px;width:200px;outline:none;}
 .search-wrap input::placeholder{color:var(--dim);}
-.search-wrap input:focus{border-color:rgba(0,0,0,0.3);}
 .search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:12px;height:12px;stroke:var(--dim);fill:none;stroke-width:1.5;stroke-linecap:round;}
-.chart-wrap{width:100%;}
-.axis-row{display:flex;align-items:center;margin-bottom:4px;padding-left:52px;}
-.axis{flex:1;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);letter-spacing:0.04em;}
-.group-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin:10px 0 5px 52px;}
-.divider{height:1px;background:var(--border);margin:8px 0 8px 52px;}
-.boat-row{display:flex;align-items:center;gap:10px;margin-bottom:5px;opacity:1;transition:opacity 0.15s;}
+
+/* CHART */
+.axis-row{display:flex;margin-bottom:3px;padding-left:52px;}
+.axis{flex:1;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
+.group-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);margin:8px 0 4px 52px;}
+.divider{height:1px;background:var(--border);margin:6px 0 6px 52px;}
+.boat-row{display:flex;align-items:center;gap:10px;margin-bottom:5px;transition:opacity 0.15s;}
 .boat-row.dimmed{opacity:0.2;}
 .boat-row.hidden{display:none;}
-.boat-id{font-size:11px;font-weight:500;color:var(--text);width:42px;text-align:right;flex-shrink:0;letter-spacing:0.02em;}
+.boat-id{font-size:11px;font-weight:500;color:var(--text);width:42px;text-align:right;flex-shrink:0;}
 .track-wrap{flex:1;position:relative;}
 .track{width:100%;height:22px;background:var(--surface);border-radius:3px;position:relative;overflow:visible;}
 .water-bar{position:absolute;top:0;height:100%;border-radius:3px;background:#1d9e75;opacity:0.12;z-index:0;}
 .water-tick{position:absolute;top:0;width:2px;height:100%;background:#0f6e56;z-index:2;}
-.wlabel{position:absolute;bottom:-13px;font-size:8px;color:var(--dim);white-space:nowrap;}
+.wlabel{position:absolute;bottom:-12px;font-size:8px;color:var(--dim);white-space:nowrap;}
 .prop-seg{position:absolute;top:3px;height:16px;border-radius:2px;background:#1d9e75;opacity:0.45;z-index:1;}
 .grid-line{position:absolute;top:0;height:100%;width:0.5px;background:rgba(0,0,0,0.07);z-index:0;}
 .dot{position:absolute;border-radius:50%;cursor:pointer;z-index:10;transform:translate(-50%,-50%);top:50%;border:1.5px solid rgba(242,240,234,0.85);transition:transform 0.1s;}
-.dot:hover{transform:translate(-50%,-50%) scale(1.45);z-index:20;}
-.dot.active{transform:translate(-50%,-50%) scale(1.45);z-index:20;}
-.tt{position:absolute;z-index:200;top:28px;width:370px;background:#f8f6f0;border:1px solid var(--border2);border-radius:4px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.6);}
+.dot:hover,.dot.active{transform:translate(-50%,-50%) scale(1.45);z-index:20;}
+.stats-bar{display:flex;gap:16px;align-items:center;padding:0 0 0 52px;margin-bottom:6px;flex-wrap:wrap;}
+.stat-chip{font-size:10px;color:var(--muted);}
+.stat-chip span{color:var(--text);font-weight:500;}
+
+/* TOOLTIP */
+.tt{position:absolute;z-index:200;top:28px;width:380px;background:#f8f6f0;border:1px solid var(--border2);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
 .tt-head{padding:8px 12px 6px;border-bottom:1px solid var(--border);}
-.tt-boat{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.04em;}
+.tt-boat{font-size:13px;font-weight:500;letter-spacing:0.04em;}
 .tt-tags{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;}
 .tt-tag{font-size:9px;padding:2px 7px;border-radius:2px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;}
+.tt-sev-note{font-size:9px;color:var(--dim);margin-top:5px;line-height:1.4;font-style:italic;}
 .tt-cols{display:grid;grid-template-columns:96px 1fr;background:rgba(0,0,0,0.04);border-bottom:1px solid var(--border);}
 .tt-col-h{padding:3px 8px;font-size:8px;font-weight:500;color:var(--dim);letter-spacing:0.12em;text-transform:uppercase;}
-.tt-body{max-height:230px;overflow-y:auto;}
+.tt-body{max-height:220px;overflow-y:auto;}
 .tt-row{display:grid;grid-template-columns:96px 1fr;border-bottom:1px solid var(--border);}
 .tt-row:last-child{border-bottom:none;}
 .tt-cell{padding:4px 8px;font-size:11px;line-height:1.45;}
 .tt-ts{color:var(--dim);font-size:10px;border-right:1px solid var(--border);padding-top:5px;white-space:nowrap;}
-.tt-who{color:var(--muted);font-size:10px;font-weight:500;border-right:1px solid var(--border);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tt-txt{color:var(--text);}
-.tt-sev-note{font-size:9px;color:var(--dim);margin-top:5px;line-height:1.4;font-style:italic;}
 .tt-empty{padding:10px 12px;font-size:11px;color:var(--dim);}
-footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+
+footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;}
 .ft{font-size:9px;color:var(--dim);letter-spacing:0.1em;}
 </style>
 </head>
@@ -84,28 +96,34 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);dis
     <div class="hdr-title">Mayhem On Water<br><em>Incident Report Timeline</em></div>
   </div>
   <div class="hdr-right">
-    <span class="hdr-date">2026 — 05 — 11</span>
-    <span class="hdr-boats" id="hdr-count">16 boats</span>
+    <span class="hdr-meta">Mon–Wed · 2026-05-11 to 05-13</span>
+    <span class="hdr-meta" id="hdr-count"></span>
   </div>
+</div>
+
+<div class="day-tabs">
+  <button class="day-tab active" data-day="05/11">Monday 05/11</button>
+  <button class="day-tab" data-day="05/12">Tuesday 05/12</button>
+  <button class="day-tab" data-day="05/13">Wednesday 05/13</button>
 </div>
 
 <div class="legend">
   <div class="legend-group">
     <div class="li"><div class="lsw" style="background:#e24b4a;"></div>autonomy</div>
-    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>mechanical / hardware</div>
+    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>mechanical</div>
     <div class="li"><div class="lsw" style="background:#1d9e75;"></div>software</div>
     <div class="li"><div class="lsw" style="background:#888780;"></div>ops</div>
   </div>
   <div class="leg-sep"></div>
   <div class="legend-group">
-    <div class="li"><div class="lcircle" style="width:14px;height:14px;background:#777;"></div>critical</div>
-    <div class="li"><div class="lcircle" style="width:9px;height:9px;background:#777;"></div>moderate</div>
-    <div class="li"><div class="lcircle" style="width:5px;height:5px;background:#777;"></div>minor</div>
+    <div class="li"><div class="lcircle" style="width:14px;height:14px;background:#aaa;"></div>critical</div>
+    <div class="li"><div class="lcircle" style="width:9px;height:9px;background:#aaa;"></div>moderate</div>
+    <div class="li"><div class="lcircle" style="width:5px;height:5px;background:#aaa;"></div>minor</div>
   </div>
   <div class="leg-sep"></div>
   <div class="legend-group">
     <div class="li"><div class="lsw" style="background:#1d9e75;opacity:0.45;"></div>under propulsion</div>
-    <div class="li"><div class="lsw" style="background:#0f6e56;opacity:0.25;"></div>on-water window</div>
+    <div class="li"><div class="lsw" style="background:#0f6e56;opacity:0.2;"></div>on-water window</div>
     <div class="li" style="font-size:10px;color:var(--dim);">click dot → Slack thread</div>
   </div>
 </div>
@@ -119,7 +137,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);dis
   <div class="ctrl-sep"></div>
   <span class="ctrl-label">type</span>
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
-  <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical / hardware</button>
+  <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical</button>
   <button class="btn" data-type="software" style="color:#1d9e75;">software</button>
   <button class="btn" data-type="ops">ops</button>
   <div class="search-wrap">
@@ -128,315 +146,517 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);dis
   </div>
 </div>
 
-<div class="chart-wrap">
-  <div class="axis-row"><div class="axis" id="axis"></div></div>
-  <div id="chart"></div>
-</div>
+<div id="day-view"></div>
 
 <footer>
-  <span class="ft">HAVOCAI // MAYHEM ON WATER INCIDENT REPORT TIMELINE // 2026-05-11</span>
+  <span class="ft">HAVOCAI // MAYHEM ON WATER INCIDENT REPORT TIMELINE // 2026-05-11 TO 05-13</span>
   <span class="ft" id="ft-count"></span>
 </footer>
 </div>
+
 <script>
-const DS=7*60+30,DE=18*60+30,SP=DE-DS;
+const DS=7*60+30, DE=18*60+30, SP=DE-DS;
 const HOURS=[8,9,10,11,12,13,14,15,16,17,18];
-function tM(ts){if(!ts||ts.startsWith('~'))return null;const p=ts.split(':').map(Number);return p[0]*60+p[1]+(p[2]||0)/60;}
+function tM(ts){if(!ts)return null;const p=ts.split(':').map(Number);return p[0]*60+p[1]+(p[2]||0)/60;}
 function pc(m){return((m-DS)/SP*100).toFixed(3)+'%';}
 function wp(a,b){return((b-a)/SP*100).toFixed(3)+'%';}
 function hm(ts){return ts.slice(0,5);}
-const TC={autonomy:'#e24b4a',mechanical:'#ef9f27',hardware:'#ef9f27',software:'#1d9e75',ops:'#888780'};
+const TC={autonomy:'#e24b4a',mechanical:'#ef9f27',software:'#1d9e75',ops:'#888780'};
 const SS={critical:14,moderate:9,minor:5};
-document.getElementById('axis').innerHTML=HOURS.map(h=>`<span>${h}:00</span>`).join('');
-const WATER={R100:{first:'08:33:17',last:'16:32:03'},R105:{first:'08:16:59',last:'16:33:24'},R108:{first:'11:33:34',last:'16:58:54'},R113:{first:'09:13:20',last:'16:47:54'},R117:{first:'07:51:22',last:'16:32:23'},R121:{first:'09:36:36',last:'16:56:17'},R122:{first:'12:11:08',last:'17:02:36'},R134:{first:'12:13:30',last:'17:21:32'},R135:{first:'11:52:21',last:'17:04:40'},R136:{first:'11:26:44',last:'17:17:01'},R137:{first:'08:05:38',last:'16:14:12'},R138:{first:'12:01:43',last:'17:22:52'},R139:{first:'07:57:16',last:'16:08:43'},R143:{first:'08:55:51',last:'16:18:36'},R145:{first:'08:26:51',last:'16:23:25'},R147:{first:'11:30:38',last:'17:13:46'}};
-const PROP={R100:[{a:'08:33',b:'08:34'},{a:'09:41',b:'09:48'},{a:'09:56',b:'09:57'},{a:'10:58',b:'10:59'},{a:'11:03',b:'11:05'},{a:'11:12',b:'11:17'},{a:'11:18',b:'11:19'},{a:'12:13',b:'12:16'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:14',b:'13:15'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:45'},{a:'14:50',b:'14:55'},{a:'14:56',b:'14:59'},{a:'16:25',b:'16:32'}],R105:[{a:'08:16',b:'08:17'},{a:'09:41',b:'09:56'},{a:'11:12',b:'11:19'},{a:'12:15',b:'12:20'},{a:'12:39',b:'12:50'},{a:'13:03',b:'13:08'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:57'},{a:'16:25',b:'16:33'}],R108:[{a:'11:33',b:'11:35'},{a:'11:58',b:'11:59'},{a:'12:03',b:'12:04'},{a:'12:07',b:'12:08'},{a:'12:23',b:'12:26'},{a:'12:58',b:'13:01'},{a:'13:03',b:'13:04'},{a:'13:06',b:'13:12'},{a:'13:27',b:'13:28'},{a:'13:42',b:'13:47'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:12'},{a:'14:30',b:'14:32'},{a:'14:36',b:'14:37'},{a:'14:52',b:'14:58'},{a:'15:12',b:'15:13'},{a:'15:21',b:'15:22'},{a:'15:31',b:'15:33'},{a:'15:50',b:'15:51'},{a:'15:53',b:'15:57'},{a:'16:49',b:'16:53'},{a:'16:57',b:'16:58'}],R113:[{a:'09:13',b:'09:14'},{a:'09:31',b:'09:33'},{a:'10:14',b:'10:29'},{a:'10:58',b:'10:59'},{a:'11:12',b:'11:19'},{a:'12:12',b:'12:17'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:14',b:'13:16'},{a:'13:24',b:'13:42'},{a:'14:41',b:'14:46'},{a:'14:50',b:'15:00'},{a:'16:12',b:'16:47'}],R117:[{a:'07:51',b:'07:52'},{a:'08:12',b:'08:13'},{a:'08:19',b:'08:21'},{a:'08:26',b:'08:29'},{a:'08:42',b:'08:43'},{a:'09:47',b:'09:48'},{a:'10:13',b:'10:28'},{a:'11:12',b:'11:22'},{a:'12:12',b:'12:13'},{a:'12:17',b:'12:18'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:09'},{a:'13:24',b:'13:42'},{a:'14:41',b:'15:02'},{a:'16:25',b:'16:32'}],R121:[{a:'09:37',b:'09:38'},{a:'09:41',b:'09:51'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:48'},{a:'13:03',b:'13:09'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:58'},{a:'16:25',b:'16:32'},{a:'16:46',b:'16:56'}],R122:[{a:'12:13',b:'12:15'},{a:'12:25',b:'12:26'},{a:'12:58',b:'13:13'},{a:'13:21',b:'13:22'},{a:'13:42',b:'13:46'},{a:'14:09',b:'14:10'},{a:'14:30',b:'14:32'},{a:'14:52',b:'14:58'},{a:'15:33',b:'15:38'},{a:'15:54',b:'15:56'},{a:'16:40',b:'16:41'},{a:'16:47',b:'16:48'},{a:'16:54',b:'16:55'},{a:'17:01',b:'17:02'}],R134:[{a:'12:13',b:'12:16'},{a:'12:25',b:'12:27'},{a:'12:58',b:'13:13'},{a:'13:49',b:'13:50'},{a:'14:52',b:'14:58'},{a:'15:56',b:'15:57'},{a:'16:48',b:'16:57'},{a:'17:20',b:'17:21'}],R135:[{a:'11:52',b:'11:53'},{a:'11:56',b:'11:57'},{a:'11:58',b:'11:59'},{a:'12:07',b:'12:08'},{a:'12:58',b:'13:11'},{a:'13:27',b:'13:29'},{a:'13:42',b:'13:46'},{a:'14:02',b:'14:12'},{a:'14:30',b:'14:37'},{a:'14:45',b:'14:59'},{a:'15:27',b:'15:28'},{a:'15:33',b:'15:34'},{a:'15:37',b:'15:40'},{a:'15:50',b:'16:02'},{a:'16:06',b:'16:13'},{a:'16:24',b:'16:35'},{a:'16:48',b:'17:04'}],R136:[{a:'11:26',b:'11:27'},{a:'12:07',b:'12:08'},{a:'12:24',b:'12:26'},{a:'12:58',b:'13:01'},{a:'13:04',b:'13:05'},{a:'13:06',b:'13:12'},{a:'13:22',b:'13:28'},{a:'13:42',b:'13:44'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:13'},{a:'14:30',b:'14:32'},{a:'14:36',b:'14:37'},{a:'14:52',b:'14:58'},{a:'15:12',b:'15:14'},{a:'15:21',b:'15:22'},{a:'15:29',b:'15:30'},{a:'15:33',b:'15:37'},{a:'15:53',b:'15:54'},{a:'15:58',b:'16:00'},{a:'16:06',b:'16:07'},{a:'16:10',b:'16:12'},{a:'16:25',b:'16:26'},{a:'16:29',b:'16:31'},{a:'16:33',b:'16:35'},{a:'16:48',b:'16:55'},{a:'17:16',b:'17:17'}],R137:[{a:'08:05',b:'08:06'},{a:'09:41',b:'10:00'},{a:'11:03',b:'11:19'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:56'},{a:'14:02',b:'14:03'},{a:'14:10',b:'14:51'},{a:'14:55',b:'15:55'},{a:'16:00',b:'16:14'}],R138:[{a:'12:01',b:'12:08'},{a:'12:23',b:'12:24'},{a:'12:58',b:'13:12'},{a:'13:27',b:'13:28'},{a:'13:42',b:'13:43'},{a:'13:49',b:'13:50'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:13'},{a:'14:31',b:'14:34'},{a:'14:45',b:'14:47'},{a:'14:52',b:'14:57'},{a:'15:21',b:'15:23'},{a:'15:31',b:'15:40'},{a:'15:44',b:'15:45'},{a:'15:50',b:'15:59'},{a:'16:00',b:'16:13'},{a:'16:29',b:'16:31'},{a:'16:33',b:'16:35'},{a:'16:48',b:'16:57'},{a:'17:21',b:'17:22'}],R139:[{a:'07:57',b:'07:58'},{a:'08:00',b:'08:01'},{a:'09:41',b:'09:56'},{a:'11:03',b:'11:17'},{a:'12:11',b:'12:14'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:08'},{a:'13:24',b:'13:44'},{a:'13:48',b:'14:05'},{a:'14:10',b:'14:11'},{a:'14:14',b:'14:48'},{a:'14:49',b:'15:55'},{a:'16:00',b:'16:08'}],R143:[{a:'08:55',b:'08:56'},{a:'09:47',b:'09:48'},{a:'10:28',b:'10:31'},{a:'11:03',b:'11:07'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:59'},{a:'14:02',b:'14:03'},{a:'14:11',b:'14:15'},{a:'14:17',b:'14:47'},{a:'14:54',b:'15:55'},{a:'16:00',b:'16:18'}],R145:[{a:'08:26',b:'08:27'},{a:'08:35',b:'08:36'},{a:'08:48',b:'08:49'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:56'},{a:'13:43',b:'13:56'},{a:'14:14',b:'14:48'},{a:'14:55',b:'14:56'},{a:'14:59',b:'15:55'},{a:'16:00',b:'16:23'}],R147:[{a:'11:30',b:'11:31'},{a:'11:38',b:'11:39'},{a:'12:04',b:'12:09'},{a:'12:24',b:'12:25'},{a:'12:58',b:'13:01'},{a:'13:03',b:'13:05'},{a:'13:06',b:'13:13'},{a:'14:52',b:'14:58'},{a:'16:25',b:'16:30'},{a:'16:48',b:'16:58'},{a:'17:12',b:'17:13'}]};
-const THREADS={
-R100:[
-  {dt:'05/11 06:47',who:'Ashley',types:['ops'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
-  {dt:'05/11 07:27',who:'Toby',types:['mechanical'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
-  {dt:'05/11 07:50',who:'Deven',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
-  {dt:'05/11 10:06',who:'Cory',types:['software'],sevs:['minor'],text:"Shouldn't affect checks — innocuous change to enable second battery"},
-  {dt:'05/11 12:19',who:'Mike',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
-],
-R105:[
-  {dt:'05/11 08:18',who:'Reed',types:['mechanical'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
-  {dt:'05/11 12:17',who:'Toby',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort'},
-  {dt:'05/12 08:53',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Controller drift continues — does not maintain position'},
-  {dt:'05/12 09:54',who:'Michael P',types:['mechanical'],sevs:['minor'],text:'Scratched lenses'},
-  {dt:'05/12 10:07',who:'Tanner',types:['software'],sevs:['moderate'],text:'Updated and autonomy container restarted'},
-  {dt:'05/13 10:22',who:'Deven',types:['mechanical'],sevs:['minor'],text:'Port and stbd door latches broken'},
-],
-R113:[
-  {dt:'05/11 08:59',who:'Anderson',types:['mechanical'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
-  {dt:'05/11 09:13',who:'Reed',types:['ops'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
-  {dt:'05/11 15:17',who:'Toby',types:['autonomy'],sevs:['critical'],text:'Acting \"drunk\" on transit play — full cyclic oscillation'},
-  {dt:'05/11 15:22',who:'Dan',types:['autonomy','mechanical'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
-  {dt:'05/11 15:23',who:'Dan',types:['autonomy','mechanical'],sevs:['critical'],text:'Cyclic oscillation until speed was dropped'},
-  {dt:'05/11 15:49',who:'Toby',types:['autonomy'],sevs:['critical'],text:'Oscillation recurring'},
-  {dt:'05/11 15:53',who:'Dan',types:['autonomy'],sevs:['critical'],text:'Going in and out of whatever that issue/mode is'},
-  {dt:'05/11 16:03',who:'Paul',types:['software'],sevs:['minor'],text:'Balena update running on R113'},
-  {dt:'05/11 16:08',who:'Mike',types:['software'],sevs:['minor'],text:'Was drunk before balena — not related'},
-  {dt:'05/11 16:13',who:'Paul',types:['software'],sevs:['moderate'],text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},
-  {dt:'05/11 18:09',who:'Tanner',types:['ops','mechanical'],sevs:['critical'],text:'Towed back in, to be investigated'},
-  {dt:'05/11 18:48',who:'Paul',types:['software','autonomy'],sevs:['critical'],text:'All normal params — oscillation cause unknown'},
-  {dt:'05/12 07:54',who:'Dan',types:['mechanical'],sevs:['critical'],text:'Internal box not secured — needs dual lock'},
-  {dt:'05/12 09:14',who:'Kyle',types:['autonomy'],sevs:['critical'],text:'Not responding to escort play — lagging behind'},
-  {dt:'05/13 13:40',who:'Tanner',types:['autonomy','mechanical'],sevs:['critical'],text:'Patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — investigate EO phantom recognitions.'},
-],
-R117:[
-  {dt:'05/11 07:50',who:'Anderson',types:['ops'],sevs:['minor'],text:'Disarm on launch'},
-  {dt:'05/11 07:57',who:'Mike',types:['mechanical'],sevs:['minor'],text:'Needed compass cal on launch'},
-  {dt:'05/11 08:13',who:'Tanner',types:['mechanical'],sevs:['moderate'],text:'Compass 180° out during movement — bringing back to resend dual GPS config'},
-  {dt:'05/11 08:23',who:'Vita',types:['mechanical'],sevs:['moderate'],text:'GPS patches installed opposite — swap SMA connectors on kitbox'},
-  {dt:'05/11 08:30',who:'Dan',types:['mechanical'],sevs:['moderate'],text:'Always power off kitbox before unplugging/plugging anything'},
-  {dt:'05/11 08:40',who:'Kyle',types:['ops'],sevs:['minor'],text:'Kitbox cycled on water'},
-  {dt:'05/11 11:21',who:'Kyle',types:['ops'],sevs:['minor'],text:'Did not navigate bridge — auto disarmed, re-armed via RC'},
-  {dt:'05/11 11:22',who:'Kyle',types:['mechanical'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
-  {dt:'05/11 15:02',who:'Mike',types:['mechanical'],sevs:['critical'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
-  {dt:'05/11 15:14',who:'Carter D',types:['mechanical'],sevs:['critical'],text:'Bridge not in shoreline data — small island to the north is though'},
-  {dt:'05/11 08:31',who:'Mari',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
-  {dt:'05/12 11:27',who:'Jeremy',types:['software'],sevs:['moderate'],text:'Disabled obstacle grid and detection tracker to prevent CDR interactions'},
-  {dt:'05/12 12:30',who:'Jeremy',types:['software'],sevs:['moderate'],text:'Engage task unexpectedly completing — possible race condition with autonomous targeting'},
-  {dt:'05/12 15:00',who:'Anderson',types:['mechanical','ops'],sevs:['critical'],text:'Towed to BEDs. Kitbox cycled — recovered under own power. Voltage at 41V.'},
-  {dt:'05/13 08:27',who:'Dan',types:['mechanical'],sevs:['critical'],text:'Hit ~37V — likely tripped undervoltage protection on battery'},
-],
-R121:[
-  {dt:'05/11 08:00',who:'Tommy',types:['ops','software'],sevs:['moderate'],text:'Checkout received but did not run after button pressed'},
-  {dt:'05/11 08:01',who:'Tommy',types:['mechanical'],sevs:['moderate'],text:'Has blue HMI cable — may be the issue'},
-  {dt:'05/11 08:26',who:'Mari',types:['mechanical'],sevs:['critical'],text:'No GPS — disarmed'},
-  {dt:'05/11 08:31',who:'Mari',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
-  {dt:'05/11 08:42',who:'Vita',types:['software'],sevs:['moderate'],text:'Reset — changed params for DGPS'},
-  {dt:'05/11 08:53',who:'Mari',types:['mechanical'],sevs:['moderate'],text:'Ilmor ICU came back up after power cycle'},
-  {dt:'05/11 09:16',who:'Vita',types:['software'],sevs:['moderate'],text:'GPS good — had to configure dual GPS board'},
-  {dt:'05/11 09:26',who:'Anderson',types:['mechanical'],sevs:['minor'],text:"Won't trim down"},
-  {dt:'05/11 09:30',who:'Jawad',types:['mechanical'],sevs:['minor'],text:'Port canoe handle missing a screw'},
-  {dt:'05/11 09:37',who:'Tanner',types:['ops'],sevs:['minor'],text:'Auto disarmed'},
-  {dt:'05/11 09:39',who:'Deven',types:['mechanical'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; motor-well hole not plugged (taped)'},
-  {dt:'05/11 13:19',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Not behaving in formation play for photoshoot'},
-  {dt:'05/13 08:23',who:'Jeremy',types:['software','autonomy'],sevs:['moderate'],text:'Obstacle grid was enabled causing collision avoidance'},
-  {dt:'05/11 14:52',who:'Jawad',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on water under autonomy at 14:52'},
-  {dt:'05/13 10:24',who:'Mari',types:['mechanical','ops'],sevs:['moderate'],text:'Prop hit the ramp on recovery'},
-  {dt:'05/13 16:52',who:'Jawad',types:['mechanical'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
-],
-R135:[
-  {dt:'05/11 08:41',who:'Mari',types:['ops','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
-  {dt:'05/11 08:42',who:'Mari',types:['ops','software'],sevs:['moderate'],text:'Sent checkout play — went to loiter rather than FF'},
-  {dt:'05/11 09:40',who:'Alex B',types:['mechanical'],sevs:['critical'],text:'Bad GPS — position jumping in UI'},
-  {dt:'05/12 08:01',who:'Dan',types:['mechanical'],sevs:['minor'],text:'Broken hatch latch starboard side'},
-  {dt:'05/12 08:32',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Intermittent on manual'},
-  {dt:'05/12 09:38',who:'Kyle',types:['ops','mechanical'],sevs:['moderate'],text:'3x power cycled kitbox — intermittent trim and throttle over Havoc remote'},
-  {dt:'05/12 09:52',who:'Kyle',types:['software'],sevs:['moderate'],text:'Could be bug with maglink overloading CPU'},
-  {dt:'05/12 14:12',who:'Kyle',types:['autonomy','ops'],sevs:['moderate'],text:'2x disarmed without permission'},
-  {dt:'05/12 15:17',who:'Deven',types:['mechanical'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
-],
-R137:[
-  {dt:'05/11 08:42',who:'Chris',types:['mechanical'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
-  {dt:'05/11 13:50',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station instead of staying ahead'},
-  {dt:'05/11 13:55',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'74°F Orca temp climbing when not at top of formation'},
-  {dt:'05/11 14:03',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort'},
-  {dt:'05/11 14:04',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Ground station at 3 kts — 137 slows then surges to regain position'},
-  {dt:'05/12 08:17',who:'Kevin',types:['mechanical'],sevs:['minor'],text:'Relay 3 (FLIR) not turning on — resolved on its own'},
-  {dt:'05/12 08:32',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
-  {dt:'05/12 08:52',who:'Tanner',types:['software','autonomy'],sevs:['minor'],text:'Would not take charlie team reassign — had to go to unassigned first'},
-  {dt:'05/13 08:47',who:'Jeremy',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
-  {dt:'05/13 08:49',who:'Kevin',types:['mechanical'],sevs:['minor'],text:'2nd time relay 3 did not auto-activate on this vehicle — check default in MP'},
-],
-R139:[
-  {dt:'05/12 09:54',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason shown in UI'},
-  {dt:'05/12 10:53',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Repeated'},
-  {dt:'05/12 10:55',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Re-armed and re-entered'},
-  {dt:'05/12 12:27',who:'Mari',types:['ops','mechanical'],sevs:['moderate'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
-  {dt:'05/12 12:34',who:'Paul',types:['software'],sevs:['moderate'],text:'Checking autonomy perspective'},
-  {dt:'05/12 12:39',who:'Jeremy',types:['software'],sevs:['moderate'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
-  {dt:'05/12 14:50',who:'Mari',types:['ops'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
-],
-R143:[
-  {dt:'05/11 07:01',who:'Anderson',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
-  {dt:'05/11 09:00',who:'Alex B',types:['mechanical'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
-  {dt:'05/11 13:56',who:'Kyle',types:['mechanical'],sevs:['minor'],text:'69°F Orca temp'},
-  {dt:'05/11 14:07',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'143 circling in rear of formation — regrouping, resending play'},
-  {dt:'05/11 18:09',who:'Tanner',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
-  {dt:'05/12 11:10',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Falling out of formation — resent play'},
-  {dt:'05/13 10:30',who:'Deven',types:['mechanical'],sevs:['moderate'],text:'Bilge pump has grinding noise'},
-],
-R145:[
-  {dt:'05/11 06:57',who:'Anderson',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
-  {dt:'05/11 08:28',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
-  {dt:'05/11 08:45',who:'Tanner',types:['mechanical'],sevs:['minor'],text:'Bad gyro'},
-  {dt:'05/12 10:39',who:'Deven',types:['software'],sevs:['minor'],text:'R145 ran checkout but UI shows failed'},
-  {dt:'05/12 10:44',who:'Carter B',types:['software'],sevs:['minor'],text:'HMI button press seen then immediately failed'},
-  {dt:'05/12 11:04',who:'Carter B',types:['software'],sevs:['minor'],text:'Resolved: initial battery usage absolute value bug — charging reported as high usage. Logging as bug report.'},
-  {dt:'05/12 11:15',who:'Anderson',types:['ops'],sevs:['minor'],text:'R145 had three disarms during launch'},
-  {dt:'05/12 14:12',who:'Kyle',types:['ops'],sevs:['minor'],text:'Disarmed without permission'},
-  {dt:'05/13 10:03',who:'Jeremy',types:['software'],sevs:['minor'],text:'Perception recording enabled on 145'},
-  {dt:'05/13 13:37',who:'Kyle',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
-],
+const SEV_NOTES={
+  critical:'Boat offline, towed, water ingress, complete system failure, or autonomous disarm mid-mission',
+  moderate:'Degraded performance, needed intervention, mission/formation failure, or single system that recovered',
+  minor:'Observation only, pre-water note, cosmetic, resolved on own, or administrative',
 };
+
+// ── PROP SEGS (from telemetry) ──
+const PROP={
+  'R100_05/11':{first:'08:33:00',last:'16:35:00',segs:[{state:'prop',start:'08:33',end:'08:34'},{state:'idle',start:'08:34',end:'09:41'},{state:'prop',start:'09:41',end:'09:48'},{state:'idle',start:'09:48',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:38'},{state:'prop',start:'12:38',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:42'},{state:'idle',start:'13:42',end:'14:41'},{state:'prop',start:'14:41',end:'14:58'},{state:'idle',start:'14:58',end:'16:25'},{state:'prop',start:'16:25',end:'16:35'}]},
+  'R100_05/12':{first:'08:41:00',last:'15:49:00',segs:[{state:'prop',start:'08:41',end:'08:42'},{state:'idle',start:'08:42',end:'09:42'},{state:'prop',start:'09:42',end:'09:53'},{state:'idle',start:'09:53',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:39'},{state:'prop',start:'12:39',end:'12:51'},{state:'idle',start:'12:51',end:'13:24'},{state:'prop',start:'13:24',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:48'},{state:'prop',start:'15:48',end:'15:49'}]},
+  'R100_05/13':{first:'08:41:00',last:'13:51:00',segs:[{state:'prop',start:'08:41',end:'08:42'},{state:'idle',start:'08:42',end:'09:42'},{state:'prop',start:'09:42',end:'09:52'},{state:'idle',start:'09:52',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:39'},{state:'prop',start:'12:39',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:51'}]},
+  'R105_05/11':{first:'08:16:00',last:'16:37:00',segs:[{state:'prop',start:'08:16',end:'08:17'},{state:'idle',start:'08:17',end:'09:41'},{state:'prop',start:'09:41',end:'09:56'},{state:'idle',start:'09:56',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:15'},{state:'prop',start:'12:15',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:41'},{state:'idle',start:'13:41',end:'14:41'},{state:'prop',start:'14:41',end:'14:57'},{state:'idle',start:'14:57',end:'16:25'},{state:'prop',start:'16:25',end:'16:37'}]},
+  'R105_05/12':{first:'08:19:00',last:'15:48:00',segs:[{state:'prop',start:'08:19',end:'08:20'},{state:'idle',start:'08:20',end:'09:42'},{state:'prop',start:'09:42',end:'09:53'},{state:'idle',start:'09:53',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:37'},{state:'prop',start:'12:37',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:47'},{state:'prop',start:'15:47',end:'15:48'}]},
+  'R108_05/11':{first:'11:33:00',last:'16:58:00',segs:[{state:'prop',start:'11:33',end:'11:35'},{state:'idle',start:'11:35',end:'12:07'},{state:'prop',start:'12:07',end:'13:12'},{state:'idle',start:'13:12',end:'13:27'},{state:'prop',start:'13:27',end:'14:58'},{state:'idle',start:'14:58',end:'15:33'},{state:'prop',start:'15:33',end:'16:00'},{state:'idle',start:'16:00',end:'16:49'},{state:'prop',start:'16:49',end:'16:58'}]},
+  'R108_05/12':{first:'09:37:00',last:'13:06:00',segs:[{state:'prop',start:'09:37',end:'09:41'},{state:'idle',start:'09:41',end:'10:09'},{state:'prop',start:'10:09',end:'13:06'}]},
+  'R113_05/11':{first:'09:13:00',last:'16:47:00',segs:[{state:'prop',start:'09:13',end:'09:14'},{state:'idle',start:'09:14',end:'10:14'},{state:'prop',start:'10:14',end:'10:29'},{state:'idle',start:'10:29',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:12'},{state:'prop',start:'12:12',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:42'},{state:'idle',start:'13:42',end:'14:41'},{state:'prop',start:'14:41',end:'15:00'},{state:'idle',start:'15:00',end:'16:12'},{state:'prop',start:'16:12',end:'16:47'}]},
+  'R113_05/12':{first:'08:26:00',last:'16:06:00',segs:[{state:'prop',start:'08:26',end:'08:27'},{state:'idle',start:'08:27',end:'09:41'},{state:'prop',start:'09:41',end:'09:53'},{state:'idle',start:'09:53',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'16:05'},{state:'prop',start:'16:05',end:'16:06'}]},
+  'R113_05/13':{first:'08:54:00',last:'13:49:00',segs:[{state:'prop',start:'08:54',end:'08:55'},{state:'idle',start:'08:55',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:40'},{state:'prop',start:'12:40',end:'13:49'}]},
+  'R114_05/12':{first:'09:54:00',last:'15:28:00',segs:[{state:'prop',start:'09:54',end:'09:55'},{state:'idle',start:'09:55',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:27'},{state:'prop',start:'15:27',end:'15:28'}]},
+  'R116_05/12':{first:'09:17:00',last:'15:41:00',segs:[{state:'prop',start:'09:17',end:'09:18'},{state:'idle',start:'09:18',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:40'},{state:'prop',start:'15:40',end:'15:41'}]},
+  'R117_05/11':{first:'07:50:00',last:'16:32:00',segs:[{state:'prop',start:'07:50',end:'07:52'},{state:'idle',start:'07:52',end:'08:12'},{state:'prop',start:'08:12',end:'08:29'},{state:'idle',start:'08:29',end:'10:13'},{state:'prop',start:'10:13',end:'11:22'},{state:'idle',start:'11:22',end:'12:38'},{state:'prop',start:'12:38',end:'12:49'},{state:'idle',start:'12:49',end:'13:24'},{state:'prop',start:'13:24',end:'13:42'},{state:'idle',start:'13:42',end:'14:41'},{state:'prop',start:'14:41',end:'15:02'},{state:'idle',start:'15:02',end:'16:25'},{state:'prop',start:'16:25',end:'16:32'}]},
+  'R117_05/12':{first:'08:39:00',last:'14:46:00',segs:[{state:'prop',start:'08:39',end:'08:40'},{state:'idle',start:'08:40',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:45'},{state:'prop',start:'14:45',end:'14:46'}]},
+  'R121_05/11':{first:'09:36:00',last:'16:56:00',segs:[{state:'prop',start:'09:36',end:'09:51'},{state:'idle',start:'09:51',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:38'},{state:'prop',start:'12:38',end:'12:48'},{state:'idle',start:'12:48',end:'13:24'},{state:'prop',start:'13:24',end:'13:41'},{state:'idle',start:'13:41',end:'14:41'},{state:'prop',start:'14:41',end:'14:58'},{state:'idle',start:'14:58',end:'16:25'},{state:'prop',start:'16:25',end:'16:56'}]},
+  'R121_05/12':{first:'08:36:00',last:'16:10:00',segs:[{state:'prop',start:'08:36',end:'08:37'},{state:'idle',start:'08:37',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'16:09'},{state:'prop',start:'16:09',end:'16:10'}]},
+  'R121_05/13':{first:'08:19:00',last:'10:19:00',segs:[{state:'prop',start:'08:19',end:'08:20'},{state:'idle',start:'08:20',end:'09:20'},{state:'prop',start:'09:20',end:'10:19'}]},
+  'R122_05/11':{first:'12:07:00',last:'17:02:00',segs:[{state:'prop',start:'12:07',end:'12:15'},{state:'idle',start:'12:15',end:'12:58'},{state:'prop',start:'12:58',end:'13:46'},{state:'idle',start:'13:46',end:'14:30'},{state:'prop',start:'14:30',end:'14:58'},{state:'idle',start:'14:58',end:'16:40'},{state:'prop',start:'16:40',end:'17:02'}]},
+  'R122_05/12':{first:'08:08:00',last:'11:40:00',segs:[{state:'prop',start:'08:08',end:'08:09'},{state:'idle',start:'08:09',end:'09:10'},{state:'prop',start:'09:10',end:'09:55'},{state:'idle',start:'09:55',end:'10:27'},{state:'prop',start:'10:27',end:'11:40'}]},
+  'R122_05/13':{first:'10:01:00',last:'13:50:00',segs:[{state:'prop',start:'10:01',end:'10:02'},{state:'idle',start:'10:02',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:50'}]},
+  'R134_05/11':{first:'12:13:00',last:'17:21:00',segs:[{state:'prop',start:'12:13',end:'12:16'},{state:'idle',start:'12:16',end:'12:58'},{state:'prop',start:'12:58',end:'13:50'},{state:'idle',start:'13:50',end:'14:52'},{state:'prop',start:'14:52',end:'14:58'},{state:'idle',start:'14:58',end:'16:48'},{state:'prop',start:'16:48',end:'17:21'}]},
+  'R134_05/12':{first:'08:22:00',last:'15:44:00',segs:[{state:'prop',start:'08:22',end:'08:23'},{state:'idle',start:'08:23',end:'09:10'},{state:'prop',start:'09:10',end:'10:56'},{state:'idle',start:'10:56',end:'12:45'},{state:'prop',start:'12:45',end:'15:44'}]},
+  'R134_05/13':{first:'08:38:00',last:'13:06:00',segs:[{state:'prop',start:'08:38',end:'08:39'},{state:'idle',start:'08:39',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:06'}]},
+  'R135_05/11':{first:'11:52:00',last:'17:04:00',segs:[{state:'prop',start:'11:52',end:'11:59'},{state:'idle',start:'11:59',end:'12:58'},{state:'prop',start:'12:58',end:'13:46'},{state:'idle',start:'13:46',end:'14:30'},{state:'prop',start:'14:30',end:'14:59'},{state:'idle',start:'14:59',end:'15:50'},{state:'prop',start:'15:50',end:'17:04'}]},
+  'R135_05/12':{first:'10:21:00',last:'15:05:00',segs:[{state:'prop',start:'10:21',end:'10:22'},{state:'idle',start:'10:22',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'15:04'},{state:'prop',start:'15:04',end:'15:05'}]},
+  'R136_05/11':{first:'11:26:00',last:'17:17:00',segs:[{state:'prop',start:'11:26',end:'11:27'},{state:'idle',start:'11:27',end:'12:07'},{state:'prop',start:'12:07',end:'13:44'},{state:'idle',start:'13:44',end:'14:30'},{state:'prop',start:'14:30',end:'16:55'},{state:'idle',start:'16:55',end:'17:16'},{state:'prop',start:'17:16',end:'17:17'}]},
+  'R136_05/12':{first:'08:05:00',last:'15:25:00',segs:[{state:'prop',start:'08:05',end:'08:06'},{state:'idle',start:'08:06',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'15:25'}]},
+  'R137_05/11':{first:'08:05:00',last:'16:14:00',segs:[{state:'prop',start:'08:05',end:'08:06'},{state:'idle',start:'08:06',end:'09:41'},{state:'prop',start:'09:41',end:'10:00'},{state:'idle',start:'10:00',end:'11:03'},{state:'prop',start:'11:03',end:'11:19'},{state:'idle',start:'11:19',end:'12:38'},{state:'prop',start:'12:38',end:'13:56'},{state:'idle',start:'13:56',end:'14:10'},{state:'prop',start:'14:10',end:'15:55'},{state:'idle',start:'15:55',end:'16:00'},{state:'prop',start:'16:00',end:'16:14'}]},
+  'R137_05/12':{first:'08:42:00',last:'16:02:00',segs:[{state:'prop',start:'08:42',end:'08:43'},{state:'idle',start:'08:43',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'15:25'},{state:'prop',start:'15:25',end:'16:02'}]},
+  'R137_05/13':{first:'08:33:00',last:'13:50:00',segs:[{state:'prop',start:'08:33',end:'08:34'},{state:'idle',start:'08:34',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:50'}]},
+  'R138_05/11':{first:'12:01:00',last:'17:23:00',segs:[{state:'prop',start:'12:01',end:'12:08'},{state:'idle',start:'12:08',end:'12:58'},{state:'prop',start:'12:58',end:'13:50'},{state:'idle',start:'13:50',end:'14:31'},{state:'prop',start:'14:31',end:'15:59'},{state:'idle',start:'15:59',end:'16:48'},{state:'prop',start:'16:48',end:'17:22'}]},
+  'R138_05/12':{first:'09:13:00',last:'15:36:00',segs:[{state:'prop',start:'09:13',end:'09:14'},{state:'idle',start:'09:14',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:29'},{state:'prop',start:'12:29',end:'12:35'},{state:'idle',start:'12:35',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:35'},{state:'prop',start:'15:35',end:'15:36'}]},
+  'R138_05/13':{first:'08:27:00',last:'13:46:00',segs:[{state:'prop',start:'08:27',end:'08:28'},{state:'idle',start:'08:28',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:46'}]},
+  'R139_05/11':{first:'07:57:00',last:'16:09:00',segs:[{state:'prop',start:'07:57',end:'07:58'},{state:'idle',start:'07:58',end:'09:41'},{state:'prop',start:'09:41',end:'09:56'},{state:'idle',start:'09:56',end:'11:03'},{state:'prop',start:'11:03',end:'11:17'},{state:'idle',start:'11:17',end:'12:38'},{state:'prop',start:'12:38',end:'13:44'},{state:'idle',start:'13:44',end:'14:14'},{state:'prop',start:'14:14',end:'15:55'},{state:'idle',start:'15:55',end:'16:00'},{state:'prop',start:'16:00',end:'16:09'}]},
+  'R139_05/12':{first:'09:40:00',last:'15:41:00',segs:[{state:'prop',start:'09:40',end:'09:41'},{state:'idle',start:'09:41',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:40'},{state:'prop',start:'15:40',end:'15:41'}]},
+  'R143_05/11':{first:'08:55:00',last:'16:18:00',segs:[{state:'prop',start:'08:55',end:'08:56'},{state:'idle',start:'08:56',end:'11:03'},{state:'prop',start:'11:03',end:'11:19'},{state:'idle',start:'11:19',end:'12:38'},{state:'prop',start:'12:38',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:59'},{state:'idle',start:'13:59',end:'14:54'},{state:'prop',start:'14:54',end:'15:55'},{state:'idle',start:'15:55',end:'16:00'},{state:'prop',start:'16:00',end:'16:18'}]},
+  'R143_05/12':{first:'10:53:00',last:'15:20:00',segs:[{state:'prop',start:'10:53',end:'10:54'},{state:'idle',start:'10:54',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:19'},{state:'prop',start:'15:19',end:'15:20'}]},
+  'R145_05/11':{first:'08:23:00',last:'16:23:00',segs:[{state:'prop',start:'08:23',end:'08:27'},{state:'idle',start:'08:27',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:38'},{state:'prop',start:'12:38',end:'13:56'},{state:'idle',start:'13:56',end:'14:14'},{state:'prop',start:'14:14',end:'15:55'},{state:'idle',start:'15:55',end:'16:00'},{state:'prop',start:'16:00',end:'16:23'}]},
+  'R145_05/12':{first:'11:08:00',last:'15:54:00',segs:[{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:53'},{state:'prop',start:'15:53',end:'15:54'}]},
+  'R145_05/13':{first:'08:58:00',last:'13:50:00',segs:[{state:'prop',start:'08:58',end:'08:59'},{state:'idle',start:'08:59',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:50'}]},
+  'R146_05/12':{first:'10:15:00',last:'14:34:00',segs:[{state:'prop',start:'10:15',end:'10:16'},{state:'idle',start:'10:16',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:33'},{state:'prop',start:'14:33',end:'14:34'}]},
+  'R147_05/11':{first:'11:30:00',last:'17:13:00',segs:[{state:'prop',start:'11:30',end:'11:31'},{state:'idle',start:'11:31',end:'12:04'},{state:'prop',start:'12:04',end:'13:13'},{state:'idle',start:'13:13',end:'14:52'},{state:'prop',start:'14:52',end:'14:58'},{state:'idle',start:'14:58',end:'16:25'},{state:'prop',start:'16:25',end:'17:13'}]},
+  'R147_05/12':{first:'08:52:00',last:'15:33:00',segs:[{state:'prop',start:'08:52',end:'08:53'},{state:'idle',start:'08:53',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'15:32'},{state:'prop',start:'15:32',end:'15:33'}]},
+  'R147_05/13':{first:'09:06:00',last:'13:12:00',segs:[{state:'prop',start:'09:06',end:'09:07'},{state:'idle',start:'09:07',end:'10:05'},{state:'prop',start:'10:05',end:'10:15'},{state:'idle',start:'10:15',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'13:12'}]},
+};
+
+// ── INCIDENTS ──
+// Severity rules:
+// CRITICAL = boat offline/towed/water ingress/complete system failure/autonomous disarm mid-mission
+// MODERATE = degraded perf, needed intervention, mission failure, single system recovered
+// MINOR    = observation, pre-water note, cosmetic, resolved on own, admin
 const INCIDENTS={
-  // SEVERITY RULES:
-  // CRITICAL = boat offline/towed/unrecoverable, safety hazard, complete system failure,
-  //            water ingress, autonomous disarm mid-mission on water, physical damage
-  // MODERATE = degraded performance, stayed operational but needed intervention,
-  //            mission/formation failures, param changes, single system failure that recovered
-  // MINOR    = observation only, cosmetic, pre-water note, resolved on own, administrative
-  R100:[
-    {time:'06:47',type:'ops',sev:'minor'},        // question about dual battery setup
-    {time:'07:27',type:'mechanical',sev:'minor'}, // broken handle — cosmetic, noted
-    {time:'07:50',type:'software',sev:'minor'},   // checkout showed failed but ran fine — resolved
-    {time:'12:19',type:'autonomy',sev:'critical'},// boat stopped moving mid-mission, went into loiter
-  ],
-  R105:[
-    {time:'08:18',type:'mechanical',sev:'minor'},   // RPM limit noted for later adjustment
-    {time:'12:17',type:'autonomy',sev:'moderate'},  // couldn't maintain position — degraded, still running
-  ],
-  R108:[],
-  R113:[
-    {time:'08:59',type:'mechanical',sev:'minor'},   // prop replaced proactively — pre-mission
-    {time:'09:13',type:'ops',sev:'minor'},           // disarm at ramp, re-armed — routine
-    {time:'15:17',type:'autonomy',sev:'critical'},  // full cyclic oscillation on transit — uncontrolled
-    {time:'15:49',type:'autonomy',sev:'critical'},  // oscillation recurring — still unresolved
-    {time:'16:03',type:'software',sev:'minor'},     // balena update — informational
-    {time:'16:13',type:'software',sev:'moderate'},  // PID param change to address active issue
-    {time:'18:09',type:'ops',sev:'critical'},        // towed in + water ingress from hull
-  ],
-  R117:[
-    {time:'07:50',type:'ops',sev:'minor'},           // disarm at launch — routine ramp issue
-    {time:'08:13',type:'mechanical',sev:'moderate'}, // compass 180° out — needed retrieval + config
-    {time:'08:31',type:'mechanical',sev:'critical'}, // Ilmor dead: no LED, no ICU comms, no power
-    {time:'08:40',type:'ops',sev:'minor'},           // kitbox cycled on water — resolved
-    {time:'11:21',type:'ops',sev:'moderate'},        // failed to navigate bridge, auto disarmed on water
-    {time:'11:22',type:'mechanical',sev:'minor'},    // gyros not calibrated after re-arm — noted
-    {time:'15:02',type:'mechanical',sev:'moderate'}, // collision avoidance at bridge again, needed manual
-  ],
-  R121:[
-    {time:'08:00',type:'ops',sev:'minor'},           // checkout button didn't trigger — pre-water
-    {time:'08:26',type:'mechanical',sev:'critical'}, // no GPS + Ilmor dead + no ICU: complete failure
-    {time:'08:42',type:'software',sev:'moderate'},   // params changed to fix GPS — intervention required
-    {time:'09:26',type:'mechanical',sev:'minor'},    // won't trim down — noted, still launched
-    {time:'09:37',type:'ops',sev:'minor'},           // auto disarmed at dock — pre-water
-    {time:'09:39',type:'mechanical',sev:'moderate'}, // bad bearing + structural issues noted before launch
-    {time:'13:19',type:'autonomy',sev:'moderate'},   // not behaving in formation — mission degraded
-    {time:'14:52',type:'autonomy',sev:'critical'},   // autonomous disarm mid-mission on water
-  ],
-  R122:[],R134:[],
-  R135:[
-    {time:'08:41',type:'ops',sev:'moderate'},        // action button broken, checkout went to loiter
-    {time:'09:40',type:'mechanical',sev:'critical'}, // GPS jumping — boat unpositioned, couldn't operate
-    {time:'14:12',type:'autonomy',sev:'moderate'},   // 2x disarmed without permission — repeated failure
-  ],
-  R136:[],
-  R137:[
-    {time:'08:42',type:'mechanical',sev:'minor'},    // RPM param noted — not blocking ops
-    {time:'13:50',type:'autonomy',sev:'moderate'},   // falling out of escort, collision avoidance misfire
-    {time:'14:03',type:'autonomy',sev:'moderate'},   // still falling out at 5.1 kts — persistent
-  ],
-  R138:[],
-  R139:[
-    {time:'12:27',type:'ops',sev:'critical'},        // disarmed failsafe on water — no RC, lost in hold
-    {time:'12:39',type:'software',sev:'minor'},      // autonomy checked out clean — informational
-    {time:'14:50',type:'ops',sev:'moderate'},        // SSM battery msg, force armed for recovery
-  ],
-  R143:[
-    {time:'07:01',type:'ops',sev:'minor'},           // Starlink config — admin, resolved
-    {time:'09:00',type:'mechanical',sev:'moderate'}, // bilge grinding — still pumping but needs repair
-    {time:'14:07',type:'autonomy',sev:'moderate'},   // circling in formation — mission degraded
-    {time:'18:09',type:'mechanical',sev:'critical'}, // large amount of water from hull — safety
-  ],
-  R145:[
-    {time:'08:28',type:'mechanical',sev:'moderate'}, // compass 180° out — same as R117, retrieval needed
-    {time:'08:45',type:'mechanical',sev:'minor'},    // bad gyro noted — resolved by power cycle
-    {time:'11:15',type:'ops',sev:'moderate'},        // three disarms during launch — repeated, not routine
-    {time:'14:12',type:'ops',sev:'minor'},           // single disarm without permission — noted
-  ],
-  R147:[],
+  // ── MONDAY 05/11 ──
+  'R100_05/11':[{time:'06:47',type:'ops',sev:'minor'},{time:'07:27',type:'mechanical',sev:'minor'},{time:'07:50',type:'software',sev:'minor'},{time:'12:19',type:'autonomy',sev:'critical'}],
+  'R105_05/11':[{time:'08:18',type:'mechanical',sev:'minor'},{time:'12:17',type:'autonomy',sev:'moderate'}],
+  'R113_05/11':[{time:'08:59',type:'mechanical',sev:'minor'},{time:'09:13',type:'ops',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'},{time:'15:49',type:'autonomy',sev:'critical'},{time:'16:03',type:'software',sev:'minor'},{time:'16:13',type:'software',sev:'moderate'},{time:'18:09',type:'ops',sev:'critical'}],
+  'R117_05/11':[{time:'07:50',type:'ops',sev:'minor'},{time:'08:13',type:'mechanical',sev:'moderate'},{time:'08:31',type:'mechanical',sev:'critical'},{time:'08:40',type:'ops',sev:'minor'},{time:'11:21',type:'ops',sev:'moderate'},{time:'11:22',type:'mechanical',sev:'minor'},{time:'15:02',type:'mechanical',sev:'moderate'}],
+  'R121_05/11':[{time:'08:00',type:'ops',sev:'minor'},{time:'08:26',type:'mechanical',sev:'critical'},{time:'08:42',type:'software',sev:'moderate'},{time:'09:26',type:'mechanical',sev:'minor'},{time:'09:37',type:'ops',sev:'minor'},{time:'09:39',type:'mechanical',sev:'moderate'},{time:'13:19',type:'autonomy',sev:'moderate'},{time:'14:52',type:'autonomy',sev:'critical'}],
+  'R135_05/11':[{time:'08:41',type:'ops',sev:'moderate'},{time:'09:40',type:'mechanical',sev:'critical'},{time:'14:12',type:'autonomy',sev:'moderate'}],
+  'R137_05/11':[{time:'08:42',type:'mechanical',sev:'minor'},{time:'13:50',type:'autonomy',sev:'moderate'},{time:'14:03',type:'autonomy',sev:'moderate'}],
+  'R139_05/11':[{time:'12:27',type:'ops',sev:'critical'},{time:'14:50',type:'ops',sev:'moderate'}],
+  'R143_05/11':[{time:'07:01',type:'ops',sev:'minor'},{time:'09:00',type:'mechanical',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'mechanical',sev:'critical'}],
+  'R145_05/11':[{time:'08:28',type:'mechanical',sev:'moderate'},{time:'08:45',type:'mechanical',sev:'minor'},{time:'11:15',type:'ops',sev:'moderate'},{time:'14:12',type:'ops',sev:'minor'}],
+  'R147_05/11':[{time:'11:49',type:'mechanical',sev:'critical'},{time:'18:09',type:'mechanical',sev:'critical'}],
+  // ── TUESDAY 05/12 ──
+  'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'ops',sev:'moderate'},{time:'12:48',type:'mechanical',sev:'critical'},{time:'14:29',type:'mechanical',sev:'critical'}],
+  'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'ops',sev:'moderate'},{time:'10:18',type:'mechanical',sev:'moderate'},{time:'10:56',type:'mechanical',sev:'critical'},{time:'11:02',type:'mechanical',sev:'critical'},{time:'12:45',type:'ops',sev:'minor'}],
+  'R135_05/12':[{time:'10:21',type:'ops',sev:'moderate'}],
+  'R136_05/12':[{time:'09:37',type:'software',sev:'minor'},{time:'11:33',type:'autonomy',sev:'moderate'}],
+  'R138_05/12':[{time:'12:29',type:'autonomy',sev:'moderate'},{time:'12:33',type:'autonomy',sev:'minor'}],
+  'R139_05/12':[{time:'09:40',type:'autonomy',sev:'moderate'}],
+  'R147_05/12':[{time:'11:49',type:'mechanical',sev:'minor'},{time:'16:12',type:'software',sev:'minor'}],
+  // General Tuesday issues (shown on first boat row as fleet-level)
+  'R113_05/12':[{time:'09:15',type:'ops',sev:'moderate'}],
+  'R117_05/12':[],
+  // ── WEDNESDAY 05/13 ──
+  'R122_05/13':[{time:'11:25',type:'autonomy',sev:'critical'},{time:'11:42',type:'autonomy',sev:'critical'},{time:'12:52',type:'autonomy',sev:'moderate'}],
+  'R134_05/13':[{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'mechanical',sev:'moderate'},{time:'12:25',type:'ops',sev:'moderate'}],
+  'R137_05/13':[{time:'08:29',type:'autonomy',sev:'minor'},{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'software',sev:'critical'},{time:'13:01',type:'autonomy',sev:'moderate'}],
+  'R138_05/13':[{time:'09:30',type:'ops',sev:'moderate'},{time:'09:57',type:'ops',sev:'moderate'}],
+  'R145_05/13':[{time:'11:25',type:'autonomy',sev:'critical'},{time:'11:34',type:'autonomy',sev:'critical'},{time:'12:10',type:'autonomy',sev:'moderate'},{time:'12:52',type:'autonomy',sev:'moderate'}],
+  'R147_05/13':[{time:'08:49',type:'ops',sev:'moderate'},{time:'08:56',type:'ops',sev:'minor'}],
 };
-const WAVE1=['R117','R139','R137','R105','R145','R100','R143','R113','R121'];
-const WAVE2=['R136','R147','R108','R135','R138','R122','R134'];
-let activeSev='all',activeType='',searchVal='',activeTip=null;
-function closeAll(){document.querySelectorAll('.tt').forEach(e=>e.remove());document.querySelectorAll('.dot.active').forEach(d=>d.classList.remove('active'));activeTip=null;}
-const chart=document.getElementById('chart');
-function addLabel(t){const d=document.createElement('div');d.className='group-label';d.textContent=t;chart.appendChild(d);}
-function addDiv(){const d=document.createElement('div');d.className='divider';chart.appendChild(d);}
-function buildRow(id){
-  const w=WATER[id],fM=w?tM(w.first):null,lM=w?tM(w.last):null;
-  const row=document.createElement('div');row.className='boat-row';row.dataset.boat=id;
-  let inner='';
-  HOURS.forEach(h=>{inner+=`<div class="grid-line" style="left:${pc(h*60)};"></div>`;});
-  if(fM&&lM){
-    inner+=`<div class="water-bar" style="left:${pc(fM)};width:${wp(fM,lM)};"></div>`;
-    inner+=`<div class="water-tick" style="left:${pc(fM)};"></div><div class="water-tick" style="left:${pc(lM)};"></div>`;
-    const sp=((fM-DS)/SP*100).toFixed(2),ep=((lM-DS)/SP*100).toFixed(2);
-    inner+=`<span class="wlabel" style="left:${sp}%;">${hm(w.first)}</span><span class="wlabel" style="left:${ep}%;transform:translateX(-100%);">${hm(w.last)}</span>`;
-  }
-  (PROP[id]||[]).forEach(s=>{const a=tM(s.a),b=tM(s.b);if(!a||!b)return;const ca=Math.max(a,DS),cb=Math.min(b,DE);if(cb<=ca)return;inner+=`<div class="prop-seg" style="left:${pc(ca)};width:${wp(ca,cb)};"></div>`;});
-  row.innerHTML=`<span class="boat-id">${id}</span><div class="track-wrap"><div class="track" id="tr-${id}">${inner}</div></div>`;
-  chart.appendChild(row);
-  const track=document.getElementById(`tr-${id}`);
-  (INCIDENTS[id]||[]).forEach(inc=>{
-    const m=tM(inc.time);if(!m)return;
-    const cm=Math.max(DS,Math.min(DE-1,m)),sz=SS[inc.sev]||8,col=TC[inc.type]||'#888';
-    const dot=document.createElement('div');
-    dot.className='dot';dot.dataset.sev=inc.sev;dot.dataset.type=inc.type;dot.dataset.search=(id+' '+inc.type).toLowerCase();
-    dot.style.cssText=`left:${pc(cm)};width:${sz}px;height:${sz}px;background:${col};`;
-    dot.addEventListener('click',e=>{
-      e.stopPropagation();
-      if(activeTip===dot){closeAll();return;}
-      closeAll();dot.classList.add('active');activeTip=dot;
-      const dotPx=(cm-DS)/SP*track.offsetWidth,tipW=370;
-      const tipLeft=dotPx+tipW+20>track.offsetWidth?Math.max(0,dotPx-tipW-4):dotPx+8;
-      const tip=document.createElement('div');tip.className='tt';tip.style.left=tipLeft+'px';
-      const allMsgs=(THREADS[id]||[]);
-      const dotMin=cm; // already in minutes from day start
-      const filtered=allMsgs.filter(m=>{
-        if(!m.types.includes(inc.type)) return false;
-        if(!m.sevs.includes(inc.sev)) return false;
-        // check time within 45 min of dot
-        const parts=m.dt.split(' ');
-        const timePart=parts[parts.length-1];
-        const tp=timePart.split(':').map(Number);
-        const msgMin=tp[0]*60+tp[1];
-        const dayMsgMin=msgMin; // same day reference
-        return Math.abs(dayMsgMin-(DS+dotMin))<=45||Math.abs(dayMsgMin-dotMin)<=45;
-      });
-      const display=filtered.length?filtered:allMsgs.filter(m=>m.types.includes(inc.type)&&m.sevs.includes(inc.sev));
-      const SEV_NOTES={
-        critical:'Boat offline, towed, water ingress, complete system failure, or autonomous disarm mid-mission',
-        moderate:'Degraded performance, needed intervention, mission/formation failure, single system recovered',
-        minor:'Observation only, pre-water note, cosmetic, resolved on own, or administrative',
-      };
-      const sevNote=SEV_NOTES[inc.sev]||'';
-      const tagHtml=`<span class="tt-tag" style="background:${col}1a;color:${col};border:1px solid ${col}44;">${inc.type}</span><span class="tt-tag" style="background:rgba(0,0,0,0.07);color:var(--muted);border:1px solid var(--border2);">${inc.sev}</span>`;      let body=display&&display.length
-        ?`<div class="tt-cols"><div class="tt-col-h">Time</div><div class="tt-col-h">Message</div></div><div class="tt-body">${display.map(m=>{const t=m.dt;return`<div class="tt-row"><div class="tt-cell tt-ts">${t}</div><div class="tt-cell tt-txt">${m.text}</div></div>`;}).join('')}</div>`
-        :`<div class="tt-empty">No messages for this incident type on ${id}</div>`;
-      tip.innerHTML=`<div class="tt-head"><div class="tt-boat" style="color:${col};">${id} · Slack thread</div><div class="tt-tags">${tagHtml}</div><div class="tt-sev-note">${sevNote}</div></div>${body}`;
-      tip.addEventListener('click',e=>e.stopPropagation());
-      track.style.overflow='visible';track.appendChild(tip);
-    });
-    track.appendChild(dot);
-  });
+
+// ── THREADS ──
+const THREADS={
+  'R100_05/11':[
+    {dt:'05/11 06:47',types:['ops'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
+    {dt:'05/11 07:27',types:['mechanical'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
+    {dt:'05/11 07:50',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
+    {dt:'05/11 12:19',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
+  ],
+  'R105_05/11':[
+    {dt:'05/11 08:18',types:['mechanical'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
+    {dt:'05/11 12:17',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort — controller drift continues'},
+    {dt:'05/12 08:53',types:['autonomy'],sevs:['moderate'],text:'Controller drift continues — does not maintain position'},
+    {dt:'05/12 10:07',types:['software'],sevs:['moderate'],text:'Updated and autonomy container restarted'},
+    {dt:'05/13 10:22',types:['mechanical'],sevs:['minor'],text:'Port and stbd door latches broken'},
+  ],
+  'R113_05/11':[
+    {dt:'05/11 08:59',types:['mechanical'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
+    {dt:'05/11 09:13',types:['ops'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
+    {dt:'05/11 15:17',types:['autonomy'],sevs:['critical'],text:'Acting "drunk" on transit play — full cyclic oscillation'},
+    {dt:'05/11 15:22',types:['autonomy','mechanical'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
+    {dt:'05/11 15:49',types:['autonomy'],sevs:['critical'],text:'Oscillation recurring'},
+    {dt:'05/11 16:03',types:['software'],sevs:['minor'],text:'Balena update running on R113'},
+    {dt:'05/11 16:13',types:['software'],sevs:['moderate'],text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},
+    {dt:'05/11 18:09',types:['ops','mechanical'],sevs:['critical'],text:'Towed back in — to be investigated'},
+    {dt:'05/12 09:15',types:['ops'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/13 13:40',types:['autonomy'],sevs:['critical'],text:'Tried patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — EO phantom recognitions.'},
+  ],
+  'R113_05/12':[
+    {dt:'05/12 09:15',types:['ops'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+  ],
+  'R117_05/11':[
+    {dt:'05/11 07:50',types:['ops'],sevs:['minor'],text:'Disarm on launch'},
+    {dt:'05/11 08:13',types:['mechanical'],sevs:['moderate'],text:'Compass 180° out — bringing back to resend dual GPS config'},
+    {dt:'05/11 08:23',types:['mechanical'],sevs:['moderate'],text:'GPS patches installed opposite — swap SMA connectors on kitbox'},
+    {dt:'05/11 08:31',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+    {dt:'05/11 08:40',types:['ops'],sevs:['minor'],text:'Kitbox cycled on water'},
+    {dt:'05/11 11:21',types:['ops'],sevs:['moderate'],text:'Did not navigate bridge — auto disarmed on water, re-armed via RC'},
+    {dt:'05/11 11:22',types:['mechanical'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
+    {dt:'05/11 15:02',types:['mechanical'],sevs:['moderate'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
+    {dt:'05/13 08:27',types:['mechanical'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection'},
+  ],
+  'R121_05/11':[
+    {dt:'05/11 08:00',types:['ops'],sevs:['minor'],text:'Checkout received but did not run after button pressed — blue HMI cable may be the issue'},
+    {dt:'05/11 08:26',types:['mechanical'],sevs:['critical'],text:'No GPS — disarmed; Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+    {dt:'05/11 08:42',types:['software'],sevs:['moderate'],text:'Reset — changed params for DGPS; Ilmor ICU recovered after power cycle'},
+    {dt:'05/11 09:26',types:['mechanical'],sevs:['minor'],text:"Won't trim down; port canoe handle missing a screw"},
+    {dt:'05/11 09:37',types:['ops'],sevs:['minor'],text:'Auto disarmed'},
+    {dt:'05/11 09:39',types:['mechanical'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; battery-well hole not plugged (taped)'},
+    {dt:'05/11 13:19',types:['autonomy'],sevs:['moderate'],text:'Not behaving in formation play for photoshoot'},
+    {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on water under autonomy at 14:52'},
+    {dt:'05/13 17:01',types:['mechanical'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
+  ],
+  'R122_05/11':[
+    {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on the water under autonomy at 14:52'},
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed twice during transit'},
+    {dt:'05/12 12:46',types:['mechanical'],sevs:['moderate'],text:'Location in real life differs from console; Grafana updating with no visible kitbox lights'},
+    {dt:'05/12 12:48',types:['mechanical'],sevs:['critical'],text:'Kitbox restarted — no GPS fix reported by Cube after restart; GPS did not come back'},
+    {dt:'05/12 14:29',types:['mechanical'],sevs:['critical'],text:'Bad GPS patch found — measuring short from shield to pin. GPS needs replacement. Reverted to single GPS + compass.'},
+    {dt:'05/13 11:02',types:['software'],sevs:['minor'],text:'Detection tracker not enabled after launch — just enabled and restarted autonomy'},
+    {dt:'05/13 13:42',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
+  ],
+  'R122_05/12':[
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed twice during transit'},
+    {dt:'05/12 12:48',types:['mechanical'],sevs:['critical'],text:'No GPS fix after kitbox restart; GPS patch bad — short from shield to pin, needs replacement'},
+    {dt:'05/12 14:29',types:['mechanical'],sevs:['critical'],text:'Reverted to single GPS boat with compass only heading'},
+  ],
+  'R122_05/13':[
+    {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile track when only one should — 122 and 145 both engaging'},
+    {dt:'05/13 11:34',types:['autonomy'],sevs:['critical'],text:'122 seemingly started trying to engage R138 rather than the safety boat'},
+    {dt:'05/13 11:42',types:['autonomy'],sevs:['critical'],text:'Running theory: tried engaging a contact (non-fused) associated with R138. 122 then began fighting for R137 point.'},
+    {dt:'05/13 12:52',types:['autonomy'],sevs:['moderate'],text:'122 and 145 both engaging as kinetic boats again'},
+    {dt:'05/13 13:42',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
+  ],
+  'R134_05/11':[
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind. Possibly CFG_COMMS_MQTT_SUB_TO_NEIGHBOR_CONTACTS not enabled.'},
+    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed once during transit'},
+    {dt:'05/12 10:18',types:['mechanical'],sevs:['moderate'],text:'Lost contact on UI — Starlink theorized down; one kitbox light found, power cycled, 2 shown'},
+    {dt:'05/12 10:56',types:['mechanical'],sevs:['critical'],text:'134 Ilmor LED solid green but prop not spinning — clicking sound from Ilmor'},
+    {dt:'05/12 11:02',types:['mechanical'],sevs:['critical'],text:'Inverter seems dead — will recover for RCCA'},
+    {dt:'05/12 12:45',types:['ops'],sevs:['minor'],text:'R134 checked out again, launching now'},
+    {dt:'05/13 11:50',types:['mechanical'],sevs:['moderate'],text:'Max reverse found to be limited — likely explaining drift issues. MaxR updated to 600 with QGC.'},
+  ],
+  'R134_05/12':[
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind'},
+    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed once during transit; lost contact on UI'},
+    {dt:'05/12 10:18',types:['mechanical'],sevs:['moderate'],text:'Starlink theorized down; kitbox power cycled'},
+    {dt:'05/12 10:56',types:['mechanical'],sevs:['critical'],text:'Ilmor LED solid green but prop not spinning — clicking sound; inverter dead'},
+    {dt:'05/12 12:45',types:['ops'],sevs:['minor'],text:'R134 checked out again, launching now'},
+  ],
+  'R134_05/13':[
+    {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
+    {dt:'05/13 11:50',types:['mechanical'],sevs:['moderate'],text:'Max reverse found to be limited — explaining drift issues. MaxR updated to 600 with QGC.'},
+    {dt:'05/13 12:25',types:['ops'],sevs:['moderate'],text:'R134 drifting too near pylon — teams not appearing in v1 UI, had to use v0 UI to send patrol play'},
+  ],
+  'R135_05/11':[
+    {dt:'05/11 08:41',types:['ops','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
+    {dt:'05/11 09:40',types:['mechanical'],sevs:['critical'],text:'Bad GPS — position jumping in UI all day'},
+    {dt:'05/11 14:12',types:['autonomy','ops'],sevs:['moderate'],text:'2x disarmed without permission'},
+    {dt:'05/12 15:17',types:['mechanical'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
+  ],
+  'R135_05/12':[
+    {dt:'05/12 10:21',types:['ops'],sevs:['moderate'],text:'Continued ops on R135 — still monitoring GPS behavior'},
+  ],
+  'R136_05/11':[
+    {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag — lmk when can restart autonomy'},
+    {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
+    {dt:'05/13 08:10',types:['mechanical'],sevs:['moderate'],text:'R136 did not charge last night — at 50.6V'},
+  ],
+  'R136_05/12':[
+    {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag'},
+    {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
+  ],
+  'R137_05/11':[
+    {dt:'05/11 08:42',types:['mechanical'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
+    {dt:'05/11 13:50',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station'},
+    {dt:'05/11 14:03',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort — ground station at 3 kts, 137 slows then surges'},
+    {dt:'05/12 08:32',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+    {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
+    {dt:'05/13 08:49',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
+    {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
+    {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'R137 Mission Manager crashed'},
+    {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation on play start — contact within range marked as neutral, trying to engage it'},
+  ],
+  'R137_05/12':[
+    {dt:'05/12 08:32',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+    {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
+  ],
+  'R137_05/13':[
+    {dt:'05/13 08:29',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
+    {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
+    {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'R137 Mission Manager crashed during picket testing'},
+    {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation — contact marked neutral within range, trying to engage it'},
+  ],
+  'R138_05/11':[
+    {dt:'05/11 18:10',types:['ops'],sevs:['minor'],text:'Continued on ram post stop'},
+    {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation — armed and in loiter. Resending formation put it back in line.'},
+    {dt:'05/13 09:30',types:['ops'],sevs:['moderate'],text:'Disarmed'},
+    {dt:'05/13 09:54',types:['software'],sevs:['minor'],text:'Reduced FLIR framerate to 5fps (from 10) — bitrate limiting caused poor image quality'},
+    {dt:'05/13 09:57',types:['ops'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related; no reason found in logs'},
+  ],
+  'R138_05/12':[
+    {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation, yet armed and in loiter'},
+    {dt:'05/12 12:33',types:['autonomy'],sevs:['minor'],text:'Resending formation put it back in line'},
+  ],
+  'R138_05/13':[
+    {dt:'05/13 09:30',types:['ops'],sevs:['moderate'],text:'Disarmed'},
+    {dt:'05/13 09:57',types:['ops'],sevs:['moderate'],text:'Disarmed again — no reason found in logs'},
+  ],
+  'R139_05/11':[
+    {dt:'05/12 09:54',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
+    {dt:'05/12 12:27',types:['ops','mechanical'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
+    {dt:'05/12 12:39',types:['software'],sevs:['minor'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
+    {dt:'05/12 14:50',types:['ops'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
+  ],
+  'R139_05/12':[
+    {dt:'05/12 09:40',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
+    {dt:'05/12 12:27',types:['ops'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold. Force armed for recovery.'},
+  ],
+  'R143_05/11':[
+    {dt:'05/11 07:01',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
+    {dt:'05/11 09:00',types:['mechanical'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
+    {dt:'05/11 14:07',types:['autonomy'],sevs:['moderate'],text:'143 circling in rear of formation — resent play'},
+    {dt:'05/11 18:09',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
+  ],
+  'R143_05/12':[],
+  'R145_05/11':[
+    {dt:'05/11 08:23',types:['mechanical'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
+    {dt:'05/11 08:45',types:['mechanical'],sevs:['minor'],text:'Bad gyro — drift identified, power cycle resolved'},
+    {dt:'05/11 11:15',types:['ops'],sevs:['moderate'],text:'R145 had three disarms during launch'},
+    {dt:'05/11 14:12',types:['ops'],sevs:['minor'],text:'Disarmed without permission'},
+  ],
+  'R145_05/12':[],
+  'R145_05/13':[
+    {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile — 122 and 145 both engaging when only one should'},
+    {dt:'05/13 11:34',types:['autonomy'],sevs:['critical'],text:'145 was engaging, then 122 joined in. Once this happened 145 started drifting rather than returning to formation.'},
+    {dt:'05/13 12:10',types:['autonomy'],sevs:['moderate'],text:'R145 activated for ramming but did not chase target track. Switched to targeting rampage — vehicle moved.'},
+    {dt:'05/13 12:52',types:['autonomy'],sevs:['moderate'],text:'122 and 145 both engaging again as kinetic boats'},
+  ],
+  'R147_05/11':[
+    {dt:'05/11 11:49',types:['mechanical'],sevs:['critical'],text:'GPS going in and out, jumping around. Bow GPS knocked off during recovery.'},
+    {dt:'05/11 12:07',types:['mechanical'],sevs:['moderate'],text:'GPS seems stable now — drive around with truck to verify'},
+    {dt:'05/11 18:09',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
+    {dt:'05/12 07:30',types:['mechanical'],sevs:['moderate'],text:'Added sealant to transom bolts'},
+  ],
+  'R147_05/12':[
+    {dt:'05/12 11:49',types:['mechanical'],sevs:['minor'],text:'147 has WiFi enabled on its Starlink'},
+  ],
+  'R147_05/13':[
+    {dt:'05/13 08:49',types:['ops'],sevs:['moderate'],text:"Can't get into R147 on Mission Planner — using QGC instead. Known issue, also affects R143."},
+    {dt:'05/13 08:56',types:['ops'],sevs:['minor'],text:'Same MP access issue as R134'},
+  ],
+};
+
+// ── DAY CONFIG ──
+const DAY_BOATS={
+  '05/11':[
+    {wave:'Wave 1 — transit boats', boats:['R117','R139','R137','R105','R145','R100','R143','R113','R121']},
+    {wave:'Wave 2 — later launch',  boats:['R136','R147','R108','R135','R138','R122','R134']},
+  ],
+  '05/12':[
+    {wave:'Wave 1 — transit boats', boats:['R117','R136','R137','R105','R113','R121','R139','R100']},
+    {wave:'Wave 2 — later launch',  boats:['R108','R134','R135','R138','R122','R114','R116','R146','R143','R145','R147']},
+  ],
+  '05/13':[
+    {wave:'Picket testing', boats:['R100','R113','R121','R122','R134','R137','R138','R145','R147']},
+  ],
+};
+
+// ── STATE ──
+let activeDay='05/11', activeSev='all', activeType='', searchVal='', activeTip=null;
+
+function closeAll(){
+  document.querySelectorAll('.tt').forEach(e=>e.remove());
+  document.querySelectorAll('.dot.active').forEach(d=>d.classList.remove('active'));
+  activeTip=null;
 }
-addLabel('Wave 1 — transit boats');WAVE1.forEach(buildRow);addDiv();addLabel('Wave 2 — later launch');WAVE2.forEach(buildRow);
-const totalInc=Object.values(INCIDENTS).reduce((s,a)=>s+a.length,0);
-document.getElementById('hdr-count').textContent=`16 boats · ${totalInc} incidents`;
-document.getElementById('ft-count').textContent=`${totalInc} INCIDENTS LOGGED`;
+
+// ── RENDER ──
+function renderDay(day){
+  const view=document.getElementById('day-view');
+  view.innerHTML='';
+
+  // axis
+  const axRow=document.createElement('div');
+  axRow.className='axis-row';
+  const ax=document.createElement('div');
+  ax.className='axis';
+  ax.innerHTML=HOURS.map(h=>`<span>${h}:00</span>`).join('');
+  axRow.appendChild(ax);
+  view.appendChild(axRow);
+
+  const waveGroups=DAY_BOATS[day]||[];
+  let totalInc=0;
+  let boatCount=0;
+
+  waveGroups.forEach((group, gi)=>{
+    // group label
+    const lbl=document.createElement('div');
+    lbl.className='group-label';
+    lbl.textContent=group.wave;
+    view.appendChild(lbl);
+
+    group.boats.forEach(boatId=>{
+    const key=`${boatId}_${day}`;
+    const propData=PROP[key];
+    const incidents=INCIDENTS[key]||[];
+    const thread=THREADS[key]||[];
+
+    if(!propData) return;
+
+    const fM=tM(propData.first), lM=tM(propData.last);
+
+    const row=document.createElement('div');
+    row.className='boat-row';
+    row.dataset.boat=boatId;
+
+    let inner='';
+    HOURS.forEach(h=>{inner+=`<div class="grid-line" style="left:${pc(h*60)};"></div>`;});
+
+    if(fM&&lM){
+      inner+=`<div class="water-bar" style="left:${pc(fM)};width:${wp(fM,lM)};"></div>`;
+      inner+=`<div class="water-tick" style="left:${pc(fM)};"></div>`;
+      inner+=`<div class="water-tick" style="left:${pc(lM)};"></div>`;
+      const sp=((fM-DS)/SP*100).toFixed(2), ep=((lM-DS)/SP*100).toFixed(2);
+      inner+=`<span class="wlabel" style="left:${sp}%;">${hm(propData.first)}</span>`;
+      inner+=`<span class="wlabel" style="left:${ep}%;transform:translateX(-100%);">${hm(propData.last)}</span>`;
+    }
+
+    propData.segs.forEach(s=>{
+      if(s.state!=='prop') return;
+      const a=tM(s.start), b=tM(s.end);
+      if(!a||!b) return;
+      const ca=Math.max(a,DS), cb=Math.min(b,DE);
+      if(cb<=ca) return;
+      inner+=`<div class="prop-seg" style="left:${pc(ca)};width:${wp(ca,cb)};"></div>`;
+    });
+
+    row.innerHTML=`<span class="boat-id">${boatId}</span><div class="track-wrap"><div class="track" id="tr-${key}">${inner}</div></div>`;
+    view.appendChild(row);
+
+    const track=document.getElementById(`tr-${key}`);
+
+    incidents.forEach(inc=>{
+      totalInc++;
+      const m=tM(inc.time);
+      if(!m) return;
+      const cm=Math.max(DS, Math.min(DE-1, m));
+      const sz=SS[inc.sev]||8, col=TC[inc.type]||'#888';
+      const dot=document.createElement('div');
+      dot.className='dot';
+      dot.dataset.sev=inc.sev; dot.dataset.type=inc.type;
+      dot.dataset.search=(boatId+' '+inc.type).toLowerCase();
+      dot.style.cssText=`left:${pc(cm)};width:${sz}px;height:${sz}px;background:${col};`;
+
+      dot.addEventListener('click',e=>{
+        e.stopPropagation();
+        if(activeTip===dot){closeAll();return;}
+        closeAll(); dot.classList.add('active'); activeTip=dot;
+
+        const dotPx=(cm-DS)/SP*track.offsetWidth, tipW=380;
+        const tipLeft=dotPx+tipW+20>track.offsetWidth?Math.max(0,dotPx-tipW-4):dotPx+8;
+        const tip=document.createElement('div'); tip.className='tt'; tip.style.left=tipLeft+'px';
+
+        const tagHtml=`<span class="tt-tag" style="background:${col}1a;color:${col};border:1px solid ${col}44;">${inc.type}</span><span class="tt-tag" style="background:rgba(0,0,0,0.07);color:var(--muted);border:1px solid var(--border2);">${inc.sev}</span>`;
+        const sevNote=SEV_NOTES[inc.sev]||'';
+
+        // filter thread msgs by type + sev + time proximity (±60min)
+        const dotTimeMin=cm;
+        const filtered=thread.filter(msg=>{
+          if(!msg.types.includes(inc.type)) return false;
+          if(!msg.sevs.includes(inc.sev)) return false;
+          const parts=msg.dt.split(' ');
+          const tp=parts[1]?parts[1].split(':').map(Number):null;
+          if(!tp) return true;
+          const msgMin=tp[0]*60+tp[1];
+          return Math.abs(msgMin-dotTimeMin)<=60;
+        });
+        const display=filtered.length?filtered:thread.filter(m=>m.types.includes(inc.type)&&m.sevs.includes(inc.sev));
+
+        let body=display.length
+          ?`<div class="tt-cols"><div class="tt-col-h">Time</div><div class="tt-col-h">Message</div></div><div class="tt-body">${display.map(m=>`<div class="tt-row"><div class="tt-cell tt-ts">${m.dt}</div><div class="tt-cell tt-txt">${m.text}</div></div>`).join('')}</div>`
+          :`<div class="tt-empty">No Slack thread messages for this incident</div>`;
+
+        tip.innerHTML=`<div class="tt-head"><div class="tt-boat" style="color:${col};">${boatId} · ${day} · Slack thread</div><div class="tt-tags">${tagHtml}</div><div class="tt-sev-note">${sevNote}</div></div>${body}`;
+        tip.addEventListener('click',e=>e.stopPropagation());
+        track.style.overflow='visible'; track.appendChild(tip);
+      });
+      track.appendChild(dot);
+      });
+    }); // end boats.forEach
+
+    boatCount+=group.boats.filter(b=>PROP[b+'_'+day]).length;
+
+    // divider between waves (not after last)
+    if(gi < waveGroups.length-1){
+      const div=document.createElement('div');
+      div.className='divider';
+      view.appendChild(div);
+    }
+  }); // end waveGroups.forEach
+
+  document.getElementById('hdr-count').textContent=`${boatCount} boats · ${totalInc} incidents`;
+  document.getElementById('ft-count').textContent=`${totalInc} INCIDENTS · ${day}`;
+  applyFilters();
+}
+
 function applyFilters(){
   let shown=0;
   document.querySelectorAll('.boat-row').forEach(row=>{
-    const id=row.dataset.boat,dots=row.querySelectorAll('.dot');
+    const id=row.dataset.boat;
+    const dots=row.querySelectorAll('.dot');
     let rowVis=false;
     dots.forEach(dot=>{
-      const ok=(activeSev==='all'||dot.dataset.sev===activeSev)&&(!activeType||dot.dataset.type===activeType)&&(!searchVal||dot.dataset.search.includes(searchVal)||id.toLowerCase().includes(searchVal));
-      dot.style.display=ok?'':'none';if(ok){rowVis=true;shown++;}
+      const ok=(activeSev==='all'||dot.dataset.sev===activeSev)
+            &&(!activeType||dot.dataset.type===activeType)
+            &&(!searchVal||dot.dataset.search.includes(searchVal)||id.toLowerCase().includes(searchVal));
+      dot.style.display=ok?'':'none';
+      if(ok){rowVis=true;shown++;}
     });
-    if((INCIDENTS[id]||[]).length===0)rowVis=true;
-    row.classList.toggle('dimmed',!rowVis&&(INCIDENTS[id]||[]).length>0);
+    const key=`${id}_${activeDay}`;
+    const hasInc=(INCIDENTS[key]||[]).length>0;
+    row.classList.toggle('dimmed',!rowVis&&hasInc);
   });
-  document.getElementById('ft-count').textContent=`${shown} INCIDENTS SHOWN`;
+  document.getElementById('ft-count').textContent=`${shown} INCIDENTS SHOWN · ${activeDay}`;
 }
-document.querySelectorAll('.btn[data-sev]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.btn[data-sev]').forEach(x=>x.classList.remove('on'));b.classList.add('on');activeSev=b.dataset.sev;closeAll();applyFilters();});});
-document.querySelectorAll('.btn[data-type]').forEach(b=>{b.addEventListener('click',()=>{if(activeType===b.dataset.type){activeType='';b.classList.remove('on');}else{document.querySelectorAll('.btn[data-type]').forEach(x=>x.classList.remove('on'));b.classList.add('on');activeType=b.dataset.type;}closeAll();applyFilters();});});
-document.getElementById('search').addEventListener('input',e=>{searchVal=e.target.value.toLowerCase().trim();closeAll();applyFilters();});
+
+// ── EVENT WIRING ──
+document.querySelectorAll('.day-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    activeDay=tab.dataset.day;
+    closeAll();
+    renderDay(activeDay);
+  });
+});
+
+document.querySelectorAll('.btn[data-sev]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.btn[data-sev]').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); activeSev=b.dataset.sev; closeAll(); applyFilters();
+  });
+});
+
+document.querySelectorAll('.btn[data-type]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    if(activeType===b.dataset.type){activeType='';b.classList.remove('on');}
+    else{document.querySelectorAll('.btn[data-type]').forEach(x=>x.classList.remove('on'));b.classList.add('on');activeType=b.dataset.type;}
+    closeAll(); applyFilters();
+  });
+});
+
+document.getElementById('search').addEventListener('input',e=>{
+  searchVal=e.target.value.toLowerCase().trim(); closeAll(); applyFilters();
+});
+
 document.addEventListener('click',closeAll);
+
+// ── INIT ──
+renderDay(activeDay);
 </script>
 </body>
 </html>
