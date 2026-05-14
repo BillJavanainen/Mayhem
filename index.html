@@ -60,15 +60,16 @@ body::before{content:'';}
 .tt-boat{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.04em;}
 .tt-tags{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;}
 .tt-tag{font-size:9px;padding:2px 7px;border-radius:2px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;}
-.tt-cols{display:grid;grid-template-columns:90px 56px 1fr;background:rgba(0,0,0,0.04);border-bottom:1px solid var(--border);}
+.tt-cols{display:grid;grid-template-columns:96px 1fr;background:rgba(0,0,0,0.04);border-bottom:1px solid var(--border);}
 .tt-col-h{padding:3px 8px;font-size:8px;font-weight:500;color:var(--dim);letter-spacing:0.12em;text-transform:uppercase;}
 .tt-body{max-height:230px;overflow-y:auto;}
-.tt-row{display:grid;grid-template-columns:90px 56px 1fr;border-bottom:1px solid var(--border);}
+.tt-row{display:grid;grid-template-columns:96px 1fr;border-bottom:1px solid var(--border);}
 .tt-row:last-child{border-bottom:none;}
 .tt-cell{padding:4px 8px;font-size:11px;line-height:1.45;}
-.tt-ts{color:var(--dim);font-size:10px;border-right:1px solid var(--border);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tt-ts{color:var(--dim);font-size:10px;border-right:1px solid var(--border);padding-top:5px;white-space:nowrap;}
 .tt-who{color:var(--muted);font-size:10px;font-weight:500;border-right:1px solid var(--border);padding-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tt-txt{color:var(--text);}
+.tt-sev-note{font-size:9px;color:var(--dim);margin-top:5px;line-height:1.4;font-style:italic;}
 .tt-empty{padding:10px 12px;font-size:11px;color:var(--dim);}
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .ft{font-size:9px;color:var(--dim);letter-spacing:0.1em;}
@@ -91,8 +92,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);dis
 <div class="legend">
   <div class="legend-group">
     <div class="li"><div class="lsw" style="background:#e24b4a;"></div>autonomy</div>
-    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>mechanical</div>
-    <div class="li"><div class="lsw" style="background:#378add;"></div>hardware / GPS</div>
+    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>mechanical / hardware</div>
     <div class="li"><div class="lsw" style="background:#1d9e75;"></div>software</div>
     <div class="li"><div class="lsw" style="background:#888780;"></div>ops</div>
   </div>
@@ -119,8 +119,7 @@ footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);dis
   <div class="ctrl-sep"></div>
   <span class="ctrl-label">type</span>
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
-  <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical</button>
-  <button class="btn" data-type="hardware" style="color:#378add;">hardware</button>
+  <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical / hardware</button>
   <button class="btn" data-type="software" style="color:#1d9e75;">software</button>
   <button class="btn" data-type="ops">ops</button>
   <div class="search-wrap">
@@ -146,13 +145,211 @@ function tM(ts){if(!ts||ts.startsWith('~'))return null;const p=ts.split(':').map
 function pc(m){return((m-DS)/SP*100).toFixed(3)+'%';}
 function wp(a,b){return((b-a)/SP*100).toFixed(3)+'%';}
 function hm(ts){return ts.slice(0,5);}
-const TC={autonomy:'#e24b4a',mechanical:'#ef9f27',hardware:'#378add',software:'#1d9e75',ops:'#888780'};
+const TC={autonomy:'#e24b4a',mechanical:'#ef9f27',hardware:'#ef9f27',software:'#1d9e75',ops:'#888780'};
 const SS={critical:14,moderate:9,minor:5};
 document.getElementById('axis').innerHTML=HOURS.map(h=>`<span>${h}:00</span>`).join('');
 const WATER={R100:{first:'08:33:17',last:'16:32:03'},R105:{first:'08:16:59',last:'16:33:24'},R108:{first:'11:33:34',last:'16:58:54'},R113:{first:'09:13:20',last:'16:47:54'},R117:{first:'07:51:22',last:'16:32:23'},R121:{first:'09:36:36',last:'16:56:17'},R122:{first:'12:11:08',last:'17:02:36'},R134:{first:'12:13:30',last:'17:21:32'},R135:{first:'11:52:21',last:'17:04:40'},R136:{first:'11:26:44',last:'17:17:01'},R137:{first:'08:05:38',last:'16:14:12'},R138:{first:'12:01:43',last:'17:22:52'},R139:{first:'07:57:16',last:'16:08:43'},R143:{first:'08:55:51',last:'16:18:36'},R145:{first:'08:26:51',last:'16:23:25'},R147:{first:'11:30:38',last:'17:13:46'}};
 const PROP={R100:[{a:'08:33',b:'08:34'},{a:'09:41',b:'09:48'},{a:'09:56',b:'09:57'},{a:'10:58',b:'10:59'},{a:'11:03',b:'11:05'},{a:'11:12',b:'11:17'},{a:'11:18',b:'11:19'},{a:'12:13',b:'12:16'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:14',b:'13:15'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:45'},{a:'14:50',b:'14:55'},{a:'14:56',b:'14:59'},{a:'16:25',b:'16:32'}],R105:[{a:'08:16',b:'08:17'},{a:'09:41',b:'09:56'},{a:'11:12',b:'11:19'},{a:'12:15',b:'12:20'},{a:'12:39',b:'12:50'},{a:'13:03',b:'13:08'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:57'},{a:'16:25',b:'16:33'}],R108:[{a:'11:33',b:'11:35'},{a:'11:58',b:'11:59'},{a:'12:03',b:'12:04'},{a:'12:07',b:'12:08'},{a:'12:23',b:'12:26'},{a:'12:58',b:'13:01'},{a:'13:03',b:'13:04'},{a:'13:06',b:'13:12'},{a:'13:27',b:'13:28'},{a:'13:42',b:'13:47'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:12'},{a:'14:30',b:'14:32'},{a:'14:36',b:'14:37'},{a:'14:52',b:'14:58'},{a:'15:12',b:'15:13'},{a:'15:21',b:'15:22'},{a:'15:31',b:'15:33'},{a:'15:50',b:'15:51'},{a:'15:53',b:'15:57'},{a:'16:49',b:'16:53'},{a:'16:57',b:'16:58'}],R113:[{a:'09:13',b:'09:14'},{a:'09:31',b:'09:33'},{a:'10:14',b:'10:29'},{a:'10:58',b:'10:59'},{a:'11:12',b:'11:19'},{a:'12:12',b:'12:17'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:14',b:'13:16'},{a:'13:24',b:'13:42'},{a:'14:41',b:'14:46'},{a:'14:50',b:'15:00'},{a:'16:12',b:'16:47'}],R117:[{a:'07:51',b:'07:52'},{a:'08:12',b:'08:13'},{a:'08:19',b:'08:21'},{a:'08:26',b:'08:29'},{a:'08:42',b:'08:43'},{a:'09:47',b:'09:48'},{a:'10:13',b:'10:28'},{a:'11:12',b:'11:22'},{a:'12:12',b:'12:13'},{a:'12:17',b:'12:18'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:09'},{a:'13:24',b:'13:42'},{a:'14:41',b:'15:02'},{a:'16:25',b:'16:32'}],R121:[{a:'09:37',b:'09:38'},{a:'09:41',b:'09:51'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:48'},{a:'13:03',b:'13:09'},{a:'13:24',b:'13:41'},{a:'14:41',b:'14:58'},{a:'16:25',b:'16:32'},{a:'16:46',b:'16:56'}],R122:[{a:'12:13',b:'12:15'},{a:'12:25',b:'12:26'},{a:'12:58',b:'13:13'},{a:'13:21',b:'13:22'},{a:'13:42',b:'13:46'},{a:'14:09',b:'14:10'},{a:'14:30',b:'14:32'},{a:'14:52',b:'14:58'},{a:'15:33',b:'15:38'},{a:'15:54',b:'15:56'},{a:'16:40',b:'16:41'},{a:'16:47',b:'16:48'},{a:'16:54',b:'16:55'},{a:'17:01',b:'17:02'}],R134:[{a:'12:13',b:'12:16'},{a:'12:25',b:'12:27'},{a:'12:58',b:'13:13'},{a:'13:49',b:'13:50'},{a:'14:52',b:'14:58'},{a:'15:56',b:'15:57'},{a:'16:48',b:'16:57'},{a:'17:20',b:'17:21'}],R135:[{a:'11:52',b:'11:53'},{a:'11:56',b:'11:57'},{a:'11:58',b:'11:59'},{a:'12:07',b:'12:08'},{a:'12:58',b:'13:11'},{a:'13:27',b:'13:29'},{a:'13:42',b:'13:46'},{a:'14:02',b:'14:12'},{a:'14:30',b:'14:37'},{a:'14:45',b:'14:59'},{a:'15:27',b:'15:28'},{a:'15:33',b:'15:34'},{a:'15:37',b:'15:40'},{a:'15:50',b:'16:02'},{a:'16:06',b:'16:13'},{a:'16:24',b:'16:35'},{a:'16:48',b:'17:04'}],R136:[{a:'11:26',b:'11:27'},{a:'12:07',b:'12:08'},{a:'12:24',b:'12:26'},{a:'12:58',b:'13:01'},{a:'13:04',b:'13:05'},{a:'13:06',b:'13:12'},{a:'13:22',b:'13:28'},{a:'13:42',b:'13:44'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:13'},{a:'14:30',b:'14:32'},{a:'14:36',b:'14:37'},{a:'14:52',b:'14:58'},{a:'15:12',b:'15:14'},{a:'15:21',b:'15:22'},{a:'15:29',b:'15:30'},{a:'15:33',b:'15:37'},{a:'15:53',b:'15:54'},{a:'15:58',b:'16:00'},{a:'16:06',b:'16:07'},{a:'16:10',b:'16:12'},{a:'16:25',b:'16:26'},{a:'16:29',b:'16:31'},{a:'16:33',b:'16:35'},{a:'16:48',b:'16:55'},{a:'17:16',b:'17:17'}],R137:[{a:'08:05',b:'08:06'},{a:'09:41',b:'10:00'},{a:'11:03',b:'11:19'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:56'},{a:'14:02',b:'14:03'},{a:'14:10',b:'14:51'},{a:'14:55',b:'15:55'},{a:'16:00',b:'16:14'}],R138:[{a:'12:01',b:'12:08'},{a:'12:23',b:'12:24'},{a:'12:58',b:'13:12'},{a:'13:27',b:'13:28'},{a:'13:42',b:'13:43'},{a:'13:49',b:'13:50'},{a:'14:02',b:'14:03'},{a:'14:09',b:'14:13'},{a:'14:31',b:'14:34'},{a:'14:45',b:'14:47'},{a:'14:52',b:'14:57'},{a:'15:21',b:'15:23'},{a:'15:31',b:'15:40'},{a:'15:44',b:'15:45'},{a:'15:50',b:'15:59'},{a:'16:00',b:'16:13'},{a:'16:29',b:'16:31'},{a:'16:33',b:'16:35'},{a:'16:48',b:'16:57'},{a:'17:21',b:'17:22'}],R139:[{a:'07:57',b:'07:58'},{a:'08:00',b:'08:01'},{a:'09:41',b:'09:56'},{a:'11:03',b:'11:17'},{a:'12:11',b:'12:14'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:08'},{a:'13:24',b:'13:44'},{a:'13:48',b:'14:05'},{a:'14:10',b:'14:11'},{a:'14:14',b:'14:48'},{a:'14:49',b:'15:55'},{a:'16:00',b:'16:08'}],R143:[{a:'08:55',b:'08:56'},{a:'09:47',b:'09:48'},{a:'10:28',b:'10:31'},{a:'11:03',b:'11:07'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:50'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:59'},{a:'14:02',b:'14:03'},{a:'14:11',b:'14:15'},{a:'14:17',b:'14:47'},{a:'14:54',b:'15:55'},{a:'16:00',b:'16:18'}],R145:[{a:'08:26',b:'08:27'},{a:'08:35',b:'08:36'},{a:'08:48',b:'08:49'},{a:'11:12',b:'11:19'},{a:'12:38',b:'12:49'},{a:'13:03',b:'13:07'},{a:'13:24',b:'13:56'},{a:'13:43',b:'13:56'},{a:'14:14',b:'14:48'},{a:'14:55',b:'14:56'},{a:'14:59',b:'15:55'},{a:'16:00',b:'16:23'}],R147:[{a:'11:30',b:'11:31'},{a:'11:38',b:'11:39'},{a:'12:04',b:'12:09'},{a:'12:24',b:'12:25'},{a:'12:58',b:'13:01'},{a:'13:03',b:'13:05'},{a:'13:06',b:'13:13'},{a:'14:52',b:'14:58'},{a:'16:25',b:'16:30'},{a:'16:48',b:'16:58'},{a:'17:12',b:'17:13'}]};
-const THREADS={R100:[{dt:'06:45',who:'Ashley',text:'Dual battery — anything special with turning this on?'},{dt:'~AM',who:'Toby',text:'Stbd aft top hat handle broken'},{dt:'~AM',who:'Deven',text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},{dt:'~AM',who:'Cory',text:"Shouldn't be by itself — innocuous change to enable second battery"},{dt:'~PM',who:'Mike',text:'R100 stopped moving and went into loiter'}],R105:[{dt:'~AM',who:'Reed',text:'Reverse RPM limited, needs adjustment'},{dt:'~PM',who:'Toby',text:'R105 having difficulty maintaining position in escort'},{dt:'~PM',who:'Tanner',text:'Controller drift continues — does not maintain position'},{dt:'~PM',who:'Michael P',text:'Scratched lenses'},{dt:'~PM',who:'Tanner',text:'Updated and autonomy container restarted'},{dt:'~PM',who:'Deven',text:'Port and stbd door latches broken'}],R113:[{dt:'08:59',who:'Anderson',text:'Prop replaced — beat up, reducing variables for radar boat'},{dt:'09:13',who:'Reed',text:'Disarmed at ramp, needed re-arm'},{dt:'15:17',who:'Toby',text:'Acting "drunk" on transit play'},{dt:'15:22',who:'Dan',text:'Low Orca temp — stuck going full back and forth cyclically'},{dt:'15:49',who:'Toby',text:'Oscillation recurring'},{dt:'16:03',who:'Paul',text:'Balena update running'},{dt:'16:08',who:'Mike',text:'Drunk before balena — not related'},{dt:'16:13',who:'Paul',text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},{dt:'18:09',who:'Tanner',text:'Towed back in, to be investigated'},{dt:'18:48',who:'Paul',text:'All normal params — oscillation cause unknown'},{dt:'05/12 07:54',who:'Dan',text:'Internal box not secured — needs dual lock'},{dt:'05/12 09:14',who:'Kyle',text:'Not responding to escort — lagging behind'},{dt:'05/12 13:40',who:'Tanner',text:'Patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — investigate EO phantom recognitions.'}],R117:[{dt:'~AM',who:'Anderson',text:'Disarm on launch'},{dt:'~AM',who:'Mike',text:'Needed compass cal on launch'},{dt:'~AM',who:'Tanner',text:'Compass 180° out — resending dual GPS config'},{dt:'~AM',who:'Vita',text:'GPS patches opposite — swap SMA connectors on kitbox'},{dt:'~AM',who:'Kyle',text:'Kitbox cycled on water'},{dt:'~AM',who:'Kyle',text:'Did not navigate bridge — auto disarmed, re-armed via RC'},{dt:'~AM',who:'Kyle',text:'Gyros not calibrated after re-arming'},{dt:'~PM',who:'Jeremy',text:'Disabled obstacle grid to prevent CDR. Engage task race condition.'},{dt:'~PM',who:'Anderson',text:'Towed to BEDs. Recovered under own power. Voltage at 41V.'},{dt:'~PM',who:'Dan',text:'Started at 50.2V — hit ~37V, tripped undervoltage protection'}],R121:[{dt:'06:49',who:'Deven',text:'Before water: ilmor bearing sounds bad; grab handle not secured; battery-well hole not plugged (taped)'},{dt:'~AM',who:'Mari',text:'No GPS — disarmed'},{dt:'~AM',who:'Mari',text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},{dt:'~AM',who:'Vita',text:'Reset — changed params for DGPS'},{dt:'~AM',who:'Mari',text:'Ilmor ICU recovered after power cycle'},{dt:'~AM',who:'Anderson',text:"Won't trim down"},{dt:'~AM',who:'Tanner',text:'Auto disarmed'},{dt:'14:52',who:'Jawad',text:'Disarmed itself on water under autonomy'},{dt:'~PM',who:'Mari',text:'Prop hit the ramp on recovery'},{dt:'~PM',who:'Jawad',text:'Port camera likely failing — should get replaced'}],R135:[{dt:'~AM',who:'Mari',text:"Action button doesn't work — went to loiter not FF on checkout"},{dt:'11:52',who:'Alex B',text:'Bad GPS — position jumping in UI'},{dt:'~AM',who:'Dan',text:'Broken hatch latch starboard side'},{dt:'~PM',who:'Kyle',text:'3x kitbox power cycled — intermittent trim and throttle'},{dt:'~PM',who:'Kyle',text:'2x disarmed without permission'},{dt:'~PM',who:'Deven',text:'On recovery, R135 missed trailer and drove up boat ramp — hull scraped. Needs new prop.'}],R137:[{dt:'~AM',who:'Chris',text:'Reverse RPM parameters need adjustment'},{dt:'14:00',who:'Kyle',text:'Falling out of escort — collision avoiding with ground station'},{dt:'14:00',who:'Kyle',text:'74°F Orca temp climbing when not at top of formation'},{dt:'15:00',who:'Kyle',text:'At 5.1 kts still falling out of escort'},{dt:'~PM',who:'Kevin',text:'Relay 3 (FLIR) not auto-activating — 2nd occurrence'},{dt:'~PM',who:'Kyle',text:'Mag field errors recurring'},{dt:'~PM',who:'Jeremy',text:'PTZ manually turned on via Mission Planner param'}],R139:[{dt:'~PM',who:'Kyle',text:'Fell out of team and headed north 200° without reason'},{dt:'~PM',who:'Tanner',text:'Repeated — re-armed and re-entered'},{dt:'~PM',who:'Mari',text:'Disarmed failsafe — no RC receiver'},{dt:'~PM',who:'Jeremy',text:'All looks good from autonomy'},{dt:'~PM',who:'Mari',text:'SSM battery message — force armed for recovery'}],R143:[{dt:'08:55',who:'Alex B',text:'Bilge impeller grinding — cleared debris but still sounds bad'},{dt:'~AM',who:'Kyle',text:'69°F Orca temp'},{dt:'14:40',who:'Kyle',text:'143 circling in rear of formation'},{dt:'~PM',who:'Tanner',text:'Large amount of water from hull'},{dt:'~PM',who:'Deven',text:'Bilge pump has grinding noise'}],R145:[{dt:'08:26',who:'Kyle',text:'Compass continually 180° out — similar to R117, dual GPS config resent'},{dt:'~AM',who:'Tanner',text:'Bad gyro'},{dt:'~AM',who:'Carter B',text:'Checkout failed: battery charging absolute value bug — logged as bug report'},{dt:'~AM',who:'Anderson',text:'R145 had three disarms during launch'},{dt:'~PM',who:'Kyle',text:'Disarmed without permission'},{dt:'~PM',who:'Jeremy',text:'Perception recording enabled on 145'},{dt:'~PM',who:'Kyle',text:'Known bug — comms node crashing when authorizing ATR'}]};
-const INCIDENTS={R100:[{time:'08:33',type:'ops',sev:'minor'},{time:'08:33',type:'hardware',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'}],R105:[{time:'15:00',type:'autonomy',sev:'moderate'}],R108:[],R113:[{time:'08:59',type:'mechanical',sev:'minor'},{time:'09:13',type:'ops',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'},{time:'15:49',type:'autonomy',sev:'critical'},{time:'16:03',type:'software',sev:'minor'},{time:'16:13',type:'software',sev:'moderate'},{time:'17:30',type:'mechanical',sev:'critical'},{time:'18:09',type:'ops',sev:'critical'}],R117:[{time:'08:00',type:'hardware',sev:'critical'},{time:'08:10',type:'hardware',sev:'moderate'},{time:'08:20',type:'mechanical',sev:'critical'},{time:'08:30',type:'mechanical',sev:'moderate'},{time:'08:40',type:'software',sev:'moderate'},{time:'09:00',type:'hardware',sev:'moderate'},{time:'09:30',type:'ops',sev:'minor'},{time:'10:00',type:'hardware',sev:'minor'}],R121:[{time:'06:49',type:'mechanical',sev:'moderate'},{time:'14:52',type:'autonomy',sev:'critical'}],R122:[],R134:[],R135:[{time:'11:52',type:'hardware',sev:'critical'},{time:'15:30',type:'autonomy',sev:'moderate'}],R136:[],R137:[{time:'14:00',type:'autonomy',sev:'moderate'},{time:'15:00',type:'autonomy',sev:'moderate'}],R138:[],R139:[{time:'14:40',type:'autonomy',sev:'moderate'}],R143:[{time:'08:55',type:'mechanical',sev:'moderate'},{time:'09:30',type:'mechanical',sev:'moderate'},{time:'14:40',type:'autonomy',sev:'moderate'}],R145:[{time:'08:26',type:'hardware',sev:'moderate'},{time:'08:30',type:'hardware',sev:'moderate'},{time:'08:45',type:'hardware',sev:'minor'},{time:'09:00',type:'software',sev:'minor'},{time:'09:15',type:'ops',sev:'minor'},{time:'13:00',type:'software',sev:'moderate'},{time:'14:40',type:'autonomy',sev:'moderate'}],R147:[]};
+const THREADS={
+R100:[
+  {dt:'05/11 06:47',who:'Ashley',types:['ops'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
+  {dt:'05/11 07:27',who:'Toby',types:['mechanical'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
+  {dt:'05/11 07:50',who:'Deven',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
+  {dt:'05/11 10:06',who:'Cory',types:['software'],sevs:['minor'],text:"Shouldn't affect checks — innocuous change to enable second battery"},
+  {dt:'05/11 12:19',who:'Mike',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
+],
+R105:[
+  {dt:'05/11 08:18',who:'Reed',types:['mechanical'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
+  {dt:'05/11 12:17',who:'Toby',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort'},
+  {dt:'05/12 08:53',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Controller drift continues — does not maintain position'},
+  {dt:'05/12 09:54',who:'Michael P',types:['mechanical'],sevs:['minor'],text:'Scratched lenses'},
+  {dt:'05/12 10:07',who:'Tanner',types:['software'],sevs:['moderate'],text:'Updated and autonomy container restarted'},
+  {dt:'05/13 10:22',who:'Deven',types:['mechanical'],sevs:['minor'],text:'Port and stbd door latches broken'},
+],
+R113:[
+  {dt:'05/11 08:59',who:'Anderson',types:['mechanical'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
+  {dt:'05/11 09:13',who:'Reed',types:['ops'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
+  {dt:'05/11 15:17',who:'Toby',types:['autonomy'],sevs:['critical'],text:'Acting \"drunk\" on transit play — full cyclic oscillation'},
+  {dt:'05/11 15:22',who:'Dan',types:['autonomy','mechanical'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
+  {dt:'05/11 15:23',who:'Dan',types:['autonomy','mechanical'],sevs:['critical'],text:'Cyclic oscillation until speed was dropped'},
+  {dt:'05/11 15:49',who:'Toby',types:['autonomy'],sevs:['critical'],text:'Oscillation recurring'},
+  {dt:'05/11 15:53',who:'Dan',types:['autonomy'],sevs:['critical'],text:'Going in and out of whatever that issue/mode is'},
+  {dt:'05/11 16:03',who:'Paul',types:['software'],sevs:['minor'],text:'Balena update running on R113'},
+  {dt:'05/11 16:08',who:'Mike',types:['software'],sevs:['minor'],text:'Was drunk before balena — not related'},
+  {dt:'05/11 16:13',who:'Paul',types:['software'],sevs:['moderate'],text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},
+  {dt:'05/11 18:09',who:'Tanner',types:['ops','mechanical'],sevs:['critical'],text:'Towed back in, to be investigated'},
+  {dt:'05/11 18:48',who:'Paul',types:['software','autonomy'],sevs:['critical'],text:'All normal params — oscillation cause unknown'},
+  {dt:'05/12 07:54',who:'Dan',types:['mechanical'],sevs:['critical'],text:'Internal box not secured — needs dual lock'},
+  {dt:'05/12 09:14',who:'Kyle',types:['autonomy'],sevs:['critical'],text:'Not responding to escort play — lagging behind'},
+  {dt:'05/13 13:40',who:'Tanner',types:['autonomy','mechanical'],sevs:['critical'],text:'Patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — investigate EO phantom recognitions.'},
+],
+R117:[
+  {dt:'05/11 07:50',who:'Anderson',types:['ops'],sevs:['minor'],text:'Disarm on launch'},
+  {dt:'05/11 07:57',who:'Mike',types:['mechanical'],sevs:['minor'],text:'Needed compass cal on launch'},
+  {dt:'05/11 08:13',who:'Tanner',types:['mechanical'],sevs:['moderate'],text:'Compass 180° out during movement — bringing back to resend dual GPS config'},
+  {dt:'05/11 08:23',who:'Vita',types:['mechanical'],sevs:['moderate'],text:'GPS patches installed opposite — swap SMA connectors on kitbox'},
+  {dt:'05/11 08:30',who:'Dan',types:['mechanical'],sevs:['moderate'],text:'Always power off kitbox before unplugging/plugging anything'},
+  {dt:'05/11 08:40',who:'Kyle',types:['ops'],sevs:['minor'],text:'Kitbox cycled on water'},
+  {dt:'05/11 11:21',who:'Kyle',types:['ops'],sevs:['minor'],text:'Did not navigate bridge — auto disarmed, re-armed via RC'},
+  {dt:'05/11 11:22',who:'Kyle',types:['mechanical'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
+  {dt:'05/11 15:02',who:'Mike',types:['mechanical'],sevs:['critical'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
+  {dt:'05/11 15:14',who:'Carter D',types:['mechanical'],sevs:['critical'],text:'Bridge not in shoreline data — small island to the north is though'},
+  {dt:'05/11 08:31',who:'Mari',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+  {dt:'05/12 11:27',who:'Jeremy',types:['software'],sevs:['moderate'],text:'Disabled obstacle grid and detection tracker to prevent CDR interactions'},
+  {dt:'05/12 12:30',who:'Jeremy',types:['software'],sevs:['moderate'],text:'Engage task unexpectedly completing — possible race condition with autonomous targeting'},
+  {dt:'05/12 15:00',who:'Anderson',types:['mechanical','ops'],sevs:['critical'],text:'Towed to BEDs. Kitbox cycled — recovered under own power. Voltage at 41V.'},
+  {dt:'05/13 08:27',who:'Dan',types:['mechanical'],sevs:['critical'],text:'Hit ~37V — likely tripped undervoltage protection on battery'},
+],
+R121:[
+  {dt:'05/11 08:00',who:'Tommy',types:['ops','software'],sevs:['moderate'],text:'Checkout received but did not run after button pressed'},
+  {dt:'05/11 08:01',who:'Tommy',types:['mechanical'],sevs:['moderate'],text:'Has blue HMI cable — may be the issue'},
+  {dt:'05/11 08:26',who:'Mari',types:['mechanical'],sevs:['critical'],text:'No GPS — disarmed'},
+  {dt:'05/11 08:31',who:'Mari',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+  {dt:'05/11 08:42',who:'Vita',types:['software'],sevs:['moderate'],text:'Reset — changed params for DGPS'},
+  {dt:'05/11 08:53',who:'Mari',types:['mechanical'],sevs:['moderate'],text:'Ilmor ICU came back up after power cycle'},
+  {dt:'05/11 09:16',who:'Vita',types:['software'],sevs:['moderate'],text:'GPS good — had to configure dual GPS board'},
+  {dt:'05/11 09:26',who:'Anderson',types:['mechanical'],sevs:['minor'],text:"Won't trim down"},
+  {dt:'05/11 09:30',who:'Jawad',types:['mechanical'],sevs:['minor'],text:'Port canoe handle missing a screw'},
+  {dt:'05/11 09:37',who:'Tanner',types:['ops'],sevs:['minor'],text:'Auto disarmed'},
+  {dt:'05/11 09:39',who:'Deven',types:['mechanical'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; motor-well hole not plugged (taped)'},
+  {dt:'05/11 13:19',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Not behaving in formation play for photoshoot'},
+  {dt:'05/13 08:23',who:'Jeremy',types:['software','autonomy'],sevs:['moderate'],text:'Obstacle grid was enabled causing collision avoidance'},
+  {dt:'05/11 14:52',who:'Jawad',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on water under autonomy at 14:52'},
+  {dt:'05/13 10:24',who:'Mari',types:['mechanical','ops'],sevs:['moderate'],text:'Prop hit the ramp on recovery'},
+  {dt:'05/13 16:52',who:'Jawad',types:['mechanical'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
+],
+R135:[
+  {dt:'05/11 08:41',who:'Mari',types:['ops','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
+  {dt:'05/11 08:42',who:'Mari',types:['ops','software'],sevs:['moderate'],text:'Sent checkout play — went to loiter rather than FF'},
+  {dt:'05/11 09:40',who:'Alex B',types:['mechanical'],sevs:['critical'],text:'Bad GPS — position jumping in UI'},
+  {dt:'05/12 08:01',who:'Dan',types:['mechanical'],sevs:['minor'],text:'Broken hatch latch starboard side'},
+  {dt:'05/12 08:32',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Intermittent on manual'},
+  {dt:'05/12 09:38',who:'Kyle',types:['ops','mechanical'],sevs:['moderate'],text:'3x power cycled kitbox — intermittent trim and throttle over Havoc remote'},
+  {dt:'05/12 09:52',who:'Kyle',types:['software'],sevs:['moderate'],text:'Could be bug with maglink overloading CPU'},
+  {dt:'05/12 14:12',who:'Kyle',types:['autonomy','ops'],sevs:['moderate'],text:'2x disarmed without permission'},
+  {dt:'05/12 15:17',who:'Deven',types:['mechanical'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
+],
+R137:[
+  {dt:'05/11 08:42',who:'Chris',types:['mechanical'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
+  {dt:'05/11 13:50',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station instead of staying ahead'},
+  {dt:'05/11 13:55',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'74°F Orca temp climbing when not at top of formation'},
+  {dt:'05/11 14:03',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort'},
+  {dt:'05/11 14:04',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Ground station at 3 kts — 137 slows then surges to regain position'},
+  {dt:'05/12 08:17',who:'Kevin',types:['mechanical'],sevs:['minor'],text:'Relay 3 (FLIR) not turning on — resolved on its own'},
+  {dt:'05/12 08:32',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+  {dt:'05/12 08:52',who:'Tanner',types:['software','autonomy'],sevs:['minor'],text:'Would not take charlie team reassign — had to go to unassigned first'},
+  {dt:'05/13 08:47',who:'Jeremy',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
+  {dt:'05/13 08:49',who:'Kevin',types:['mechanical'],sevs:['minor'],text:'2nd time relay 3 did not auto-activate on this vehicle — check default in MP'},
+],
+R139:[
+  {dt:'05/12 09:54',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason shown in UI'},
+  {dt:'05/12 10:53',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Repeated'},
+  {dt:'05/12 10:55',who:'Tanner',types:['autonomy'],sevs:['moderate'],text:'Re-armed and re-entered'},
+  {dt:'05/12 12:27',who:'Mari',types:['ops','mechanical'],sevs:['moderate'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
+  {dt:'05/12 12:34',who:'Paul',types:['software'],sevs:['moderate'],text:'Checking autonomy perspective'},
+  {dt:'05/12 12:39',who:'Jeremy',types:['software'],sevs:['moderate'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
+  {dt:'05/12 14:50',who:'Mari',types:['ops'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
+],
+R143:[
+  {dt:'05/11 07:01',who:'Anderson',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
+  {dt:'05/11 09:00',who:'Alex B',types:['mechanical'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
+  {dt:'05/11 13:56',who:'Kyle',types:['mechanical'],sevs:['minor'],text:'69°F Orca temp'},
+  {dt:'05/11 14:07',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'143 circling in rear of formation — regrouping, resending play'},
+  {dt:'05/11 18:09',who:'Tanner',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
+  {dt:'05/12 11:10',who:'Kyle',types:['autonomy'],sevs:['moderate'],text:'Falling out of formation — resent play'},
+  {dt:'05/13 10:30',who:'Deven',types:['mechanical'],sevs:['moderate'],text:'Bilge pump has grinding noise'},
+],
+R145:[
+  {dt:'05/11 06:57',who:'Anderson',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
+  {dt:'05/11 08:28',who:'Kyle',types:['mechanical'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
+  {dt:'05/11 08:45',who:'Tanner',types:['mechanical'],sevs:['minor'],text:'Bad gyro'},
+  {dt:'05/12 10:39',who:'Deven',types:['software'],sevs:['minor'],text:'R145 ran checkout but UI shows failed'},
+  {dt:'05/12 10:44',who:'Carter B',types:['software'],sevs:['minor'],text:'HMI button press seen then immediately failed'},
+  {dt:'05/12 11:04',who:'Carter B',types:['software'],sevs:['minor'],text:'Resolved: initial battery usage absolute value bug — charging reported as high usage. Logging as bug report.'},
+  {dt:'05/12 11:15',who:'Anderson',types:['ops'],sevs:['minor'],text:'R145 had three disarms during launch'},
+  {dt:'05/12 14:12',who:'Kyle',types:['ops'],sevs:['minor'],text:'Disarmed without permission'},
+  {dt:'05/13 10:03',who:'Jeremy',types:['software'],sevs:['minor'],text:'Perception recording enabled on 145'},
+  {dt:'05/13 13:37',who:'Kyle',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
+],
+};
+const INCIDENTS={
+  // SEVERITY RULES:
+  // CRITICAL = boat offline/towed/unrecoverable, safety hazard, complete system failure,
+  //            water ingress, autonomous disarm mid-mission on water, physical damage
+  // MODERATE = degraded performance, stayed operational but needed intervention,
+  //            mission/formation failures, param changes, single system failure that recovered
+  // MINOR    = observation only, cosmetic, pre-water note, resolved on own, administrative
+  R100:[
+    {time:'06:47',type:'ops',sev:'minor'},        // question about dual battery setup
+    {time:'07:27',type:'mechanical',sev:'minor'}, // broken handle — cosmetic, noted
+    {time:'07:50',type:'software',sev:'minor'},   // checkout showed failed but ran fine — resolved
+    {time:'12:19',type:'autonomy',sev:'critical'},// boat stopped moving mid-mission, went into loiter
+  ],
+  R105:[
+    {time:'08:18',type:'mechanical',sev:'minor'},   // RPM limit noted for later adjustment
+    {time:'12:17',type:'autonomy',sev:'moderate'},  // couldn't maintain position — degraded, still running
+  ],
+  R108:[],
+  R113:[
+    {time:'08:59',type:'mechanical',sev:'minor'},   // prop replaced proactively — pre-mission
+    {time:'09:13',type:'ops',sev:'minor'},           // disarm at ramp, re-armed — routine
+    {time:'15:17',type:'autonomy',sev:'critical'},  // full cyclic oscillation on transit — uncontrolled
+    {time:'15:49',type:'autonomy',sev:'critical'},  // oscillation recurring — still unresolved
+    {time:'16:03',type:'software',sev:'minor'},     // balena update — informational
+    {time:'16:13',type:'software',sev:'moderate'},  // PID param change to address active issue
+    {time:'18:09',type:'ops',sev:'critical'},        // towed in + water ingress from hull
+  ],
+  R117:[
+    {time:'07:50',type:'ops',sev:'minor'},           // disarm at launch — routine ramp issue
+    {time:'08:13',type:'mechanical',sev:'moderate'}, // compass 180° out — needed retrieval + config
+    {time:'08:31',type:'mechanical',sev:'critical'}, // Ilmor dead: no LED, no ICU comms, no power
+    {time:'08:40',type:'ops',sev:'minor'},           // kitbox cycled on water — resolved
+    {time:'11:21',type:'ops',sev:'moderate'},        // failed to navigate bridge, auto disarmed on water
+    {time:'11:22',type:'mechanical',sev:'minor'},    // gyros not calibrated after re-arm — noted
+    {time:'15:02',type:'mechanical',sev:'moderate'}, // collision avoidance at bridge again, needed manual
+  ],
+  R121:[
+    {time:'08:00',type:'ops',sev:'minor'},           // checkout button didn't trigger — pre-water
+    {time:'08:26',type:'mechanical',sev:'critical'}, // no GPS + Ilmor dead + no ICU: complete failure
+    {time:'08:42',type:'software',sev:'moderate'},   // params changed to fix GPS — intervention required
+    {time:'09:26',type:'mechanical',sev:'minor'},    // won't trim down — noted, still launched
+    {time:'09:37',type:'ops',sev:'minor'},           // auto disarmed at dock — pre-water
+    {time:'09:39',type:'mechanical',sev:'moderate'}, // bad bearing + structural issues noted before launch
+    {time:'13:19',type:'autonomy',sev:'moderate'},   // not behaving in formation — mission degraded
+    {time:'14:52',type:'autonomy',sev:'critical'},   // autonomous disarm mid-mission on water
+  ],
+  R122:[],R134:[],
+  R135:[
+    {time:'08:41',type:'ops',sev:'moderate'},        // action button broken, checkout went to loiter
+    {time:'09:40',type:'mechanical',sev:'critical'}, // GPS jumping — boat unpositioned, couldn't operate
+    {time:'14:12',type:'autonomy',sev:'moderate'},   // 2x disarmed without permission — repeated failure
+  ],
+  R136:[],
+  R137:[
+    {time:'08:42',type:'mechanical',sev:'minor'},    // RPM param noted — not blocking ops
+    {time:'13:50',type:'autonomy',sev:'moderate'},   // falling out of escort, collision avoidance misfire
+    {time:'14:03',type:'autonomy',sev:'moderate'},   // still falling out at 5.1 kts — persistent
+  ],
+  R138:[],
+  R139:[
+    {time:'12:27',type:'ops',sev:'critical'},        // disarmed failsafe on water — no RC, lost in hold
+    {time:'12:39',type:'software',sev:'minor'},      // autonomy checked out clean — informational
+    {time:'14:50',type:'ops',sev:'moderate'},        // SSM battery msg, force armed for recovery
+  ],
+  R143:[
+    {time:'07:01',type:'ops',sev:'minor'},           // Starlink config — admin, resolved
+    {time:'09:00',type:'mechanical',sev:'moderate'}, // bilge grinding — still pumping but needs repair
+    {time:'14:07',type:'autonomy',sev:'moderate'},   // circling in formation — mission degraded
+    {time:'18:09',type:'mechanical',sev:'critical'}, // large amount of water from hull — safety
+  ],
+  R145:[
+    {time:'08:28',type:'mechanical',sev:'moderate'}, // compass 180° out — same as R117, retrieval needed
+    {time:'08:45',type:'mechanical',sev:'minor'},    // bad gyro noted — resolved by power cycle
+    {time:'11:15',type:'ops',sev:'moderate'},        // three disarms during launch — repeated, not routine
+    {time:'14:12',type:'ops',sev:'minor'},           // single disarm without permission — noted
+  ],
+  R147:[],
+};
 const WAVE1=['R117','R139','R137','R105','R145','R100','R143','R113','R121'];
 const WAVE2=['R136','R147','R108','R135','R138','R122','R134'];
 let activeSev='all',activeType='',searchVal='',activeTip=null;
@@ -188,12 +385,30 @@ function buildRow(id){
       const dotPx=(cm-DS)/SP*track.offsetWidth,tipW=370;
       const tipLeft=dotPx+tipW+20>track.offsetWidth?Math.max(0,dotPx-tipW-4):dotPx+8;
       const tip=document.createElement('div');tip.className='tt';tip.style.left=tipLeft+'px';
-      const thread=THREADS[id]||null;
-      const tagHtml=`<span class="tt-tag" style="background:${col}1a;color:${col};border:1px solid ${col}44;">${inc.type}</span><span class="tt-tag" style="background:rgba(0,0,0,0.07);color:var(--muted);border:1px solid var(--border2);">${inc.sev}</span>`;
-      let body=thread&&thread.length
-        ?`<div class="tt-cols"><div class="tt-col-h">Date/time</div><div class="tt-col-h">Who</div><div class="tt-col-h">Message</div></div><div class="tt-body">${thread.map(m=>`<div class="tt-row"><div class="tt-cell tt-ts">${m.dt}</div><div class="tt-cell tt-who">${m.who}</div><div class="tt-cell tt-txt">${m.text}</div></div>`).join('')}</div>`
-        :`<div class="tt-empty">No Slack thread for ${id}</div>`;
-      tip.innerHTML=`<div class="tt-head"><div class="tt-boat" style="color:${col};">${id} · Slack thread</div><div class="tt-tags">${tagHtml}</div></div>${body}`;
+      const allMsgs=(THREADS[id]||[]);
+      const dotMin=cm; // already in minutes from day start
+      const filtered=allMsgs.filter(m=>{
+        if(!m.types.includes(inc.type)) return false;
+        if(!m.sevs.includes(inc.sev)) return false;
+        // check time within 45 min of dot
+        const parts=m.dt.split(' ');
+        const timePart=parts[parts.length-1];
+        const tp=timePart.split(':').map(Number);
+        const msgMin=tp[0]*60+tp[1];
+        const dayMsgMin=msgMin; // same day reference
+        return Math.abs(dayMsgMin-(DS+dotMin))<=45||Math.abs(dayMsgMin-dotMin)<=45;
+      });
+      const display=filtered.length?filtered:allMsgs.filter(m=>m.types.includes(inc.type)&&m.sevs.includes(inc.sev));
+      const SEV_NOTES={
+        critical:'Boat offline, towed, water ingress, complete system failure, or autonomous disarm mid-mission',
+        moderate:'Degraded performance, needed intervention, mission/formation failure, single system recovered',
+        minor:'Observation only, pre-water note, cosmetic, resolved on own, or administrative',
+      };
+      const sevNote=SEV_NOTES[inc.sev]||'';
+      const tagHtml=`<span class="tt-tag" style="background:${col}1a;color:${col};border:1px solid ${col}44;">${inc.type}</span><span class="tt-tag" style="background:rgba(0,0,0,0.07);color:var(--muted);border:1px solid var(--border2);">${inc.sev}</span>`;      let body=display&&display.length
+        ?`<div class="tt-cols"><div class="tt-col-h">Time</div><div class="tt-col-h">Message</div></div><div class="tt-body">${display.map(m=>{const t=m.dt;return`<div class="tt-row"><div class="tt-cell tt-ts">${t}</div><div class="tt-cell tt-txt">${m.text}</div></div>`;}).join('')}</div>`
+        :`<div class="tt-empty">No messages for this incident type on ${id}</div>`;
+      tip.innerHTML=`<div class="tt-head"><div class="tt-boat" style="color:${col};">${id} · Slack thread</div><div class="tt-tags">${tagHtml}</div><div class="tt-sev-note">${sevNote}</div></div>${body}`;
       tip.addEventListener('click',e=>e.stopPropagation());
       track.style.overflow='visible';track.appendChild(tip);
     });
