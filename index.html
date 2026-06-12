@@ -771,36 +771,66 @@ function renderReports(){
       <div class="rpt-stat"><div class="rpt-stat-label">Resolved</div><div class="rpt-stat-val" style="color:#1d9e75;">${done}</div><div class="rpt-stat-sub">${Math.round(done/JIRA_TICKETS.length*100)}% closed</div></div>
     </div>
 
-    <div class="rpt-section-title" style="margin-top:1.5rem;">Confluence reports &amp; notes</div>
-  `;
+    <div class="rpt-section-title" style="margin-top:1.5rem;">Incident &amp; Notes Summary</div>
 
-  CONFLUENCE_PAGES.forEach(p=>{
-    wrap.innerHTML+=`
-      <div class="conf-card">
-        <div class="conf-card-title">${p.title}</div>
-        <div class="conf-card-meta">${p.date} · ${p.author}</div>
-        <div class="conf-card-body">${p.summary}</div>
-        <a class="conf-card-link" href="${p.url}" target="_blank">Open in Confluence →</a>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#e24b4a;">Mayhem Incidents Log</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.7;background:var(--surface2);">
+          Full incident log for all three Mayhem days (05/11–05/13). Covers all boats on transit and picket operations running v0.11.0-rc10 (Days 1–2) and v0.11.0-rc11 (Day 3).<br><br>
+          <strong style="color:var(--text);font-weight:500;">Day 1 (Mon 05/11)</strong> — Transit boats: R100, R105, R113, R117, R121, R137, R139, R143, R145. Picket boats: R108, R112, R114, R122, R134, R135, R136, R138, R146, R147. Key issues: R113 oscillation + tow-in, R117 Ilmor dead at launch, dual GPS wiring on R117/R122/R145, R143 water ingress, R147 bow GPS knocked off.<br><br>
+          <strong style="color:var(--text);font-weight:500;">Day 2 (Tue 05/12)</strong> — Full 20-boat fleet. Key issues: R134 Ilmor inverter dead, R122 GPS patch shorted (reverted to single GPS), R135 drove up boat ramp on recovery.<br><br>
+          <strong style="color:var(--text);font-weight:500;">Day 3 (Wed 05/13)</strong> — Picket testing with radar boats. Key issues: R137 Mission Manager crashed, R122/R145 double-engage bug during kinetic testing, R134 collision avoidance with R137.
+        </div>
       </div>
-    `;
-  });
 
-  // ── JIRA TICKETS BY CATEGORY ──
-  wrap.innerHTML+=`<div class="rpt-section-title" style="margin-top:1.5rem;">Jira tickets by category</div>`;
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#888780;">Mayhem Notes (Ops Plan)</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.7;background:var(--surface2);">
+          Day-by-day operational plan authored by Samara Holmes. Covers in-person and remote support structure and test plans for each day.<br><br>
+          <strong style="color:var(--text);font-weight:500;">Test objectives by day:</strong><br>
+          · Mon: 5-knot transit, escort plays, dual GPS boat characterization, FLIR/PTZ validation<br>
+          · Tue: Picket plays, kinetic boat testing, formation control, Proteus (R134) radar ops<br>
+          · Wed: Picket development, ATR/rampage testing, contact fusion, SOF week CONOP scenarios
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#ef9f27;">Tideman Field Notes — Day 1</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.7;background:var(--surface2);">
+          Field engineer notes from 05/11–05/13:<br><br>
+          · <strong>05/11</strong>: Checkout good 7:20am. 5-knot transit ran smoothly. Marine ICE error on QGC at ~1:26pm. VectorNav bad at end of day.<br>
+          · <strong>05/12</strong>: Picket team and safety on water. Patrol plays for SOF week CONOP.<br>
+          · <strong>05/13</strong>: VectorNav/GPS not working on launch — GPS puck cables likely need replacement. Boat offline.
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#1d9e75;">Picket Notes (Kyle Hartner)</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.7;background:var(--surface2);">
+          Detailed record of picket plays and exercises on 05/11–05/12. Covers boats R108, R113, R117, R121, R122, R134, R136, R137, R138 and others.<br><br>
+          Documents formation configurations, escort play execution, disarm events, obstacle avoidance interactions, patrol play testing, and FLIR/PTZ payload performance across both days.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rpt-section-title">Jira tickets by category</div>
+  `;
 
   const cats=Object.keys(CAT_LABELS);
   cats.forEach(cat=>{
     const tickets=JIRA_TICKETS.filter(t=>t.cat===cat);
     if(!tickets.length) return;
     const col=CAT_COLORS[cat];
-    const tableId=`tbl-${cat}`;
     wrap.innerHTML+=`
       <div style="margin-bottom:1.25rem;border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
         <div class="cat-group-label" style="color:${col};">
           <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col};margin-right:6px;"></span>
           ${CAT_LABELS[cat]} · ${tickets.length} ticket${tickets.length>1?'s':''}
         </div>
-        <table class="ticket-table" id="${tableId}">
+        <table class="ticket-table">
           <thead><tr><th>Key</th><th>Type</th><th>Priority</th><th>Status</th><th>Day</th><th>Summary</th><th>Assignee</th></tr></thead>
           <tbody>
             ${tickets.map(t=>`
@@ -819,6 +849,18 @@ function renderReports(){
       </div>
     `;
   });
+
+  // Confluence links at bottom
+  wrap.innerHTML+=`
+    <div class="rpt-section-title" style="margin-top:1.5rem;">Confluence sources</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
+      ${CONFLUENCE_PAGES.map(p=>`
+        <a href="${p.url}" target="_blank" style="font-size:11px;color:#378add;text-decoration:none;padding:5px 12px;border:1px solid rgba(55,138,221,0.3);border-radius:3px;background:rgba(55,138,221,0.05);">
+          ${p.title} →
+        </a>
+      `).join('')}
+    </div>
+  `;
 
   view.appendChild(wrap);
   document.getElementById('hdr-count').textContent=`${JIRA_TICKETS.length} tickets · ${CONFLUENCE_PAGES.length} reports`;
@@ -982,16 +1024,6 @@ function renderRepairs(){
   wrap.innerHTML=`
     <div class="rpt-section-title">Mayhem Repair Status &amp; Downtime
       <a href="https://havocai.atlassian.net/browse/TESTCM-829" target="_blank" style="font-size:10px;color:#378add;text-decoration:none;margin-left:10px;">TESTCM-829 →</a>
-    </div>
-
-    <div style="font-size:11px;color:var(--text);line-height:1.7;background:var(--surface);border:1px solid var(--border2);border-left:3px solid #378add;border-radius:3px;padding:10px 14px;margin-bottom:1.25rem;">
-      <strong style="color:var(--text);font-weight:500;">Key clarifications — Bill / Kyle sync 06/12</strong><br>
-      · <strong>Dual GPS wiring</strong> — 3 boats (R117, R122, R145) had SMA connectors swapped. ~1 hr fix per boat once root cause known on first boat.<br>
-      · <strong>Disarms</strong> — boats loiter/drift on disarm; re-armable via RC without physical retrieval. Not counted as hard downtime.<br>
-      · <strong>ORCA overheating</strong> — safe degradation by design; boat slows automatically, resumes when cooled. No downtime.<br>
-      · <strong>Formation drift</strong> — autonomy control loop issue, not hardware. Minutes to reissue play.<br>
-      · <strong>Bearing / prop noise</strong> — typically resolves after running; rarely leads to downtime.<br>
-      <div style="margin-top:8px;font-size:10px;color:var(--muted);background:rgba(55,138,221,0.07);padding:5px 10px;border-radius:2px;display:inline-block;">⟶ Action: Kyle to compile Excel of hardware incidents + downtime with Jawad &amp; Reed</div>
     </div>
 
     <div style="font-size:10px;font-style:italic;color:var(--muted);margin-bottom:1rem;line-height:1.5;">
