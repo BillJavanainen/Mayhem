@@ -85,6 +85,59 @@ body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospa
 
 footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;}
 .ft{font-size:9px;color:var(--dim);letter-spacing:0.1em;}
+
+/* REPORTS TAB */
+.rpt-wrap{padding-top:0.5rem;}
+.rpt-section{margin-bottom:2rem;}
+.rpt-section-title{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;padding-bottom:6px;border-bottom:1px solid var(--border2);}
+.rpt-summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:1.5rem;}
+.rpt-stat{background:var(--surface);padding:1rem 1.25rem;}
+.rpt-stat-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;}
+.rpt-stat-val{font-size:1.6rem;font-weight:500;color:var(--text);line-height:1;}
+.rpt-stat-sub{font-size:10px;color:var(--muted);margin-top:0.3rem;}
+.conf-card{border:1px solid var(--border2);border-radius:3px;padding:1rem 1.25rem;margin-bottom:0.75rem;background:var(--surface);}
+.conf-card-title{font-size:12px;font-weight:500;color:var(--text);margin-bottom:0.4rem;}
+.conf-card-meta{font-size:10px;color:var(--muted);margin-bottom:0.5rem;}
+.conf-card-body{font-size:11px;color:var(--text);line-height:1.6;max-height:120px;overflow:hidden;position:relative;}
+.conf-card-body::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--surface));}
+.conf-card-link{font-size:10px;color:#378add;text-decoration:none;margin-top:6px;display:inline-block;}
+.conf-card-link:hover{text-decoration:underline;}
+.ticket-table{width:100%;border-collapse:collapse;font-size:11px;}
+.ticket-table th{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);background:var(--surface);}
+.ticket-table td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.ticket-table tr:last-child td{border-bottom:none;}
+.ticket-table tr:hover td{background:var(--surface);}
+.t-key{font-family:'JetBrains Mono',monospace;font-size:10px;}
+.t-key a{color:#378add;text-decoration:none;}
+.t-key a:hover{text-decoration:underline;}
+.t-badge{display:inline-block;font-size:9px;padding:1px 6px;border-radius:2px;font-weight:500;white-space:nowrap;}
+.badge-bug{background:rgba(226,75,74,0.12);color:#a32d2d;}
+.badge-task{background:rgba(55,138,221,0.12);color:#185fa5;}
+.badge-high{background:rgba(239,159,39,0.15);color:#854f0b;}
+.badge-medium{background:rgba(0,0,0,0.07);color:var(--muted);}
+.badge-low{background:transparent;color:var(--dim);border:1px solid var(--border);}
+.badge-done{background:rgba(29,158,117,0.12);color:#0f6e56;}
+.badge-backlog{background:rgba(0,0,0,0.05);color:var(--dim);}
+.badge-blocked{background:rgba(226,75,74,0.1);color:#a32d2d;}
+.badge-progress{background:rgba(55,138,221,0.1);color:#185fa5;}
+.badge-review{background:rgba(239,159,39,0.1);color:#854f0b;}
+.cat-group-label{font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);padding:8px 10px 4px;background:var(--surface);border-bottom:1px solid var(--border);}
+.rpt-day-tag{font-size:9px;padding:1px 5px;border-radius:2px;background:rgba(0,0,0,0.06);color:var(--muted);white-space:nowrap;}
+
+/* FLEET HISTORY */
+.fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+.fleet-card{border:1px solid var(--border2);border-radius:3px;overflow:hidden;background:var(--surface);}
+.fleet-card-header{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--border);}
+.fleet-boat-id{font-size:13px;font-weight:500;color:var(--text);letter-spacing:0.04em;}
+.fleet-role{font-size:10px;padding:1px 7px;border-radius:2px;font-weight:500;}
+.fleet-link{font-size:10px;color:#378add;text-decoration:none;margin-left:auto;}
+.fleet-link:hover{text-decoration:underline;}
+.fleet-event{display:flex;gap:8px;padding:5px 12px;border-bottom:1px solid var(--border);font-size:11px;}
+.fleet-event:last-child{border-bottom:none;}
+.fleet-event-date{color:var(--dim);font-size:10px;flex-shrink:0;width:72px;padding-top:1px;}
+.fleet-event-text{color:var(--text);line-height:1.45;flex:1;}
+.fleet-event-by{color:var(--muted);font-size:9px;flex-shrink:0;padding-top:2px;}
+.fleet-mayhem-badge{font-size:9px;padding:1px 6px;border-radius:2px;background:rgba(226,75,74,0.12);color:#a32d2d;font-weight:500;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -105,14 +158,16 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   <button class="day-tab active" data-day="05/11">Monday 05/11</button>
   <button class="day-tab" data-day="05/12">Tuesday 05/12</button>
   <button class="day-tab" data-day="05/13">Wednesday 05/13</button>
+  <button class="day-tab" data-day="reports">Reports &amp; Tickets</button>
+  <button class="day-tab" data-day="fleet">Fleet History</button>
+  <button class="day-tab" data-day="repairs">Repair Status</button>
 </div>
 
 <div class="legend">
   <div class="legend-group">
     <div class="li"><div class="lsw" style="background:#e24b4a;"></div>autonomy</div>
-    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>mechanical</div>
+    <div class="li"><div class="lsw" style="background:#ef9f27;"></div>hardware</div>
     <div class="li"><div class="lsw" style="background:#1d9e75;"></div>software</div>
-    <div class="li"><div class="lsw" style="background:#888780;"></div>ops</div>
   </div>
   <div class="leg-sep"></div>
   <div class="legend-group">
@@ -139,7 +194,6 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
   <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical</button>
   <button class="btn" data-type="software" style="color:#1d9e75;">software</button>
-  <button class="btn" data-type="ops">ops</button>
   <div class="search-wrap">
     <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
     <input type="text" id="search" placeholder="search boat, issue...">
@@ -161,7 +215,7 @@ function tM(ts){if(!ts)return null;const p=ts.split(':').map(Number);return p[0]
 function pc(m){return((m-DS)/SP*100).toFixed(3)+'%';}
 function wp(a,b){return((b-a)/SP*100).toFixed(3)+'%';}
 function hm(ts){return ts.slice(0,5);}
-const TC={autonomy:'#e24b4a',mechanical:'#ef9f27',software:'#1d9e75',ops:'#888780'};
+const TC={autonomy:'#e24b4a',hardware:'#ef9f27',software:'#1d9e75',};
 const SS={critical:14,moderate:9,minor:5};
 const SEV_NOTES={
   critical:'Boat offline, towed, water ingress, complete system failure, or autonomous disarm mid-mission',
@@ -224,104 +278,104 @@ const PROP={
 // MINOR    = observation, pre-water note, cosmetic, resolved on own, admin
 const INCIDENTS={
   // ── MONDAY 05/11 ──
-  'R100_05/11':[{time:'06:47',type:'ops',sev:'minor'},{time:'07:27',type:'mechanical',sev:'minor'},{time:'07:50',type:'software',sev:'minor'},{time:'12:19',type:'autonomy',sev:'critical'}],
-  'R105_05/11':[{time:'08:18',type:'mechanical',sev:'minor'},{time:'12:17',type:'autonomy',sev:'moderate'}],
-  'R113_05/11':[{time:'08:59',type:'mechanical',sev:'minor'},{time:'09:13',type:'ops',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'},{time:'15:49',type:'autonomy',sev:'critical'},{time:'16:03',type:'software',sev:'minor'},{time:'16:13',type:'software',sev:'moderate'},{time:'18:09',type:'ops',sev:'critical'}],
-  'R117_05/11':[{time:'07:50',type:'ops',sev:'minor'},{time:'08:13',type:'mechanical',sev:'moderate'},{time:'08:31',type:'mechanical',sev:'critical'},{time:'08:40',type:'ops',sev:'minor'},{time:'11:21',type:'ops',sev:'moderate'},{time:'11:22',type:'mechanical',sev:'minor'},{time:'15:02',type:'mechanical',sev:'moderate'}],
-  'R121_05/11':[{time:'08:00',type:'ops',sev:'minor'},{time:'08:26',type:'mechanical',sev:'critical'},{time:'08:42',type:'software',sev:'moderate'},{time:'09:26',type:'mechanical',sev:'minor'},{time:'09:37',type:'ops',sev:'minor'},{time:'09:39',type:'mechanical',sev:'moderate'},{time:'13:19',type:'autonomy',sev:'moderate'},{time:'14:52',type:'autonomy',sev:'critical'}],
-  'R135_05/11':[{time:'08:41',type:'ops',sev:'moderate'},{time:'09:40',type:'mechanical',sev:'critical'},{time:'14:12',type:'autonomy',sev:'moderate'}],
-  'R137_05/11':[{time:'08:42',type:'mechanical',sev:'minor'},{time:'13:50',type:'autonomy',sev:'moderate'},{time:'14:03',type:'autonomy',sev:'moderate'}],
-  'R139_05/11':[{time:'12:27',type:'ops',sev:'critical'},{time:'14:50',type:'ops',sev:'moderate'}],
-  'R143_05/11':[{time:'07:01',type:'ops',sev:'minor'},{time:'09:00',type:'mechanical',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'mechanical',sev:'critical'}],
-  'R145_05/11':[{time:'08:28',type:'mechanical',sev:'moderate'},{time:'08:45',type:'mechanical',sev:'minor'},{time:'11:15',type:'ops',sev:'moderate'},{time:'14:12',type:'ops',sev:'minor'}],
-  'R147_05/11':[{time:'11:49',type:'mechanical',sev:'critical'},{time:'18:09',type:'mechanical',sev:'critical'}],
+  'R100_05/11':[{time:'06:47',type:'hardware',sev:'minor'},{time:'07:27',type:'hardware',sev:'minor'},{time:'07:50',type:'software',sev:'minor'},{time:'12:19',type:'autonomy',sev:'critical'}],
+  'R105_05/11':[{time:'08:18',type:'hardware',sev:'minor'},{time:'12:17',type:'autonomy',sev:'moderate'}],
+  'R113_05/11':[{time:'08:59',type:'hardware',sev:'minor'},{time:'09:13',type:'hardware',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'},{time:'15:49',type:'autonomy',sev:'critical'},{time:'16:03',type:'software',sev:'minor'},{time:'16:13',type:'software',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
+  'R117_05/11':[{time:'07:50',type:'hardware',sev:'minor'},{time:'08:13',type:'hardware',sev:'moderate'},{time:'08:31',type:'hardware',sev:'critical'},{time:'08:40',type:'hardware',sev:'minor'},{time:'11:21',type:'hardware',sev:'moderate'},{time:'11:22',type:'hardware',sev:'minor'},{time:'15:02',type:'hardware',sev:'moderate'}],
+  'R121_05/11':[{time:'08:00',type:'hardware',sev:'minor'},{time:'08:26',type:'hardware',sev:'critical'},{time:'08:42',type:'software',sev:'moderate'},{time:'09:26',type:'hardware',sev:'minor'},{time:'09:37',type:'hardware',sev:'minor'},{time:'09:39',type:'hardware',sev:'moderate'},{time:'13:19',type:'autonomy',sev:'moderate'},{time:'14:52',type:'autonomy',sev:'critical'}],
+  'R135_05/11':[{time:'08:41',type:'hardware',sev:'moderate'},{time:'09:40',type:'hardware',sev:'critical'},{time:'14:12',type:'autonomy',sev:'moderate'}],
+  'R137_05/11':[{time:'08:42',type:'hardware',sev:'minor'},{time:'13:50',type:'autonomy',sev:'moderate'},{time:'14:03',type:'autonomy',sev:'moderate'}],
+  'R139_05/11':[{time:'12:27',type:'hardware',sev:'critical'},{time:'14:50',type:'hardware',sev:'moderate'}],
+  'R143_05/11':[{time:'07:01',type:'hardware',sev:'minor'},{time:'09:00',type:'hardware',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
+  'R145_05/11':[{time:'08:28',type:'hardware',sev:'moderate'},{time:'08:45',type:'hardware',sev:'minor'},{time:'11:15',type:'hardware',sev:'moderate'},{time:'14:12',type:'hardware',sev:'minor'}],
+  'R147_05/11':[{time:'11:49',type:'hardware',sev:'critical'},{time:'18:09',type:'hardware',sev:'critical'}],
   // ── TUESDAY 05/12 ──
-  'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'ops',sev:'moderate'},{time:'12:48',type:'mechanical',sev:'critical'},{time:'14:29',type:'mechanical',sev:'critical'}],
-  'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'ops',sev:'moderate'},{time:'10:18',type:'mechanical',sev:'moderate'},{time:'10:56',type:'mechanical',sev:'critical'},{time:'11:02',type:'mechanical',sev:'critical'},{time:'12:45',type:'ops',sev:'minor'}],
-  'R135_05/12':[{time:'10:21',type:'ops',sev:'moderate'}],
+  'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'12:48',type:'hardware',sev:'critical'},{time:'14:29',type:'hardware',sev:'critical'}],
+  'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'10:18',type:'hardware',sev:'moderate'},{time:'10:56',type:'hardware',sev:'critical'},{time:'11:02',type:'hardware',sev:'critical'},{time:'12:45',type:'hardware',sev:'minor'}],
+  'R135_05/12':[{time:'10:21',type:'hardware',sev:'moderate'}],
   'R136_05/12':[{time:'09:37',type:'software',sev:'minor'},{time:'11:33',type:'autonomy',sev:'moderate'}],
   'R138_05/12':[{time:'12:29',type:'autonomy',sev:'moderate'},{time:'12:33',type:'autonomy',sev:'minor'}],
   'R139_05/12':[{time:'09:40',type:'autonomy',sev:'moderate'}],
-  'R147_05/12':[{time:'11:49',type:'mechanical',sev:'minor'},{time:'16:12',type:'software',sev:'minor'}],
+  'R147_05/12':[{time:'11:49',type:'hardware',sev:'minor'},{time:'16:12',type:'software',sev:'minor'}],
   // General Tuesday issues (shown on first boat row as fleet-level)
-  'R113_05/12':[{time:'09:15',type:'ops',sev:'moderate'}],
+  'R113_05/12':[{time:'09:15',type:'hardware',sev:'moderate'}],
   'R117_05/12':[],
   // ── WEDNESDAY 05/13 ──
   'R122_05/13':[{time:'11:25',type:'autonomy',sev:'critical'},{time:'11:42',type:'autonomy',sev:'critical'},{time:'12:52',type:'autonomy',sev:'moderate'}],
-  'R134_05/13':[{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'mechanical',sev:'moderate'},{time:'12:25',type:'ops',sev:'moderate'}],
+  'R134_05/13':[{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'hardware',sev:'moderate'},{time:'12:25',type:'hardware',sev:'moderate'}],
   'R137_05/13':[{time:'08:29',type:'autonomy',sev:'minor'},{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'software',sev:'critical'},{time:'13:01',type:'autonomy',sev:'moderate'}],
-  'R138_05/13':[{time:'09:30',type:'ops',sev:'moderate'},{time:'09:57',type:'ops',sev:'moderate'}],
+  'R138_05/13':[{time:'09:30',type:'hardware',sev:'moderate'},{time:'09:57',type:'hardware',sev:'moderate'}],
   'R145_05/13':[{time:'11:25',type:'autonomy',sev:'critical'},{time:'11:34',type:'autonomy',sev:'critical'},{time:'12:10',type:'autonomy',sev:'moderate'},{time:'12:52',type:'autonomy',sev:'moderate'}],
-  'R147_05/13':[{time:'08:49',type:'ops',sev:'moderate'},{time:'08:56',type:'ops',sev:'minor'}],
+  'R147_05/13':[{time:'08:49',type:'hardware',sev:'moderate'},{time:'08:56',type:'hardware',sev:'minor'}],
 };
 
 // ── THREADS ──
 const THREADS={
   'R100_05/11':[
-    {dt:'05/11 06:47',types:['ops'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
-    {dt:'05/11 07:27',types:['mechanical'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
+    {dt:'05/11 06:47',types:['hardware'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
+    {dt:'05/11 07:27',types:['hardware'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
     {dt:'05/11 07:50',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
     {dt:'05/11 12:19',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
   ],
   'R105_05/11':[
-    {dt:'05/11 08:18',types:['mechanical'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
+    {dt:'05/11 08:18',types:['hardware'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
     {dt:'05/11 12:17',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort — controller drift continues'},
     {dt:'05/12 08:53',types:['autonomy'],sevs:['moderate'],text:'Controller drift continues — does not maintain position'},
     {dt:'05/12 10:07',types:['software'],sevs:['moderate'],text:'Updated and autonomy container restarted'},
-    {dt:'05/13 10:22',types:['mechanical'],sevs:['minor'],text:'Port and stbd door latches broken'},
+    {dt:'05/13 10:22',types:['hardware'],sevs:['minor'],text:'Port and stbd door latches broken'},
   ],
   'R113_05/11':[
-    {dt:'05/11 08:59',types:['mechanical'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
-    {dt:'05/11 09:13',types:['ops'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
+    {dt:'05/11 08:59',types:['hardware'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
+    {dt:'05/11 09:13',types:['hardware'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
     {dt:'05/11 15:17',types:['autonomy'],sevs:['critical'],text:'Acting "drunk" on transit play — full cyclic oscillation'},
-    {dt:'05/11 15:22',types:['autonomy','mechanical'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
+    {dt:'05/11 15:22',types:['autonomy','hardware'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
     {dt:'05/11 15:49',types:['autonomy'],sevs:['critical'],text:'Oscillation recurring'},
     {dt:'05/11 16:03',types:['software'],sevs:['minor'],text:'Balena update running on R113'},
     {dt:'05/11 16:13',types:['software'],sevs:['moderate'],text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},
-    {dt:'05/11 18:09',types:['ops','mechanical'],sevs:['critical'],text:'Towed back in — to be investigated'},
-    {dt:'05/12 09:15',types:['ops'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/11 18:09',types:['hardware','hardware'],sevs:['critical'],text:'Towed back in — to be investigated'},
+    {dt:'05/12 09:15',types:['hardware'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
     {dt:'05/13 13:40',types:['autonomy'],sevs:['critical'],text:'Tried patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — EO phantom recognitions.'},
   ],
   'R113_05/12':[
-    {dt:'05/12 09:15',types:['ops'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/12 09:15',types:['hardware'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
   ],
   'R117_05/11':[
-    {dt:'05/11 07:50',types:['ops'],sevs:['minor'],text:'Disarm on launch'},
-    {dt:'05/11 08:13',types:['mechanical'],sevs:['moderate'],text:'Compass 180° out — bringing back to resend dual GPS config'},
-    {dt:'05/11 08:23',types:['mechanical'],sevs:['moderate'],text:'GPS patches installed opposite — swap SMA connectors on kitbox'},
-    {dt:'05/11 08:31',types:['mechanical'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
-    {dt:'05/11 08:40',types:['ops'],sevs:['minor'],text:'Kitbox cycled on water'},
-    {dt:'05/11 11:21',types:['ops'],sevs:['moderate'],text:'Did not navigate bridge — auto disarmed on water, re-armed via RC'},
-    {dt:'05/11 11:22',types:['mechanical'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
-    {dt:'05/11 15:02',types:['mechanical'],sevs:['moderate'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
-    {dt:'05/13 08:27',types:['mechanical'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection'},
+    {dt:'05/11 07:50',types:['hardware'],sevs:['minor'],text:'Disarm on launch'},
+    {dt:'05/11 08:13',types:['hardware'],sevs:['moderate'],text:'Compass 180° out — bringing back to resend dual GPS config'},
+    {dt:'05/11 08:23',types:['hardware'],sevs:['moderate'],text:'GPS patches installed opposite — swap SMA connectors on kitbox'},
+    {dt:'05/11 08:31',types:['hardware'],sevs:['critical'],text:'Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+    {dt:'05/11 08:40',types:['hardware'],sevs:['minor'],text:'Kitbox cycled on water'},
+    {dt:'05/11 11:21',types:['hardware'],sevs:['moderate'],text:'Did not navigate bridge — auto disarmed on water, re-armed via RC'},
+    {dt:'05/11 11:22',types:['hardware'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
+    {dt:'05/11 15:02',types:['hardware'],sevs:['moderate'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
+    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection'},
   ],
   'R121_05/11':[
-    {dt:'05/11 08:00',types:['ops'],sevs:['minor'],text:'Checkout received but did not run after button pressed — blue HMI cable may be the issue'},
-    {dt:'05/11 08:26',types:['mechanical'],sevs:['critical'],text:'No GPS — disarmed; Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+    {dt:'05/11 08:00',types:['hardware'],sevs:['minor'],text:'Checkout received but did not run after button pressed — blue HMI cable may be the issue'},
+    {dt:'05/11 08:26',types:['hardware'],sevs:['critical'],text:'No GPS — disarmed; Power cycled — Ilmor not healthy, no LED, no ICU comms'},
     {dt:'05/11 08:42',types:['software'],sevs:['moderate'],text:'Reset — changed params for DGPS; Ilmor ICU recovered after power cycle'},
-    {dt:'05/11 09:26',types:['mechanical'],sevs:['minor'],text:"Won't trim down; port canoe handle missing a screw"},
-    {dt:'05/11 09:37',types:['ops'],sevs:['minor'],text:'Auto disarmed'},
-    {dt:'05/11 09:39',types:['mechanical'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; battery-well hole not plugged (taped)'},
+    {dt:'05/11 09:26',types:['hardware'],sevs:['minor'],text:"Won't trim down; port canoe handle missing a screw"},
+    {dt:'05/11 09:37',types:['hardware'],sevs:['minor'],text:'Auto disarmed'},
+    {dt:'05/11 09:39',types:['hardware'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; battery-well hole not plugged (taped)'},
     {dt:'05/11 13:19',types:['autonomy'],sevs:['moderate'],text:'Not behaving in formation play for photoshoot'},
     {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on water under autonomy at 14:52'},
-    {dt:'05/13 17:01',types:['mechanical'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
+    {dt:'05/13 17:01',types:['hardware'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
   ],
   'R122_05/11':[
     {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on the water under autonomy at 14:52'},
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
-    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed twice during transit'},
-    {dt:'05/12 12:46',types:['mechanical'],sevs:['moderate'],text:'Location in real life differs from console; Grafana updating with no visible kitbox lights'},
-    {dt:'05/12 12:48',types:['mechanical'],sevs:['critical'],text:'Kitbox restarted — no GPS fix reported by Cube after restart; GPS did not come back'},
-    {dt:'05/12 14:29',types:['mechanical'],sevs:['critical'],text:'Bad GPS patch found — measuring short from shield to pin. GPS needs replacement. Reverted to single GPS + compass.'},
+    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed twice during transit'},
+    {dt:'05/12 12:46',types:['hardware'],sevs:['moderate'],text:'Location in real life differs from console; Grafana updating with no visible kitbox lights'},
+    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'Kitbox restarted — no GPS fix reported by Cube after restart; GPS did not come back'},
+    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'Bad GPS patch found — measuring short from shield to pin. GPS needs replacement. Reverted to single GPS + compass.'},
     {dt:'05/13 11:02',types:['software'],sevs:['minor'],text:'Detection tracker not enabled after launch — just enabled and restarted autonomy'},
     {dt:'05/13 13:42',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
   'R122_05/12':[
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
-    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed twice during transit'},
-    {dt:'05/12 12:48',types:['mechanical'],sevs:['critical'],text:'No GPS fix after kitbox restart; GPS patch bad — short from shield to pin, needs replacement'},
-    {dt:'05/12 14:29',types:['mechanical'],sevs:['critical'],text:'Reverted to single GPS boat with compass only heading'},
+    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed twice during transit'},
+    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'No GPS fix after kitbox restart; GPS patch bad — short from shield to pin, needs replacement'},
+    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'Reverted to single GPS boat with compass only heading'},
   ],
   'R122_05/13':[
     {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile track when only one should — 122 and 145 both engaging'},
@@ -332,48 +386,48 @@ const THREADS={
   ],
   'R134_05/11':[
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind. Possibly CFG_COMMS_MQTT_SUB_TO_NEIGHBOR_CONTACTS not enabled.'},
-    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed once during transit'},
-    {dt:'05/12 10:18',types:['mechanical'],sevs:['moderate'],text:'Lost contact on UI — Starlink theorized down; one kitbox light found, power cycled, 2 shown'},
-    {dt:'05/12 10:56',types:['mechanical'],sevs:['critical'],text:'134 Ilmor LED solid green but prop not spinning — clicking sound from Ilmor'},
-    {dt:'05/12 11:02',types:['mechanical'],sevs:['critical'],text:'Inverter seems dead — will recover for RCCA'},
-    {dt:'05/12 12:45',types:['ops'],sevs:['minor'],text:'R134 checked out again, launching now'},
-    {dt:'05/13 11:50',types:['mechanical'],sevs:['moderate'],text:'Max reverse found to be limited — likely explaining drift issues. MaxR updated to 600 with QGC.'},
+    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed once during transit'},
+    {dt:'05/12 10:18',types:['hardware'],sevs:['moderate'],text:'Lost contact on UI — Starlink theorized down; one kitbox light found, power cycled, 2 shown'},
+    {dt:'05/12 10:56',types:['hardware'],sevs:['critical'],text:'134 Ilmor LED solid green but prop not spinning — clicking sound from Ilmor'},
+    {dt:'05/12 11:02',types:['hardware'],sevs:['critical'],text:'Inverter seems dead — will recover for RCCA'},
+    {dt:'05/12 12:45',types:['hardware'],sevs:['minor'],text:'R134 checked out again, launching now'},
+    {dt:'05/13 11:50',types:['hardware'],sevs:['moderate'],text:'Max reverse found to be limited — likely explaining drift issues. MaxR updated to 600 with QGC.'},
   ],
   'R134_05/12':[
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind'},
-    {dt:'05/12 10:06',types:['ops'],sevs:['moderate'],text:'Disarmed once during transit; lost contact on UI'},
-    {dt:'05/12 10:18',types:['mechanical'],sevs:['moderate'],text:'Starlink theorized down; kitbox power cycled'},
-    {dt:'05/12 10:56',types:['mechanical'],sevs:['critical'],text:'Ilmor LED solid green but prop not spinning — clicking sound; inverter dead'},
-    {dt:'05/12 12:45',types:['ops'],sevs:['minor'],text:'R134 checked out again, launching now'},
+    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed once during transit; lost contact on UI'},
+    {dt:'05/12 10:18',types:['hardware'],sevs:['moderate'],text:'Starlink theorized down; kitbox power cycled'},
+    {dt:'05/12 10:56',types:['hardware'],sevs:['critical'],text:'Ilmor LED solid green but prop not spinning — clicking sound; inverter dead'},
+    {dt:'05/12 12:45',types:['hardware'],sevs:['minor'],text:'R134 checked out again, launching now'},
   ],
   'R134_05/13':[
     {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
-    {dt:'05/13 11:50',types:['mechanical'],sevs:['moderate'],text:'Max reverse found to be limited — explaining drift issues. MaxR updated to 600 with QGC.'},
-    {dt:'05/13 12:25',types:['ops'],sevs:['moderate'],text:'R134 drifting too near pylon — teams not appearing in v1 UI, had to use v0 UI to send patrol play'},
+    {dt:'05/13 11:50',types:['hardware'],sevs:['moderate'],text:'Max reverse found to be limited — explaining drift issues. MaxR updated to 600 with QGC.'},
+    {dt:'05/13 12:25',types:['hardware'],sevs:['moderate'],text:'R134 drifting too near pylon — teams not appearing in v1 UI, had to use v0 UI to send patrol play'},
   ],
   'R135_05/11':[
-    {dt:'05/11 08:41',types:['ops','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
-    {dt:'05/11 09:40',types:['mechanical'],sevs:['critical'],text:'Bad GPS — position jumping in UI all day'},
-    {dt:'05/11 14:12',types:['autonomy','ops'],sevs:['moderate'],text:'2x disarmed without permission'},
-    {dt:'05/12 15:17',types:['mechanical'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
+    {dt:'05/11 08:41',types:['hardware','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
+    {dt:'05/11 09:40',types:['hardware'],sevs:['critical'],text:'Bad GPS — position jumping in UI all day'},
+    {dt:'05/11 14:12',types:['autonomy','hardware'],sevs:['moderate'],text:'2x disarmed without permission'},
+    {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
   ],
   'R135_05/12':[
-    {dt:'05/12 10:21',types:['ops'],sevs:['moderate'],text:'Continued ops on R135 — still monitoring GPS behavior'},
+    {dt:'05/12 10:21',types:['hardware'],sevs:['moderate'],text:'Continued ops on R135 — still monitoring GPS behavior'},
   ],
   'R136_05/11':[
     {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag — lmk when can restart autonomy'},
     {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
-    {dt:'05/13 08:10',types:['mechanical'],sevs:['moderate'],text:'R136 did not charge last night — at 50.6V'},
+    {dt:'05/13 08:10',types:['hardware'],sevs:['moderate'],text:'R136 did not charge last night — at 50.6V'},
   ],
   'R136_05/12':[
     {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag'},
     {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
   ],
   'R137_05/11':[
-    {dt:'05/11 08:42',types:['mechanical'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
+    {dt:'05/11 08:42',types:['hardware'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
     {dt:'05/11 13:50',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station'},
     {dt:'05/11 14:03',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort — ground station at 3 kts, 137 slows then surges'},
-    {dt:'05/12 08:32',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+    {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
     {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
     {dt:'05/13 08:49',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
     {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
@@ -381,7 +435,7 @@ const THREADS={
     {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation on play start — contact within range marked as neutral, trying to engage it'},
   ],
   'R137_05/12':[
-    {dt:'05/12 08:32',types:['mechanical'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+    {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
     {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
   ],
   'R137_05/13':[
@@ -391,42 +445,42 @@ const THREADS={
     {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation — contact marked neutral within range, trying to engage it'},
   ],
   'R138_05/11':[
-    {dt:'05/11 18:10',types:['ops'],sevs:['minor'],text:'Continued on ram post stop'},
+    {dt:'05/11 18:10',types:['hardware'],sevs:['minor'],text:'Continued on ram post stop'},
     {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation — armed and in loiter. Resending formation put it back in line.'},
-    {dt:'05/13 09:30',types:['ops'],sevs:['moderate'],text:'Disarmed'},
+    {dt:'05/13 09:30',types:['hardware'],sevs:['moderate'],text:'Disarmed'},
     {dt:'05/13 09:54',types:['software'],sevs:['minor'],text:'Reduced FLIR framerate to 5fps (from 10) — bitrate limiting caused poor image quality'},
-    {dt:'05/13 09:57',types:['ops'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related; no reason found in logs'},
+    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related; no reason found in logs'},
   ],
   'R138_05/12':[
     {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation, yet armed and in loiter'},
     {dt:'05/12 12:33',types:['autonomy'],sevs:['minor'],text:'Resending formation put it back in line'},
   ],
   'R138_05/13':[
-    {dt:'05/13 09:30',types:['ops'],sevs:['moderate'],text:'Disarmed'},
-    {dt:'05/13 09:57',types:['ops'],sevs:['moderate'],text:'Disarmed again — no reason found in logs'},
+    {dt:'05/13 09:30',types:['hardware'],sevs:['moderate'],text:'Disarmed'},
+    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — no reason found in logs'},
   ],
   'R139_05/11':[
     {dt:'05/12 09:54',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
-    {dt:'05/12 12:27',types:['ops','mechanical'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
+    {dt:'05/12 12:27',types:['hardware','hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
     {dt:'05/12 12:39',types:['software'],sevs:['minor'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
-    {dt:'05/12 14:50',types:['ops'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
+    {dt:'05/12 14:50',types:['hardware'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
   ],
   'R139_05/12':[
     {dt:'05/12 09:40',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
-    {dt:'05/12 12:27',types:['ops'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold. Force armed for recovery.'},
+    {dt:'05/12 12:27',types:['hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold. Force armed for recovery.'},
   ],
   'R143_05/11':[
-    {dt:'05/11 07:01',types:['ops'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
-    {dt:'05/11 09:00',types:['mechanical'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
+    {dt:'05/11 07:01',types:['hardware'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
+    {dt:'05/11 09:00',types:['hardware'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
     {dt:'05/11 14:07',types:['autonomy'],sevs:['moderate'],text:'143 circling in rear of formation — resent play'},
-    {dt:'05/11 18:09',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
+    {dt:'05/11 18:09',types:['hardware'],sevs:['critical'],text:'Large amount of water from hull'},
   ],
   'R143_05/12':[],
   'R145_05/11':[
-    {dt:'05/11 08:23',types:['mechanical'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
-    {dt:'05/11 08:45',types:['mechanical'],sevs:['minor'],text:'Bad gyro — drift identified, power cycle resolved'},
-    {dt:'05/11 11:15',types:['ops'],sevs:['moderate'],text:'R145 had three disarms during launch'},
-    {dt:'05/11 14:12',types:['ops'],sevs:['minor'],text:'Disarmed without permission'},
+    {dt:'05/11 08:23',types:['hardware'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
+    {dt:'05/11 08:45',types:['hardware'],sevs:['minor'],text:'Bad gyro — drift identified, power cycle resolved'},
+    {dt:'05/11 11:15',types:['hardware'],sevs:['moderate'],text:'R145 had three disarms during launch'},
+    {dt:'05/11 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
   ],
   'R145_05/12':[],
   'R145_05/13':[
@@ -436,17 +490,17 @@ const THREADS={
     {dt:'05/13 12:52',types:['autonomy'],sevs:['moderate'],text:'122 and 145 both engaging again as kinetic boats'},
   ],
   'R147_05/11':[
-    {dt:'05/11 11:49',types:['mechanical'],sevs:['critical'],text:'GPS going in and out, jumping around. Bow GPS knocked off during recovery.'},
-    {dt:'05/11 12:07',types:['mechanical'],sevs:['moderate'],text:'GPS seems stable now — drive around with truck to verify'},
-    {dt:'05/11 18:09',types:['mechanical'],sevs:['critical'],text:'Large amount of water from hull'},
-    {dt:'05/12 07:30',types:['mechanical'],sevs:['moderate'],text:'Added sealant to transom bolts'},
+    {dt:'05/11 11:49',types:['hardware'],sevs:['critical'],text:'GPS going in and out, jumping around. Bow GPS knocked off during recovery.'},
+    {dt:'05/11 12:07',types:['hardware'],sevs:['moderate'],text:'GPS seems stable now — drive around with truck to verify'},
+    {dt:'05/11 18:09',types:['hardware'],sevs:['critical'],text:'Large amount of water from hull'},
+    {dt:'05/12 07:30',types:['hardware'],sevs:['moderate'],text:'Added sealant to transom bolts'},
   ],
   'R147_05/12':[
-    {dt:'05/12 11:49',types:['mechanical'],sevs:['minor'],text:'147 has WiFi enabled on its Starlink'},
+    {dt:'05/12 11:49',types:['hardware'],sevs:['minor'],text:'147 has WiFi enabled on its Starlink'},
   ],
   'R147_05/13':[
-    {dt:'05/13 08:49',types:['ops'],sevs:['moderate'],text:"Can't get into R147 on Mission Planner — using QGC instead. Known issue, also affects R143."},
-    {dt:'05/13 08:56',types:['ops'],sevs:['minor'],text:'Same MP access issue as R134'},
+    {dt:'05/13 08:49',types:['hardware'],sevs:['moderate'],text:"Can't get into R147 on Mission Planner — using QGC instead. Known issue, also affects R143."},
+    {dt:'05/13 08:56',types:['hardware'],sevs:['minor'],text:'Same MP access issue as R134'},
   ],
 };
 
@@ -623,14 +677,492 @@ function applyFilters(){
   document.getElementById('ft-count').textContent=`${shown} INCIDENTS SHOWN · ${activeDay}`;
 }
 
+// ── REPORTS DATA ──
+const CONFLUENCE_PAGES=[
+  {title:'Mayhem Incidents Log',url:'https://havocai.atlassian.net/wiki/spaces/Product/pages/1001488388/Mayhem+Incidents+Log',date:'2026-05-14',author:'Deven Parmar',summary:'Complete incident log for all three Mayhem days. Day 1 (v0.11.0-rc10): transit boats 100,105,113,117,121,137,139,143,145; picket boats 108,112,114,122,134,135,136,138,146,147. Day 2 (v0.11.0-rc10): full 20-boat fleet. Day 3 (v0.11.0-rc11): picket testing with radar boats, ATR tracking, and major autonomy issues.'},
+  {title:'Mayhem Notes',url:'https://havocai.atlassian.net/wiki/spaces/SD/pages/972816406/Mayhem+Notes',date:'2026-05-11',author:'Samara Holmes',summary:'Day-by-day plan and operational notes for Mayhem. Covers in-person and remote support structure, test plans for each day including transit, picket, radar testing, FLIR, kinetic boats, and afternoon fusion testing.'},
+  {title:'Tideman Mayhem notes day 1',url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/983367712/Tideman+Mayhem+notes+day+1',date:'2026-05-11',author:'Field Team',summary:'5/11: Checkout good 7:20am, 5-knot transit, ~1:26pm marine ICE error on QGC, vectornav bad at end of day. 5/12: Picket team and safety on water, patrol plays for SOF week CONOP. 5/13: VectorNav/GPS not working on launch — cables on GPS pucks likely need replacement. Offline.'},
+  {title:'v0.11.0 Standup Notes',url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/945455133/v0.11.0+Standup+Notes',date:'ongoing',author:'Test Team',summary:'Running standup notes for v0.11.0. Pre-Mayhem testing covered rc8/rc9, Ben comm structure, retask testing, radar testing, AIS disable. Mayhem test plan included in notes.'},
+];
+
+const JIRA_TICKETS=[
+  // ── UI / HC ──
+  {key:'HC-1589',type:'Bug',priority:'Medium',status:'Backlog',date:'05/11',cat:'ui',summary:"HUD Tab for Active Plays doesn't toggle off unless clicked",assignee:'Unassigned'},
+  {key:'HC-1590',type:'Bug',priority:'High',status:"Won't Fix",date:'05/11',cat:'ui',summary:'User should be able to move map while HUD menu & Settings Menu is open',assignee:'Jeff Ayer'},
+  {key:'HC-1591',type:'Bug',priority:'Low',status:'Backlog',date:'05/11',cat:'ui',summary:'[HUD] Vehicle selection dropdown style update',assignee:'Francis Tang'},
+  {key:'HC-1592',type:'Bug',priority:'Low',status:'Done',date:'05/11',cat:'ui',summary:'Double scroll bar on track selection',assignee:'Derek Leadbetter'},
+  {key:'HC-1593',type:'Bug',priority:'Medium',status:'Done',date:'05/11',cat:'ui',summary:'Navigating from editing and entity',assignee:'Derek Leadbetter'},
+  {key:'HC-1594',type:'Task',priority:'Medium',status:'Backlog',date:'05/11',cat:'ui',summary:'Updates to hover and selected state ellipse styling',assignee:'Unassigned'},
+  {key:'HC-1595',type:'Bug',priority:'Medium',status:'Backlog',date:'05/11',cat:'ui',summary:'Need to update HudComponentSchemaHelpers for team play data',assignee:'Unassigned'},
+  {key:'HC-1596',type:'Task',priority:'Low',status:'Done',date:'05/11',cat:'ui',summary:'Settings menu style updates',assignee:'Derek Leadbetter'},
+  {key:'HC-1597',type:'Bug',priority:'Medium',status:'Done',date:'05/11',cat:'ui',summary:'WSOD when deleting number in custom speed in vehicle dynamics',assignee:'Taryn Martin'},
+  {key:'HC-1598',type:'Bug',priority:'Medium',status:'Blocked',date:'05/12',cat:'ui',summary:'Refresh on path /v1/video-feeds returns 404',assignee:'Unassigned'},
+  {key:'HC-1599',type:'Bug',priority:'Medium',status:'Backlog',date:'05/12',cat:'ui',summary:'Hover effect does not occur for markers',assignee:'Unassigned'},
+  {key:'HC-1600',type:'Bug',priority:'Medium',status:'Backlog',date:'05/12',cat:'ui',summary:'Selected marker indicator uses old style',assignee:'Unassigned'},
+  {key:'HC-1602',type:'Bug',priority:'High',status:'Backlog',date:'05/12',cat:'ui',summary:'Name is not shown when entity hovered on map',assignee:'Unassigned'},
+  {key:'HC-1603',type:'Bug',priority:'Medium',status:'Done',date:'05/12',cat:'ui',summary:'Zone names not shown on map',assignee:'Derek Leadbetter'},
+  {key:'HC-1604',type:'Bug',priority:'Medium',status:'Ready for QA',date:'05/12',cat:'ui',summary:'HUD and entity manager show weirdness when track deleted',assignee:'Evangeline Ireland'},
+  {key:'HC-1606',type:'Bug',priority:'Medium',status:'Done',date:'05/12',cat:'ui',summary:'Cannot interact with map when menu open',assignee:'Pete Cabel'},
+  {key:'HC-1607',type:'Bug',priority:'Medium',status:'Backlog',date:'05/12',cat:'ui',summary:'Menu/vid HUD dropdown closes when you click on map',assignee:'Unassigned'},
+  {key:'HC-1608',type:'Bug',priority:'Medium',status:'Done',date:'05/12',cat:'ui',summary:'Planned route not showing',assignee:'Francis Tang'},
+  {key:'HC-1609',type:'Bug',priority:'Medium',status:'Done',date:'05/12',cat:'ui',summary:'Zoom reset on refresh',assignee:'Francis Tang'},
+  {key:'HC-1610',type:'Bug',priority:'Medium',status:'Done',date:'05/12',cat:'ui',summary:'Remove staging point from formation plays',assignee:'Francis Tang'},
+  {key:'HC-1611',type:'Task',priority:'Medium',status:'Ready for QA',date:'05/12',cat:'ui',summary:'Team should be primary text on active tasks',assignee:'Derek Leadbetter'},
+  {key:'HC-1612',type:'Bug',priority:'Medium',status:'Backlog',date:'05/12',cat:'ui',summary:'[Spike] High memory usage on prod with Redux testTools open',assignee:'Unassigned'},
+  // ── AUTONOMY / ATN ──
+  {key:'ATN-809',type:'Task',priority:'Medium',status:'Backlog',date:'05/11',cat:'autonomy',summary:'Add unit tests',assignee:'Kevin Becker'},
+  {key:'ATN-810',type:'Task',priority:'Medium',status:'Done',date:'05/11',cat:'autonomy',summary:'Add tow behavior',assignee:'David Dorf'},
+  {key:'ATN-811',type:'Task',priority:'Medium',status:'Backlog',date:'05/11',cat:'autonomy',summary:'WorldStatePropagator',assignee:'Kevin Becker'},
+  {key:'ATN-812',type:'Bug',priority:'High',status:'In Progress',date:'05/12',cat:'autonomy',summary:'PTZ stream delay',assignee:'Kevin Becker'},
+  {key:'ATN-813',type:'Bug',priority:'Medium',status:'Backlog',date:'05/12',cat:'autonomy',summary:'Foxglove manager — reduce viz overhead',assignee:'Kevin Becker'},
+  // ── PLATFORM / HCP ──
+  {key:'HCP-415',type:'Task',priority:'Medium',status:'Done',date:'05/11',cat:'platform',summary:'Promote backend v0.26.0 to UAT',assignee:'Andrew Mollohan'},
+  {key:'HCP-416',type:'Task',priority:'Medium',status:'Done',date:'05/11',cat:'platform',summary:'render-testing-release-notes.sh: auto-detect HavocOS pin from cloud',assignee:'Andrew Mollohan'},
+  {key:'HCP-417',type:'Task',priority:'Medium',status:'Done',date:'05/11',cat:'platform',summary:'open-deploy-pr.sh: emit HCP-313 PR title format',assignee:'Andrew Mollohan'},
+  {key:'HCP-418',type:'Task',priority:'Medium',status:'Done',date:'05/11',cat:'platform',summary:'Add backend Helm post-install hook for qa-havoc e2e auto-rollback gate',assignee:'Andrew Mollohan'},
+  // ── OPS TRACKING / HOW ──
+  {key:'HOW-140',type:'Task',priority:'Medium',status:'To Do',date:'05/11',cat:'hardware',summary:'Tideman, KK20.1, R100, R105, R113, R117, R121, R137, R139, R143, R145 on the water',assignee:'Unassigned'},
+  {key:'HOW-141',type:'Task',priority:'Medium',status:'To Do',date:'05/11',cat:'hardware',summary:'R108, R122, R134, R135, R136, R138, R147 on the water in Quonset',assignee:'Unassigned'},
+  // ── INFRA / CMD ──
+  {key:'CMD-60',type:'Sub-task',priority:'Medium',status:'Done',date:'05/12',cat:'platform',summary:'Push image with server + NOAA charts to ECR',assignee:'Unassigned'},
+  {key:'CMD-61',type:'Sub-task',priority:'Medium',status:'In Review',date:'05/12',cat:'platform',summary:'Host the tile server in Havoc cloud',assignee:'Unassigned'},
+  {key:'CMD-62',type:'Sub-task',priority:'Medium',status:'In Progress',date:'05/12',cat:'platform',summary:'Frontend updates for self-hosted tile server',assignee:'Unassigned'},
+  // ── ACME ──
+  {key:'ACME-127',type:'Task',priority:'Medium',status:'To Do',date:'05/11',cat:'autonomy',summary:'[Autonomy] Create minimized HavocOS image',assignee:'Josh Cheng'},
+];
+
+const CAT_LABELS={ui:'UI / HavocCommand',autonomy:'Autonomy',platform:'Platform / Infra',hardware:'Hardware'};
+const CAT_COLORS={ui:'#378add',autonomy:'#e24b4a',platform:'#1d9e75',};
+
+function statusBadgeClass(s){
+  if(!s) return 'badge-medium';
+  const sl=s.toLowerCase();
+  if(sl==='done'||sl==='closed') return 'badge-done';
+  if(sl==='blocked') return 'badge-blocked';
+  if(sl==='in progress') return 'badge-progress';
+  if(sl==='in review'||sl==='ready for qa') return 'badge-review';
+  if(sl==='backlog'||sl==='to do') return 'badge-backlog';
+  return 'badge-medium';
+}
+
+function renderReports(){
+  const view=document.getElementById('day-view');
+  view.innerHTML='';
+
+  // hide controls
+  document.querySelector('.controls').style.display='none';
+  document.querySelector('.legend').style.display='none';
+
+  const wrap=document.createElement('div');
+  wrap.className='rpt-wrap';
+
+  // ── SUMMARY STATS ──
+  const bugs=JIRA_TICKETS.filter(t=>t.type==='Bug').length;
+  const openBugs=JIRA_TICKETS.filter(t=>t.type==='Bug'&&t.status!=='Done'&&t.status!=="Won't Fix").length;
+  const highPri=JIRA_TICKETS.filter(t=>t.priority==='High').length;
+  const done=JIRA_TICKETS.filter(t=>t.status==='Done').length;
+
+  wrap.innerHTML=`
+    <div class="rpt-section-title">Summary — Jira tickets filed 05/11–05/12</div>
+    <div class="rpt-summary-grid">
+      <div class="rpt-stat"><div class="rpt-stat-label">Total tickets</div><div class="rpt-stat-val">${JIRA_TICKETS.length}</div><div class="rpt-stat-sub">across ${Object.keys(CAT_LABELS).length} categories</div></div>
+      <div class="rpt-stat"><div class="rpt-stat-label">Bugs filed</div><div class="rpt-stat-val" style="color:#e24b4a;">${bugs}</div><div class="rpt-stat-sub">${openBugs} still open</div></div>
+      <div class="rpt-stat"><div class="rpt-stat-label">High priority</div><div class="rpt-stat-val" style="color:#ef9f27;">${highPri}</div><div class="rpt-stat-sub">needing attention</div></div>
+      <div class="rpt-stat"><div class="rpt-stat-label">Resolved</div><div class="rpt-stat-val" style="color:#1d9e75;">${done}</div><div class="rpt-stat-sub">${Math.round(done/JIRA_TICKETS.length*100)}% closed</div></div>
+    </div>
+
+    <div class="rpt-section-title" style="margin-top:1.5rem;">Confluence reports &amp; notes</div>
+  `;
+
+  CONFLUENCE_PAGES.forEach(p=>{
+    wrap.innerHTML+=`
+      <div class="conf-card">
+        <div class="conf-card-title">${p.title}</div>
+        <div class="conf-card-meta">${p.date} · ${p.author}</div>
+        <div class="conf-card-body">${p.summary}</div>
+        <a class="conf-card-link" href="${p.url}" target="_blank">Open in Confluence →</a>
+      </div>
+    `;
+  });
+
+  // ── JIRA TICKETS BY CATEGORY ──
+  wrap.innerHTML+=`<div class="rpt-section-title" style="margin-top:1.5rem;">Jira tickets by category</div>`;
+
+  const cats=Object.keys(CAT_LABELS);
+  cats.forEach(cat=>{
+    const tickets=JIRA_TICKETS.filter(t=>t.cat===cat);
+    if(!tickets.length) return;
+    const col=CAT_COLORS[cat];
+    const tableId=`tbl-${cat}`;
+    wrap.innerHTML+=`
+      <div style="margin-bottom:1.25rem;border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:${col};">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col};margin-right:6px;"></span>
+          ${CAT_LABELS[cat]} · ${tickets.length} ticket${tickets.length>1?'s':''}
+        </div>
+        <table class="ticket-table" id="${tableId}">
+          <thead><tr><th>Key</th><th>Type</th><th>Priority</th><th>Status</th><th>Day</th><th>Summary</th><th>Assignee</th></tr></thead>
+          <tbody>
+            ${tickets.map(t=>`
+              <tr>
+                <td class="t-key"><a href="https://havocai.atlassian.net/browse/${t.key}" target="_blank">${t.key}</a></td>
+                <td><span class="t-badge ${t.type==='Bug'?'badge-bug':'badge-task'}">${t.type}</span></td>
+                <td><span class="t-badge ${t.priority==='High'?'badge-high':t.priority==='Low'?'badge-low':'badge-medium'}">${t.priority}</span></td>
+                <td><span class="t-badge ${statusBadgeClass(t.status)}">${t.status}</span></td>
+                <td><span class="rpt-day-tag">${t.date}</span></td>
+                <td style="max-width:320px;color:var(--text);">${t.summary}</td>
+                <td style="color:var(--muted);font-size:10px;white-space:nowrap;">${t.assignee}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  });
+
+  view.appendChild(wrap);
+  document.getElementById('hdr-count').textContent=`${JIRA_TICKETS.length} tickets · ${CONFLUENCE_PAGES.length} reports`;
+  document.getElementById('ft-count').textContent=`JIRA + CONFLUENCE · 05/11–05/13`;
+}
+
+// ── FLEET HISTORY DATA (from Gen 2 Fleet Status and History, Confluence) ──
+// Only Mayhem boats (R100, R105, R108, R113, R117, R121, R122, R134, R135, R136, R137, R138, R139, R143, R145, R147)
+// Events marked mayhem=true occurred during or directly before/after Mayhem days
+const FLEET_DATA=[
+  {id:'R100', role:'Transit / Dual Battery', url:'https://havocai.atlassian.net/wiki/x/CACPEQ', events:[
+    {date:'1/5/2026',text:'Second battery installed',by:'Dalton',mayhem:false},
+    {date:'1/12/2026',text:'Replaced Ilmor after boat ran aground — cracked motor mount, bent trim pin, inverter and ICU issues',by:'Dalton',mayhem:false},
+    {date:'2/18/2026',text:'Higher power ORCA and shaft testing (Engineering Sample). Swapped ORCA 260199003',by:'Dalton',mayhem:false},
+  ]},
+  {id:'R105', role:'Transit', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294584533', events:[
+    {date:'11/4/2025',text:'Inverter inside Ilmor shorted causing battery to self-protect — Ilmor swapped',by:'DW',mayhem:false},
+    {date:'12/10/2025',text:'Prop replaced (damaged before transit to FL, chipped additional during packout)',by:'Reed',mayhem:false},
+    {date:'2/9/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
+  ]},
+  {id:'R108', role:'Picket', url:'', events:[
+    {date:'5/8/2026',text:'Installed dual GPS kit',by:'Dalton',mayhem:true},
+  ]},
+  {id:'R113', role:'Transit / Radar', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294584934', events:[
+    {date:'11/20/2025',text:'HMI added from R116. Outboard swapped to new unit E700117. Collision with safety boat damaged gelcoat.',by:'Dalton',mayhem:false},
+    {date:'1/6/2026',text:'Phantom estop problem. Fix: changed ESTOP pins from 50 to 51 in kitbox.',by:'Ashley & Vita',mayhem:false},
+    {date:'2/9/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
+    {date:'3/30/2026',text:'Swapped outboard from the 3D printed boat with Ilmor HMI cowling',by:'Dalton',mayhem:false},
+    {date:'5/28/2026',text:'Known issue with GPIO pin — moved E-stop to different pin. BTN_PIN = 51 must be set in MP.',by:'Vita',mayhem:true},
+  ]},
+  {id:'R117', role:'Transit / Dual GPS', url:'', events:[
+    {date:'3/2/2026',text:'Replaced ICU',by:'Dalton',mayhem:false},
+    {date:'5/8/2026',text:'Cleaned Orca surlok connectors (sticking open after removing from PDB)',by:'Dalton',mayhem:true},
+  ]},
+  {id:'R121', role:'Transit', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294585004', events:[
+    {date:'1/21/2026',text:'Swapped ICU for updated unit (No GPS). Large amount of dried salt found under motor cowlings.',by:'Dalton',mayhem:false},
+    {date:'5/20/2026',text:'Fish Sensor CAN kitbox modification. Swapped barrel switch mount. Replaced HMI to kitbox cable.',by:'',mayhem:true},
+    {date:'5/28/2026',text:'Verified port camera — no issues on inspection. Reseated connection, twisted D+/D- pairs. May have been line interference.',by:'Vita',mayhem:true},
+  ]},
+  {id:'R122', role:'Picket / Dual GPS', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294585052', events:[
+    {date:'1/20/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
+    {date:'5/8/2026',text:'Installed dual GPS kit',by:'Dalton',mayhem:true},
+  ]},
+  {id:'R134', role:'Picket / Radar', url:'', events:[
+    {date:'1/13/2026',text:'DWE camera install. Compass, radar and payload box install.',by:'Dalton',mayhem:false},
+    {date:'1/21/2026',text:'Swapped ICU for updated unit (No GPS)',by:'Dalton',mayhem:false},
+    {date:'3/25/2026',text:'Replaced Ilmor comms cable, HIPOT variety',by:'',mayhem:false},
+    {date:'5/13/2026',text:'Ilmor bad inverter — replaced Ilmor with complete assembly with steering. Ilmor SN: E700130, Orca SN: 250706021',by:'Kurt',mayhem:true},
+  ]},
+  {id:'R135', role:'Picket / Kraken SDR', url:'', events:[
+    {date:'1/29/2026',text:'Swapped ICU for updated unit (No GPS)',by:'Dalton',mayhem:false},
+    {date:'3/23/2026',text:'3x DWE cameras installed',by:'Dalton',mayhem:false},
+  ]},
+  {id:'R136', role:'Picket / FLIR', url:'', events:[
+    {date:'1/21/2026',text:'Swapped ICU for updated unit (No GPS)',by:'Dalton',mayhem:false},
+    {date:'3/23/2026',text:'3x DWE cameras installed',by:'Dalton',mayhem:false},
+    {date:'6/9/2026',text:'Ilmor LED replaced with spare',by:'Dalton',mayhem:true},
+    {date:'6/10/2026',text:'LED swapped back — original not the issue for odd color display',by:'Jawad',mayhem:true},
+  ]},
+  {id:'R137', role:'Transit / PTZ', url:'', events:[
+    {date:'2/20/2026',text:'Boat passed ATP. No camera setup yet.',by:'Reed',mayhem:false},
+    {date:'3/23/2026',text:'3x DWE cameras installed',by:'Dalton',mayhem:false},
+  ]},
+  {id:'R138', role:'Picket / FLIR', url:'', events:[
+    {date:'2/9/2026',text:'3x DWE camera install',by:'Dalton',mayhem:false},
+    {date:'2/19/2026',text:'Boat passed ATP',by:'Reed',mayhem:false},
+  ]},
+  {id:'R139', role:'Transit', url:'', events:[
+    {date:'2/27/2026',text:'Boat passed ATP. No camera setup yet.',by:'Dalton',mayhem:false},
+    {date:'3/23/2026',text:'3x DWE cameras installed',by:'Dalton',mayhem:false},
+    {date:'4/3/2026',text:'Ilmor LED replaced',by:'',mayhem:false},
+  ]},
+  {id:'R143', role:'Transit / PTZ', url:'', events:[
+    // No fleet history entries for R143 in Mayhem boat range
+  ]},
+  {id:'R145', role:'Transit / Dual GPS', url:'', events:[
+    {date:'5/19/2026',text:'Ilmor replaced, new SN E700152',by:'',mayhem:true},
+  ]},
+  {id:'R147', role:'Picket', url:'', events:[
+    {date:'6/10/2026',text:'R147 original LED appeared fried. Spare LED installed — now displaying wrong color.',by:'Jawad',mayhem:true},
+  ]},
+];
+
+const BOAT_ROLES={
+  R100:'Transit · Dual Battery', R105:'Transit', R108:'Picket',
+  R113:'Transit · Radar', R117:'Transit · Dual GPS', R121:'Transit',
+  R122:'Picket · Dual GPS', R134:'Picket · Radar', R135:'Picket · Kraken SDR',
+  R136:'Picket · FLIR', R137:'Transit · PTZ', R138:'Picket · FLIR',
+  R139:'Transit', R143:'Transit · PTZ', R145:'Transit · Dual GPS', R147:'Picket',
+};
+
+const ROLE_COLORS={Transit:'#1d9e75',Picket:'#378add',Radar:'#ef9f27',PTZ:'#888780'};
+
+function roleColor(role){
+  if(role.startsWith('Transit')) return '#1d9e75';
+  if(role.startsWith('Picket')) return '#378add';
+  return '#888780';
+}
+
+function renderFleet(){
+  const view=document.getElementById('day-view');
+  view.innerHTML='';
+  document.querySelector('.controls').style.display='none';
+  document.querySelector('.legend').style.display='none';
+
+  const wrap=document.createElement('div');
+  wrap.className='rpt-wrap';
+
+  wrap.innerHTML=`
+    <div class="rpt-section-title">Gen 2 Fleet Status &amp; History — Mayhem boats
+      <a href="https://havocai.atlassian.net/wiki/spaces/havocengin/pages/243826721/Gen+2+Fleet+Status+and+History"
+         target="_blank" style="font-size:10px;color:#378add;text-decoration:none;margin-left:10px;">Open in Confluence →</a>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:1.25rem;">Maintenance and configuration history for the 16 boats on the water during Mayhem (05/11–05/13). Events highlighted in red occurred during or immediately around Mayhem days.</p>
+    <div class="fleet-grid" id="fleet-grid"></div>
+  `;
+  view.appendChild(wrap);
+
+  const grid=document.getElementById('fleet-grid');
+  FLEET_DATA.forEach(boat=>{
+    const col=roleColor(BOAT_ROLES[boat.id]||'');
+    const card=document.createElement('div');
+    card.className='fleet-card';
+
+    const noEvents=boat.events.filter(e=>e.mayhem).length===0;
+    const eventsHtml=noEvents
+      ?'<div class="fleet-event"><div class="fleet-event-text" style="color:var(--dim);font-style:italic;">No Mayhem-period events recorded</div></div>'
+      :boat.events.filter(e=>e.mayhem).map(e=>`
+        <div class="fleet-event">
+          <div class="fleet-event-date">${e.date}</div>
+          <div class="fleet-event-text">${e.text}</div>
+          ${e.mayhem?'<div class="fleet-mayhem-badge">Mayhem</div>':''}
+          ${e.by?`<div class="fleet-event-by">${e.by}</div>`:''}
+        </div>
+      `).join('');
+
+    card.innerHTML=`
+      <div class="fleet-card-header">
+        <span class="fleet-boat-id">${boat.id}</span>
+        <span class="fleet-role" style="background:${col}1a;color:${col};">${BOAT_ROLES[boat.id]||''}</span>
+        ${boat.url?`<a class="fleet-link" href="${boat.url}" target="_blank">Testing page →</a>`:''}
+      </div>
+      ${eventsHtml}
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('hdr-count').textContent=`${FLEET_DATA.length} boats · Gen 2 Fleet History`;
+  document.getElementById('ft-count').textContent=`CONFLUENCE · GEN 2 FLEET STATUS AND HISTORY`;
+}
+
+// ── REPAIR STATUS ──
+function renderRepairs(){
+  const view=document.getElementById('day-view');
+  view.innerHTML='';
+  document.querySelector('.controls').style.display='none';
+  document.querySelector('.legend').style.display='none';
+
+  const wrap=document.createElement('div');
+  wrap.className='rpt-wrap';
+  wrap.innerHTML=`
+    <div class="rpt-section-title">Mayhem Repair Status &amp; Downtime
+      <a href="https://havocai.atlassian.net/browse/TESTCM-829" target="_blank" style="font-size:10px;color:#378add;text-decoration:none;margin-left:10px;">TESTCM-829 →</a>
+    </div>
+
+    <div style="font-size:11px;color:var(--text);line-height:1.7;background:var(--surface);border:1px solid var(--border2);border-left:3px solid #378add;border-radius:3px;padding:10px 14px;margin-bottom:1.25rem;">
+      <strong style="color:var(--text);font-weight:500;">Key clarifications — Bill / Kyle sync 06/12</strong><br>
+      · <strong>Dual GPS wiring</strong> — 3 boats (R117, R122, R145) had SMA connectors swapped. ~1 hr fix per boat once root cause known on first boat.<br>
+      · <strong>Disarms</strong> — boats loiter/drift on disarm; re-armable via RC without physical retrieval. Not counted as hard downtime.<br>
+      · <strong>ORCA overheating</strong> — safe degradation by design; boat slows automatically, resumes when cooled. No downtime.<br>
+      · <strong>Formation drift</strong> — autonomy control loop issue, not hardware. Minutes to reissue play.<br>
+      · <strong>Bearing / prop noise</strong> — typically resolves after running; rarely leads to downtime.<br>
+      <div style="margin-top:8px;font-size:10px;color:var(--muted);background:rgba(55,138,221,0.07);padding:5px 10px;border-radius:2px;display:inline-block;">⟶ Action: Kyle to compile Excel of hardware incidents + downtime with Jawad &amp; Reed</div>
+    </div>
+
+    <div style="font-size:10px;font-style:italic;color:var(--muted);margin-bottom:1rem;line-height:1.5;">
+      Repair duration = incident to confirmed back on water (telemetry or Slack). Disarm-only events excluded as hard downtime per Kyle. Turnaround ≠ root cause resolved.
+    </div>
+
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>Boat</th>
+          <th>Day / Time</th>
+          <th>Incident</th>
+          <th>Root cause</th>
+          <th>Resolution</th>
+          <th>Downtime</th>
+          <th>Status 06/12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="7" class="cat-group-label" style="color:#ef9f27;">Hardware — required physical intervention</td></tr>
+
+        <tr>
+          <td class="t-key" style="white-space:nowrap;">R117 R122 R145</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11 AM</td>
+          <td>Compass 180° reversed — GPS patches wired backwards (SMA connectors swapped)</td>
+          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Dual GPS patches installed opposite. Swap SMA = fix.</td>
+          <td>~1 hr per boat once root cause found on first boat</td>
+          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">~1 hr each</td>
+          <td><span class="t-badge badge-done">✓ operational</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R113</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11 15:17</td>
+          <td>Steering oscillation ("drunk") during transit. Towed in 18:09. Water ingress from hull.</td>
+          <td style="font-size:10px;">Unknown — params normal per Paul. Low Orca temp + control loop suspected. CRD / EO phantom recognitions also possible.</td>
+          <td>Internal box secured. PID param ATC_STR_RAT_I adjusted. Back on water 05/12 08:26.</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~14 hrs</td>
+          <td><span class="t-badge badge-amber" style="background:rgba(239,159,39,0.12);color:#854f0b;">monitoring — unresolved</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R134</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/12 10:56</td>
+          <td>Ilmor inverter dead — prop not spinning, clicking sound</td>
+          <td style="font-size:10px;">Dead inverter hardware</td>
+          <td>Relaunched same day ~12:45. Full Ilmor replaced 05/13 by Kurt. SN: E700130.</td>
+          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">~2 hrs (relaunch)</td>
+          <td><span class="t-badge badge-done">✓ Ilmor replaced 05/13</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R135</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11–12</td>
+          <td>Bad GPS all day. Drove up boat ramp on recovery — hull, Ilmor, stbd bunk scraped, prop damaged.</td>
+          <td style="font-size:10px;">GPS hardware fault + recovery error under disarmed state</td>
+          <td>Operational next day. Prop replacement pending — not logged in fleet history as of 06/12.</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~25 hrs to water<br><span style="font-size:9px;">prop repair open</span></td>
+          <td><span class="t-badge badge-red" style="background:rgba(226,75,74,0.1);color:#a32d2d;">⚠ prop replacement open (30d)</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R147</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11 11:49</td>
+          <td>GPS jumping — bow GPS knocked off on recovery. Water ingress from hull.</td>
+          <td style="font-size:10px;">Physical GPS antenna displaced on recovery. Transom seal leak.</td>
+          <td>GPS verified stable after drive test. Sealant applied to transom bolts 05/12 AM.</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~21 hrs</td>
+          <td><span class="t-badge badge-done">✓ operational</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R143</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11</td>
+          <td>Bilge impeller grinding (debris). Water ingress from hull 18:09.</td>
+          <td style="font-size:10px;">Debris in impeller. Kyle: "resolves after running" — rarely hard downtime.</td>
+          <td>Debris cleared. Bilge replacement deferred. Back on water 05/12 10:53.</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~17 hrs</td>
+          <td><span class="t-badge badge-amber" style="background:rgba(239,159,39,0.12);color:#854f0b;">bilge replacement deferred</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R122</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/12 12:48</td>
+          <td>GPS patch shorted (shield-to-pin). No fix after kitbox restart. Reverted to single GPS + compass.</td>
+          <td style="font-size:10px;">Defective GPS patch — short from shield to pin</td>
+          <td>Reverted to single GPS. Back on water 05/13. No replacement patch logged as of 06/12.</td>
+          <td style="color:#e24b4a;font-weight:500;white-space:nowrap;">~21 hrs (degraded)<br><span style="font-size:9px;">full fix open</span></td>
+          <td><span class="t-badge badge-red" style="background:rgba(226,75,74,0.1);color:#a32d2d;">⚠ GPS patch open (30d)</span></td>
+        </tr>
+
+        <tr><td colspan="7" class="cat-group-label" style="color:#888780;">Autonomy / software — no physical retrieval required</td></tr>
+
+        <tr>
+          <td class="t-key">R121 R139 + fleet</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11–13</td>
+          <td>Multiple autonomous disarms on water mid-mission</td>
+          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Boats loiter/drift on disarm — RC re-armable without retrieval. IP drop likely cause.</td>
+          <td>Re-armed via RC or force-armed. Obstacle grid disabled (Jeremy, 05/12).</td>
+          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Minutes (RC rearm)</td>
+          <td><span class="t-badge badge-done">✓ operational</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">Fleet</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11–13</td>
+          <td>Formation drift, escort falling-out, multi-waypoint transit failures</td>
+          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Autonomy control loop issue — not hardware</td>
+          <td>Plays reissued per event. TESTCM-1251 Picket Play Development — Done.</td>
+          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Minutes per event</td>
+          <td><span class="t-badge badge-done">✓ TESTCM-1251 Done</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R117 + fleet</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11</td>
+          <td>ORCA overheating during long transits with strong currents</td>
+          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Safe degradation by design — slows at temp threshold, resumes when cooled</td>
+          <td>Auto-recovery. No retrieval or repair needed.</td>
+          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Auto-recovery</td>
+          <td><span class="t-badge badge-done">✓ by design</span></td>
+        </tr>
+
+        <tr><td colspan="7" class="cat-group-label" style="color:#378add;">Post-Mayhem follow-on repairs</td></tr>
+
+        <tr>
+          <td class="t-key">R145</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/19</td>
+          <td>Ilmor degradation post-Mayhem</td>
+          <td style="font-size:10px;">Hardware wear — compounded by dual GPS config issues and multiple disarms during Mayhem</td>
+          <td>Ilmor replaced. New SN: E700152.</td>
+          <td style="color:#e24b4a;font-weight:500;white-space:nowrap;">8 days post-Mayhem</td>
+          <td><span class="t-badge badge-done">✓ replaced 05/19</span></td>
+        </tr>
+
+        <tr>
+          <td class="t-key">R134</td>
+          <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/13</td>
+          <td>Full Ilmor assembly replacement (follow-on from 05/12 inverter death)</td>
+          <td style="font-size:10px;">Bad inverter confirmed</td>
+          <td>New Ilmor SN: E700130, Orca SN: 250706021. By Kurt.</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">1 day</td>
+          <td><span class="t-badge badge-done">✓ replaced 05/13</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  `;
+  view.appendChild(wrap);
+  document.getElementById('hdr-count').textContent='Repair status · 05/11–05/13 · updated 06/12';
+  document.getElementById('ft-count').textContent='SOURCES: SLACK · CONFLUENCE · JIRA · TELEMETRY · MEETING NOTES 06/12';
+}
+
 // ── EVENT WIRING ──
 document.querySelectorAll('.day-tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
-    activeDay=tab.dataset.day;
     closeAll();
-    renderDay(activeDay);
+    if(tab.dataset.day==='reports'){
+      renderReports();
+    } else if(tab.dataset.day==='fleet'){
+      renderFleet();
+    } else if(tab.dataset.day==='repairs'){
+      renderRepairs();
+    } else {
+      activeDay=tab.dataset.day;
+      document.querySelector('.controls').style.display='';
+      document.querySelector('.legend').style.display='';
+      renderDay(activeDay);
+    }
   });
 });
 
