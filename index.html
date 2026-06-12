@@ -192,7 +192,7 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   <div class="ctrl-sep"></div>
   <span class="ctrl-label">type</span>
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
-  <button class="btn" data-type="mechanical" style="color:#ef9f27;">mechanical</button>
+  <button class="btn" data-type="mechanical" style="color:#ef9f27;">hardware</button>
   <button class="btn" data-type="software" style="color:#1d9e75;">software</button>
   <div class="search-wrap">
     <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
@@ -850,17 +850,54 @@ function renderReports(){
     `;
   });
 
-  // Confluence links at bottom
-  wrap.innerHTML+=`
-    <div class="rpt-section-title" style="margin-top:1.5rem;">Confluence sources</div>
+  // Lessons learned + Confluence links - append as DOM nodes to avoid innerHTML truncation
+  const extra = document.createElement('div');
+  extra.innerHTML = `
+    <div class="rpt-section-title" style="margin-top:1.5rem;">Lessons Learned</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#e24b4a;">Hardware / Prep</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Dual GPS wiring must be verified pre-launch</strong> — 3 boats lost time to reversed SMA connectors. A simple pre-water checklist item (compass pointing correctly?) would catch this before deployment.<br>
+          · <strong>GPS patch quality control</strong> — R122's patch shorted shield-to-pin. Inspect dual GPS patches before install; 30-day open repair suggests post-event tracking gaps.<br>
+          · <strong>Bow GPS physically vulnerable on recovery</strong> — R147's GPS knocked off on retrieval. Mounting needs to withstand trailer recovery forces.<br>
+          · <strong>Bilge and hull inspection should be pre-event</strong> — R143 water ingress and bilge debris noted on the day. Pre-Mayhem hull check would reduce same-day pulls.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#ef9f27;">Operations / Recovery</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Disarms are not hard downtime</strong> — boats loiter and are RC re-armable. Default to RC recovery before retrieval.<br>
+          · <strong>R135 ramp incident</strong> — drove up ramp under disarmed autonomous state. Recovery procedures need guidance for disarmed-but-moving boats near the trailer.<br>
+          · <strong>Battery voltage at launch must be enforced</strong> — R117 launched at 50.2V and hit undervoltage ~37V. Minimum launch voltage should be a checkout gate.<br>
+          · <strong>ORCA safe degradation is expected behavior</strong> — teams should know slowing at high temp is by design, not a fault, to avoid premature retrieval.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#1d9e75;">Autonomy / Software</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Obstacle grid should be off by default in formation ops</strong> — caused collision avoidance interference in escort plays. Should not be on by default for transit/escort missions.<br>
+          · <strong>Contact fusion logic needs pre-mission validation</strong> — R122/R145 double-engage and R137 targeting a neutral contact both stem from fused contact association. Test with live contacts before kinetic exercises.<br>
+          · <strong>Mission Manager crash on R137</strong> — no clear trigger. Needs automated restart / heartbeat monitoring before next kinetic exercise.<br>
+          · <strong>Formation drift root cause still unclear</strong> — attributed to control loop issues. Needs formal RCA before next large-scale formation exercise.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#888780;">Documentation / Process</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Incident log needs structured timestamps</strong> — repair duration analysis required cross-referencing 4 sources. A structured form (boat, time, issue, fix, back-on-water) would make this trivial.<br>
+          · <strong>TESTCM-829 still In Progress with no description</strong> — umbrella test report for all three Mayhem days has no write-up. Reports should be completed within 48 hrs of event close.<br>
+          · <strong>R135 prop and R122 GPS patch are 30 days open</strong> — follow-on repairs with no fleet history entry. Field-to-hardware handoff needs a tracked ticket, not just a Slack note.<br>
+          · <strong>Logs status page is manually maintained</strong> — automating S3 upload tracking would save post-event admin time.
+        </div>
+      </div>
+    </div>
+    <div class="rpt-section-title" style="margin-top:0.5rem;">Confluence sources</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
-      ${CONFLUENCE_PAGES.map(p=>`
-        <a href="${p.url}" target="_blank" style="font-size:11px;color:#378add;text-decoration:none;padding:5px 12px;border:1px solid rgba(55,138,221,0.3);border-radius:3px;background:rgba(55,138,221,0.05);">
-          ${p.title} →
-        </a>
-      `).join('')}
+      ${CONFLUENCE_PAGES.map(p=>`<a href="${p.url}" target="_blank" style="font-size:11px;color:#378add;text-decoration:none;padding:5px 12px;border:1px solid rgba(55,138,221,0.3);border-radius:3px;background:rgba(55,138,221,0.05);">${p.title} →</a>`).join('')}
     </div>
   `;
+  wrap.appendChild(extra);
 
   view.appendChild(wrap);
   document.getElementById('hdr-count').textContent=`${JIRA_TICKETS.length} tickets · ${CONFLUENCE_PAGES.length} reports`;
