@@ -235,7 +235,7 @@ const PROP={
   'R113_05/11':{first:'09:13:00',last:'16:47:00',segs:[{state:'prop',start:'09:13',end:'09:14'},{state:'idle',start:'09:14',end:'10:14'},{state:'prop',start:'10:14',end:'10:29'},{state:'idle',start:'10:29',end:'11:12'},{state:'prop',start:'11:12',end:'11:19'},{state:'idle',start:'11:19',end:'12:12'},{state:'prop',start:'12:12',end:'12:50'},{state:'idle',start:'12:50',end:'13:24'},{state:'prop',start:'13:24',end:'13:42'},{state:'idle',start:'13:42',end:'14:41'},{state:'prop',start:'14:41',end:'15:00'},{state:'idle',start:'15:00',end:'16:12'},{state:'prop',start:'16:12',end:'16:47'}]},
   'R113_05/12':{first:'08:26:00',last:'16:06:00',segs:[{state:'prop',start:'08:26',end:'08:27'},{state:'idle',start:'08:27',end:'09:41'},{state:'prop',start:'09:41',end:'09:53'},{state:'idle',start:'09:53',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'16:05'},{state:'prop',start:'16:05',end:'16:06'}]},
   'R113_05/13':{first:'08:54:00',last:'13:49:00',segs:[{state:'prop',start:'08:54',end:'08:55'},{state:'idle',start:'08:55',end:'09:55'},{state:'prop',start:'09:55',end:'10:05'},{state:'idle',start:'10:05',end:'11:08'},{state:'prop',start:'11:08',end:'11:20'},{state:'idle',start:'11:20',end:'12:40'},{state:'prop',start:'12:40',end:'13:49'}]},
-  'R114_05/12':{first:'09:54:00',last:'15:28:00',segs:[{state:'prop',start:'09:54',end:'09:55'},{state:'idle',start:'09:55',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:27'},{state:'prop',start:'15:27',end:'15:28'}]},
+    'R114_05/12':{first:'09:54:00',last:'15:28:00',segs:[{state:'prop',start:'09:54',end:'09:55'},{state:'idle',start:'09:55',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:27'},{state:'prop',start:'15:27',end:'15:28'}]},
   'R116_05/12':{first:'09:17:00',last:'15:41:00',segs:[{state:'prop',start:'09:17',end:'09:18'},{state:'idle',start:'09:18',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:40'},{state:'prop',start:'14:40',end:'14:57'},{state:'idle',start:'14:57',end:'15:40'},{state:'prop',start:'15:40',end:'15:41'}]},
   'R117_05/11':{first:'07:50:00',last:'16:32:00',segs:[{state:'prop',start:'07:50',end:'07:52'},{state:'idle',start:'07:52',end:'08:12'},{state:'prop',start:'08:12',end:'08:29'},{state:'idle',start:'08:29',end:'10:13'},{state:'prop',start:'10:13',end:'11:22'},{state:'idle',start:'11:22',end:'12:38'},{state:'prop',start:'12:38',end:'12:49'},{state:'idle',start:'12:49',end:'13:24'},{state:'prop',start:'13:24',end:'13:42'},{state:'idle',start:'13:42',end:'14:41'},{state:'prop',start:'14:41',end:'15:02'},{state:'idle',start:'15:02',end:'16:25'},{state:'prop',start:'16:25',end:'16:32'}]},
   'R117_05/12':{first:'08:39:00',last:'14:46:00',segs:[{state:'prop',start:'08:39',end:'08:40'},{state:'idle',start:'08:40',end:'09:41'},{state:'prop',start:'09:41',end:'09:52'},{state:'idle',start:'09:52',end:'11:09'},{state:'prop',start:'11:09',end:'11:20'},{state:'idle',start:'11:20',end:'12:38'},{state:'prop',start:'12:38',end:'12:51'},{state:'idle',start:'12:51',end:'13:23'},{state:'prop',start:'13:23',end:'13:43'},{state:'idle',start:'13:43',end:'14:45'},{state:'prop',start:'14:45',end:'14:46'}]},
@@ -285,22 +285,65 @@ const INCIDENTS={
   'R121_05/11':[{time:'08:00',type:'hardware',sev:'minor'},{time:'08:26',type:'hardware',sev:'critical'},{time:'08:42',type:'software',sev:'moderate'},{time:'09:26',type:'hardware',sev:'minor'},{time:'09:37',type:'hardware',sev:'minor'},{time:'09:39',type:'hardware',sev:'moderate'},{time:'13:19',type:'autonomy',sev:'moderate'},{time:'14:52',type:'autonomy',sev:'critical'}],
   'R135_05/11':[{time:'08:41',type:'hardware',sev:'moderate'},{time:'09:40',type:'hardware',sev:'critical'},{time:'14:12',type:'autonomy',sev:'moderate'}],
   'R137_05/11':[{time:'08:42',type:'hardware',sev:'minor'},{time:'13:50',type:'autonomy',sev:'moderate'},{time:'14:03',type:'autonomy',sev:'moderate'}],
-  'R139_05/11':[{time:'12:27',type:'hardware',sev:'critical'},{time:'14:50',type:'hardware',sev:'moderate'}],
-  'R143_05/11':[{time:'07:01',type:'hardware',sev:'minor'},{time:'09:00',type:'hardware',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
+  'R139_05/11':[],  // R139 had no incidents on 05/11 — thread was empty
+  'R139_05/12':[
+    {time:'09:54',type:'autonomy',sev:'moderate'},   // fell out of team, headed north 200°
+    {time:'12:27',type:'hardware',sev:'critical'},   // disarmed failsafe — no RC receiver
+    {time:'14:50',type:'hardware',sev:'moderate'},   // SSM battery message, force armed for recovery
+  ],
+  // R116 — dual GPS issues all day 05/11, ICU bad 05/12
+  'R116_05/11':[
+    {time:'13:25',type:'hardware',sev:'moderate'},   // dual GPS heading 180° off
+    {time:'14:01',type:'hardware',sev:'moderate'},   // still reading wrong after swap
+    {time:'14:41',type:'hardware',sev:'moderate'},   // heading jumped 90° backing down ramp
+  ],
+  'R116_05/12':[
+    {time:'08:54',type:'hardware',sev:'moderate'},   // GPS FOD in connector, dielectric damaged, bad HMI
+    {time:'09:43',type:'autonomy',sev:'moderate'},   // drifting ~35m from formation
+    {time:'15:17',type:'hardware',sev:'critical'},   // ICU bad, force rearmed
+  ],
+  // R146 — dual GPS heading bug 05/11, repeated disarms 05/12
+  'R146_05/11':[
+    {time:'14:12',type:'software',sev:'moderate'},   // dual GPS yaw accurate but heading wrong in UI
+    {time:'14:41',type:'software',sev:'moderate'},   // heading jumped 90° backing down ramp
+  ],
+  'R146_05/12':[
+    {time:'10:20',type:'autonomy',sev:'moderate'},   // would not take checkout play
+    {time:'11:23',type:'autonomy',sev:'moderate'},   // drifting off line formation
+    {time:'13:30',type:'autonomy',sev:'moderate'},   // disarmed without permission
+    {time:'14:58',type:'autonomy',sev:'critical'},   // disarmed multiple times, recovered by SB36
+  ],  'R143_05/11':[{time:'07:01',type:'hardware',sev:'minor'},{time:'09:00',type:'hardware',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
   'R145_05/11':[{time:'08:28',type:'hardware',sev:'moderate'},{time:'08:45',type:'hardware',sev:'minor'},{time:'11:15',type:'hardware',sev:'moderate'},{time:'14:12',type:'hardware',sev:'minor'}],
   'R147_05/11':[{time:'11:49',type:'hardware',sev:'critical'},{time:'18:09',type:'hardware',sev:'critical'}],
   // ── TUESDAY 05/12 ──
   'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'12:48',type:'hardware',sev:'critical'},{time:'14:29',type:'hardware',sev:'critical'}],
   'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'10:18',type:'hardware',sev:'moderate'},{time:'10:56',type:'hardware',sev:'critical'},{time:'11:02',type:'hardware',sev:'critical'},{time:'12:45',type:'hardware',sev:'minor'}],
-  'R135_05/12':[{time:'10:21',type:'hardware',sev:'moderate'}],
+  'R135_05/12':[{time:'08:01',type:'hardware',sev:'minor'},{time:'10:21',type:'hardware',sev:'moderate'}],
   'R136_05/12':[{time:'09:37',type:'software',sev:'minor'},{time:'11:33',type:'autonomy',sev:'moderate'}],
   'R138_05/12':[{time:'12:29',type:'autonomy',sev:'moderate'},{time:'12:33',type:'autonomy',sev:'minor'}],
   'R139_05/12':[{time:'09:40',type:'autonomy',sev:'moderate'}],
   'R147_05/12':[{time:'11:49',type:'hardware',sev:'minor'},{time:'16:12',type:'software',sev:'minor'}],
-  // General Tuesday issues (shown on first boat row as fleet-level)
+  // Tuesday 05/12 — continued from Monday threads (per Tanner: "continue logging on yesterday's threads")
+  'R100_05/12':[],
+  'R105_05/12':[
+    {time:'08:53',type:'autonomy',sev:'moderate'},  // controller drift continues, not maintaining position
+    {time:'09:54',type:'hardware',sev:'minor'},     // scratched lenses
+    {time:'10:07',type:'software',sev:'minor'},     // autonomy container restarted
+  ],
+  'R121_05/12':[],
   'R113_05/12':[{time:'09:15',type:'hardware',sev:'moderate'}],
-  'R117_05/12':[],
+  'R117_05/12':[
+    {time:'11:05',type:'software',sev:'moderate'},   // CFG_FEATURES_ENABLE_DETECTION_TRACKER missed, obstacle grid disabled
+    {time:'11:27',type:'software',sev:'moderate'},   // CDR globally disabled to allow ram
+    {time:'12:30',type:'autonomy',sev:'moderate'},   // engage task race condition
+    {time:'14:22',type:'hardware',sev:'critical'},   // failed to connect on recovery, towed to BEDs, 41V
+  ],
   // ── WEDNESDAY 05/13 ──
+  'R121_05/13':[
+    {time:'08:23',type:'software',sev:'moderate'},  // obstacle grid enabled, collision avoidance, autonomy restart
+    {time:'08:52',type:'hardware',sev:'minor'},     // port camera black image
+    {time:'10:24',type:'hardware',sev:'moderate'},  // prop hit ramp on recovery
+  ],
   'R122_05/13':[{time:'11:25',type:'autonomy',sev:'critical'},{time:'11:42',type:'autonomy',sev:'critical'},{time:'12:52',type:'autonomy',sev:'moderate'}],
   'R134_05/13':[{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'hardware',sev:'moderate'},{time:'12:25',type:'hardware',sev:'moderate'}],
   'R137_05/13':[{time:'08:29',type:'autonomy',sev:'minor'},{time:'09:55',type:'autonomy',sev:'moderate'},{time:'11:50',type:'software',sev:'critical'},{time:'13:01',type:'autonomy',sev:'moderate'}],
@@ -311,19 +354,56 @@ const INCIDENTS={
 
 // ── THREADS ──
 const THREADS={
+  // ── MONDAY 05/11 (+ continued notes from 05/12 and 05/13 per Tanner: "continue logging on yesterday's threads") ──
+
   'R100_05/11':[
     {dt:'05/11 06:47',types:['hardware'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
     {dt:'05/11 07:27',types:['hardware'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
     {dt:'05/11 07:50',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
+    {dt:'05/11 10:06',types:['software'],sevs:['minor'],text:"Shouldn't affect checks — innocuous change to enable second battery"},
     {dt:'05/11 12:19',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
   ],
+
   'R105_05/11':[
-    {dt:'05/11 08:18',types:['hardware'],sevs:['minor'],text:'Reverse RPM limited, needs adjustment'},
-    {dt:'05/11 12:17',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort — controller drift continues'},
+    {dt:'05/11 08:18',types:['hardware'],sevs:['minor'],text:'Reverse RPM parameters need to be adjusted'},
+    {dt:'05/11 12:17',types:['autonomy'],sevs:['moderate'],text:'R105 having difficulty maintaining position in escort'},
     {dt:'05/12 08:53',types:['autonomy'],sevs:['moderate'],text:'Controller drift continues — does not maintain position'},
-    {dt:'05/12 10:07',types:['software'],sevs:['moderate'],text:'Updated and autonomy container restarted'},
-    {dt:'05/13 10:22',types:['hardware'],sevs:['minor'],text:'Port and stbd door latches broken'},
+    {dt:'05/12 09:54',types:['hardware'],sevs:['minor'],text:'Scratched lenses'},
+    {dt:'05/12 10:07',types:['software'],sevs:['minor'],text:'Updated and autonomy container restarted'},
+    {dt:'05/13 10:22',types:['hardware'],sevs:['minor'],text:'Port and stbd door latches are broken'},
   ],
+
+  'R108_05/11':[
+    {dt:'05/11 22:04',types:['software'],sevs:['minor'],text:'DWEs appear to be assigned improperly'},
+    {dt:'05/12 08:08',types:['software'],sevs:['minor'],text:'Fixed DWE streams'},
+    {dt:'05/12 19:57',types:['hardware'],sevs:['critical'],text:'Continuous rebooting on kitbox'},
+    {dt:'05/12 20:49',types:['hardware'],sevs:['minor'],text:'Confirmed turned off by Tanner — not a fault'},
+    {dt:'05/13 08:32',types:['hardware'],sevs:['critical'],text:'No data after ~1PM 05/12, voltage takes steep dive — may have tripped LV protection'},
+    {dt:'05/13 08:51',types:['hardware'],sevs:['critical'],text:'Flashing lights on kitbox on recovery, not showing up in UI'},
+  ],
+
+  'R108_05/12':[
+    {dt:'05/12 19:57',types:['hardware'],sevs:['critical'],text:'Continuous rebooting on kitbox'},
+    {dt:'05/13 08:32',types:['hardware'],sevs:['critical'],text:'No data after ~1PM, voltage steep dive — may have tripped LV protection'},
+    {dt:'05/13 08:51',types:['hardware'],sevs:['critical'],text:'Flashing lights on kitbox on recovery today — not showing up on UI'},
+  ],
+
+  'R108_05/13':[
+    {dt:'05/13 08:51',types:['hardware'],sevs:['critical'],text:'Flashing lights on kitbox on recovery, not showing up in UI'},
+    {dt:'05/13 08:51',types:['hardware'],sevs:['minor'],text:'Demons in it. (Vita)'},
+  ],
+
+  'R112_05/11':[
+    {dt:'05/11 12:03',types:['software'],sevs:['critical'],text:'Mavlink TX overflow after removing ardupilot.apj and kitbox restart — unable to connect in MP'},
+    {dt:'05/11 12:24',types:['software'],sevs:['critical'],text:'Hold off on launching R112 if possible'},
+    {dt:'05/12 07:48',types:['software'],sevs:['critical'],text:'Cube bootloader issue — flashed with wrong build. Need 50cc FW, latest FW page not up to date.'},
+    {dt:'05/12 11:05',types:['software'],sevs:['critical'],text:'Still not seeing boat on Mission Planner, UI has no GPS fix. This boat would put us at 20 rampages.'},
+    {dt:'05/12 11:47',types:['software'],sevs:['moderate'],text:'Boat is balena updating — no override ardupilot.apj so should flash correct firmware when done'},
+    {dt:'05/12 12:58',types:['hardware'],sevs:['critical'],text:'Vita asked to look at boat at BEDs'},
+    {dt:'05/12 14:24',types:['software'],sevs:['critical'],text:'Soft bricked from whatever happened above — Paul flashed it on the pier'},
+    {dt:'05/12 20:45',types:['software'],sevs:['critical'],text:'Not sure how this got bricked. Plan to fix bricking problem that happens time to time — requires next revision of kitbox PCB'},
+  ],
+
   'R113_05/11':[
     {dt:'05/11 08:59',types:['hardware'],sevs:['minor'],text:'Prop replaced — beat up, reducing variables for radar boat'},
     {dt:'05/11 09:13',types:['hardware'],sevs:['minor'],text:'Disarmed at ramp, needed re-arm'},
@@ -331,14 +411,43 @@ const THREADS={
     {dt:'05/11 15:22',types:['autonomy','hardware'],sevs:['critical'],text:'Low Orca temp — stuck going full back and forth cyclically'},
     {dt:'05/11 15:49',types:['autonomy'],sevs:['critical'],text:'Oscillation recurring'},
     {dt:'05/11 16:03',types:['software'],sevs:['minor'],text:'Balena update running on R113'},
+    {dt:'05/11 16:08',types:['software'],sevs:['minor'],text:'Drunk before balena — not related'},
     {dt:'05/11 16:13',types:['software'],sevs:['moderate'],text:'Steering PID updated: ATC_STR_RAT_I 1 → 2'},
-    {dt:'05/11 18:09',types:['hardware','hardware'],sevs:['critical'],text:'Towed back in — to be investigated'},
-    {dt:'05/12 09:15',types:['hardware'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
-    {dt:'05/13 13:40',types:['autonomy'],sevs:['critical'],text:'Tried patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — EO phantom recognitions.'},
+    {dt:'05/11 18:09',types:['hardware'],sevs:['critical'],text:'Towed back in, to be investigated'},
+    {dt:'05/11 18:48',types:['software'],sevs:['critical'],text:'All params normal — oscillation cause unknown'},
+    {dt:'05/12 07:54',types:['hardware'],sevs:['critical'],text:'Internal box not secured — needs dual lock'},
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/13 13:40',types:['autonomy'],sevs:['moderate'],text:'Patrol at 3 kts in heavy winds — not enough authority. Continuous CRD — EO phantom recognitions.'},
   ],
+
   'R113_05/12':[
-    {dt:'05/12 09:15',types:['hardware'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/12 07:54',types:['hardware'],sevs:['moderate'],text:'Internal box not secured — needs dual lock'},
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
   ],
+
+  'R116_05/11':[
+    {dt:'05/11 13:25',types:['hardware'],sevs:['moderate'],text:'Having issues with dual GPS — trying compass learn on land. Heading offset 180° after compass learn.'},
+    {dt:'05/11 13:38',types:['hardware'],sevs:['moderate'],text:'Something is wrong — GPS may be installed opposite. Try switching them on the kitbox.'},
+    {dt:'05/11 14:01',types:['hardware'],sevs:['moderate'],text:'Still reading ~200° while facing roughly north'},
+    {dt:'05/11 14:23',types:['hardware'],sevs:['moderate'],text:'Resolved — heading looks correct now'},
+    {dt:'05/11 14:41',types:['hardware'],sevs:['moderate'],text:'Nevermind — heading jumped 90° while backing down the ramp'},
+    {dt:'05/12 08:31',types:['hardware'],sevs:['moderate'],text:'Failed checkout play'},
+    {dt:'05/12 08:54',types:['hardware'],sevs:['moderate'],text:'New GPS for DGPS had FOD in connector — cleaned, working now. Needs replacement post-Mayhem, dielectric damaged.'},
+    {dt:'05/12 08:54',types:['hardware'],sevs:['moderate'],text:'Boat also has a bad integrated HMI'},
+    {dt:'05/12 09:43',types:['autonomy'],sevs:['moderate'],text:'Not remaining in formation — drifting ~35m downwind from expected location'},
+    {dt:'05/12 10:07',types:['autonomy'],sevs:['moderate'],text:'2x not remaining in formation, drifting'},
+    {dt:'05/12 15:06',types:['autonomy'],sevs:['moderate'],text:'Keeps collision avoiding with seemingly nothing'},
+    {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'ICU is bad'},
+    {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'Force rearmed to get it on transit'},
+  ],
+
+  'R116_05/12':[
+    {dt:'05/12 08:54',types:['hardware'],sevs:['moderate'],text:'New GPS for DGPS had FOD in connector — cleaned out, dielectric damaged, needs replacement post-Mayhem'},
+    {dt:'05/12 08:54',types:['hardware'],sevs:['moderate'],text:'Bad integrated HMI'},
+    {dt:'05/12 09:43',types:['autonomy'],sevs:['moderate'],text:'Not remaining in formation, drifting ~35m downwind'},
+    {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'ICU is bad — force rearmed to get on transit'},
+  ],
+
   'R117_05/11':[
     {dt:'05/11 07:50',types:['hardware'],sevs:['minor'],text:'Disarm on launch'},
     {dt:'05/11 08:13',types:['hardware'],sevs:['moderate'],text:'Compass 180° out — bringing back to resend dual GPS config'},
@@ -348,156 +457,262 @@ const THREADS={
     {dt:'05/11 11:21',types:['hardware'],sevs:['moderate'],text:'Did not navigate bridge — auto disarmed on water, re-armed via RC'},
     {dt:'05/11 11:22',types:['hardware'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
     {dt:'05/11 15:02',types:['hardware'],sevs:['moderate'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
-    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection'},
+    {dt:'05/12 11:05',types:['software'],sevs:['moderate'],text:'CFG_FEATURES_ENABLE_DETECTION_TRACKER missed on R117 for ramming config'},
+    {dt:'05/12 11:27',types:['software'],sevs:['moderate'],text:'Globally disabled CDR to allow ram; also disabled obstacle grid'},
+    {dt:'05/12 12:30',types:['autonomy'],sevs:['moderate'],text:'Engage task unexpectedly completing — race condition with autonomous targeting'},
+    {dt:'05/12 14:22',types:['hardware'],sevs:['critical'],text:'Failed to connect to remote on recovery — kitbox cycled at BEDs, voltage at 41V'},
+    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection on battery'},
   ],
+
+  'R117_05/12':[
+    {dt:'05/12 11:05',types:['software'],sevs:['moderate'],text:'CFG_FEATURES_ENABLE_DETECTION_TRACKER missed — globally disabled CDR to allow ram'},
+    {dt:'05/12 11:27',types:['software'],sevs:['moderate'],text:'Also disabled obstacle grid and track_manager ownship filtering'},
+    {dt:'05/12 12:30',types:['autonomy'],sevs:['moderate'],text:'Engage task race condition — autonomous targeting not publishing lost contact before engage behavior fails'},
+    {dt:'05/12 14:22',types:['hardware'],sevs:['critical'],text:'Failed to connect on recovery — towed to BEDs. Kitbox cycled, recovered under own power. Voltage at 41V.'},
+    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Started at 50.2V, only. Hit ~37V — tripped undervoltage protection'},
+  ],
+
+  'R117_05/13':[
+    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Dan: started at 50V on 05/12 and hit low voltage threshold below 37V'},
+  ],
+
   'R121_05/11':[
     {dt:'05/11 08:00',types:['hardware'],sevs:['minor'],text:'Checkout received but did not run after button pressed — blue HMI cable may be the issue'},
-    {dt:'05/11 08:26',types:['hardware'],sevs:['critical'],text:'No GPS — disarmed; Power cycled — Ilmor not healthy, no LED, no ICU comms'},
+    {dt:'05/11 08:26',types:['hardware'],sevs:['critical'],text:'No GPS — disarmed; Ilmor not healthy, no LED, no ICU comms'},
     {dt:'05/11 08:42',types:['software'],sevs:['moderate'],text:'Reset — changed params for DGPS; Ilmor ICU recovered after power cycle'},
+    {dt:'05/11 09:16',types:['software'],sevs:['moderate'],text:'GPS good — had to configure dual GPS board'},
     {dt:'05/11 09:26',types:['hardware'],sevs:['minor'],text:"Won't trim down; port canoe handle missing a screw"},
     {dt:'05/11 09:37',types:['hardware'],sevs:['minor'],text:'Auto disarmed'},
-    {dt:'05/11 09:39',types:['hardware'],sevs:['moderate'],text:'Before water: ilmor bearing sounds bad; grab handle not secured; battery-well hole not plugged (taped)'},
+    {dt:'05/11 09:39',types:['hardware'],sevs:['moderate'],text:'Ilmor bearing sounds bad; grab handle not secured; motor-well hole not plugged (taped)'},
     {dt:'05/11 13:19',types:['autonomy'],sevs:['moderate'],text:'Not behaving in formation play for photoshoot'},
     {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on water under autonomy at 14:52'},
-    {dt:'05/13 17:01',types:['hardware'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
   ],
+
+  'R121_05/12':[],
+
+  'R121_05/13':[
+    {dt:'05/13 08:23',types:['software'],sevs:['moderate'],text:'Obstacle grid was enabled causing collision avoidance — autonomy restart'},
+    {dt:'05/13 08:52',types:['hardware'],sevs:['minor'],text:'Port camera showing black image — devices in lsusb, rebooted forcer, no fix'},
+    {dt:'05/13 10:24',types:['hardware'],sevs:['moderate'],text:'Prop hit the ramp on recovery'},
+    {dt:'05/13 16:52',types:['hardware'],sevs:['moderate'],text:'Port camera likely failing — should get replaced'},
+  ],
+
   'R122_05/11':[
     {dt:'05/11 14:52',types:['autonomy'],sevs:['critical'],text:'Disarmed itself on the water under autonomy at 14:52'},
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
     {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed twice during transit'},
-    {dt:'05/12 12:46',types:['hardware'],sevs:['moderate'],text:'Location in real life differs from console; Grafana updating with no visible kitbox lights'},
-    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'Kitbox restarted — no GPS fix reported by Cube after restart; GPS did not come back'},
-    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'Bad GPS patch found — measuring short from shield to pin. GPS needs replacement. Reverted to single GPS + compass.'},
-    {dt:'05/13 11:02',types:['software'],sevs:['minor'],text:'Detection tracker not enabled after launch — just enabled and restarted autonomy'},
+    {dt:'05/12 12:46',types:['hardware'],sevs:['moderate'],text:'Location in real life differs from console — Grafana updating with no visible kitbox lights'},
+    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'Kitbox restarted — no GPS fix reported by Cube after restart'},
+    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'GPS patch bad — short from shield to pin. Needs replacement. Reverted to single GPS + compass heading only.'},
+    {dt:'05/13 11:02',types:['software'],sevs:['minor'],text:'Forgot to enable detection tracker after launch — just enabled and restarted autonomy'},
     {dt:'05/13 13:42',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
+
   'R122_05/12':[
-    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play as expected — lagging behind'},
+    {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind'},
     {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed twice during transit'},
-    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'No GPS fix after kitbox restart; GPS patch bad — short from shield to pin, needs replacement'},
-    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'Reverted to single GPS boat with compass only heading'},
+    {dt:'05/12 12:48',types:['hardware'],sevs:['critical'],text:'No GPS fix after kitbox restart — big gap in all telemetry starting 12:48'},
+    {dt:'05/12 14:29',types:['hardware'],sevs:['critical'],text:'GPS patch measuring short from shield to pin — bad patch. Reverted to single GPS + compass.'},
   ],
+
   'R122_05/13':[
-    {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile track when only one should — 122 and 145 both engaging'},
+    {dt:'05/13 11:02',types:['software'],sevs:['minor'],text:'Forgot to enable detection tracker after launch — just enabled and restarted autonomy'},
+    {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile — 122 and 145 both engaging when only one should'},
     {dt:'05/13 11:34',types:['autonomy'],sevs:['critical'],text:'122 seemingly started trying to engage R138 rather than the safety boat'},
     {dt:'05/13 11:42',types:['autonomy'],sevs:['critical'],text:'Running theory: tried engaging a contact (non-fused) associated with R138. 122 then began fighting for R137 point.'},
     {dt:'05/13 12:52',types:['autonomy'],sevs:['moderate'],text:'122 and 145 both engaging as kinetic boats again'},
     {dt:'05/13 13:42',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
+
   'R134_05/11':[
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind. Possibly CFG_COMMS_MQTT_SUB_TO_NEIGHBOR_CONTACTS not enabled.'},
-    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed once during transit'},
+    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed once during transit; lost contact on UI'},
     {dt:'05/12 10:18',types:['hardware'],sevs:['moderate'],text:'Lost contact on UI — Starlink theorized down; one kitbox light found, power cycled, 2 shown'},
     {dt:'05/12 10:56',types:['hardware'],sevs:['critical'],text:'134 Ilmor LED solid green but prop not spinning — clicking sound from Ilmor'},
     {dt:'05/12 11:02',types:['hardware'],sevs:['critical'],text:'Inverter seems dead — will recover for RCCA'},
     {dt:'05/12 12:45',types:['hardware'],sevs:['minor'],text:'R134 checked out again, launching now'},
-    {dt:'05/13 11:50',types:['hardware'],sevs:['moderate'],text:'Max reverse found to be limited — likely explaining drift issues. MaxR updated to 600 with QGC.'},
+    {dt:'05/13 11:50',types:['hardware'],sevs:['moderate'],text:'Max reverse found to be limited — explaining drift issues. MaxR updated to 600 with QGC.'},
   ],
+
   'R134_05/12':[
     {dt:'05/12 09:14',types:['autonomy'],sevs:['moderate'],text:'Not responding to escort play — lagging behind'},
-    {dt:'05/12 10:06',types:['hardware'],sevs:['moderate'],text:'Disarmed once during transit; lost contact on UI'},
-    {dt:'05/12 10:18',types:['hardware'],sevs:['moderate'],text:'Starlink theorized down; kitbox power cycled'},
     {dt:'05/12 10:56',types:['hardware'],sevs:['critical'],text:'Ilmor LED solid green but prop not spinning — clicking sound; inverter dead'},
     {dt:'05/12 12:45',types:['hardware'],sevs:['minor'],text:'R134 checked out again, launching now'},
   ],
+
   'R134_05/13':[
     {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
     {dt:'05/13 11:50',types:['hardware'],sevs:['moderate'],text:'Max reverse found to be limited — explaining drift issues. MaxR updated to 600 with QGC.'},
-    {dt:'05/13 12:25',types:['hardware'],sevs:['moderate'],text:'R134 drifting too near pylon — teams not appearing in v1 UI, had to use v0 UI to send patrol play'},
+    {dt:'05/13 12:25',types:['hardware'],sevs:['moderate'],text:'R134 drifting too near pylon — had to use v0 UI to send patrol play'},
   ],
+
   'R135_05/11':[
-    {dt:'05/11 08:41',types:['hardware','software'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
+    {dt:'05/11 08:41',types:['hardware'],sevs:['moderate'],text:"Action button doesn't work — went to loiter not FF on checkout"},
     {dt:'05/11 09:40',types:['hardware'],sevs:['critical'],text:'Bad GPS — position jumping in UI all day'},
-    {dt:'05/11 14:12',types:['autonomy','hardware'],sevs:['moderate'],text:'2x disarmed without permission'},
+    {dt:'05/11 14:12',types:['autonomy'],sevs:['moderate'],text:'2x disarmed without permission'},
+    {dt:'05/12 08:01',types:['hardware'],sevs:['minor'],text:'Broken hatch latch — starboard side'},
     {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'On recovery, R135 missed trailer and drove up boat ramp — hull and Ilmor scraped. Needs new prop.'},
   ],
+
   'R135_05/12':[
-    {dt:'05/12 10:21',types:['hardware'],sevs:['moderate'],text:'Continued ops on R135 — still monitoring GPS behavior'},
+    {dt:'05/12 08:01',types:['hardware'],sevs:['minor'],text:'Broken hatch latch — starboard side'},
+    {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Intermittent on manual — 3x kitbox power cycled'},
+    {dt:'05/12 14:12',types:['autonomy'],sevs:['moderate'],text:'2x disarmed without permission'},
+    {dt:'05/12 15:17',types:['hardware'],sevs:['critical'],text:'On recovery, missed trailer and drove up boat ramp — hull scraped. Needs new prop.'},
   ],
+
   'R136_05/11':[
     {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag — lmk when can restart autonomy'},
     {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
     {dt:'05/13 08:10',types:['hardware'],sevs:['moderate'],text:'R136 did not charge last night — at 50.6V'},
   ],
+
   'R136_05/12':[
     {dt:'05/12 09:37',types:['software'],sevs:['minor'],text:'Changed FLIR streaming vars to eliminate lag'},
     {dt:'05/12 11:33',types:['autonomy'],sevs:['moderate'],text:'Did not take play'},
   ],
+
   'R137_05/11':[
-    {dt:'05/11 08:42',types:['hardware'],sevs:['minor'],text:'Reverse RPM parameters need adjustment'},
-    {dt:'05/11 13:50',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station'},
-    {dt:'05/11 14:03',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort — ground station at 3 kts, 137 slows then surges'},
+    {dt:'05/11 08:42',types:['hardware'],sevs:['minor'],text:'Reverse RPM parameters need to be adjusted'},
+    {dt:'05/11 08:50',types:['hardware'],sevs:['minor'],text:'Escalated to Paul Soucy for param adjustment'},
+    {dt:'05/11 13:50',types:['autonomy'],sevs:['moderate'],text:'Falling out of escort — collision avoiding with ground station instead of staying ahead'},
+    {dt:'05/11 13:55',types:['hardware'],sevs:['moderate'],text:'74°F Orca temp climbing when not staying at top of formation'},
+    {dt:'05/11 13:58',types:['hardware'],sevs:['minor'],text:'Mike: 5-8 knots usually overheats the Orcas in straight transits'},
+    {dt:'05/11 14:03',types:['autonomy'],sevs:['moderate'],text:'At 5.1 kts still falling out of escort — collision avoiding with ground station'},
+    {dt:'05/11 14:04',types:['autonomy'],sevs:['moderate'],text:'Ground station at 3 kts — 137 slows then surges to get back to top of formation'},
+    {dt:'05/12 08:17',types:['hardware'],sevs:['minor'],text:'Relay 3 (FLIR) not turning on — set in MP but FLIR has no power. Resolved on its own.'},
     {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
-    {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
-    {dt:'05/13 08:49',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
-    {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
-    {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'R137 Mission Manager crashed'},
-    {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation on play start — contact within range marked as neutral, trying to engage it'},
-  ],
-  'R137_05/12':[
-    {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
-    {dt:'05/12 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
-  ],
-  'R137_05/13':[
+    {dt:'05/12 08:52',types:['software'],sevs:['minor'],text:'Would not take charlie team reassign — had to go to unassigned before putting back to charlie'},
     {dt:'05/13 08:29',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
+    {dt:'05/13 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on through Mission Planner param'},
+    {dt:'05/13 08:49',types:['hardware'],sevs:['minor'],text:'2nd time relay 3 did not auto-activate on this vehicle — check default in MP'},
     {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
     {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'R137 Mission Manager crashed during picket testing'},
     {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'R137 failed formation — contact marked neutral within range, trying to engage it'},
   ],
+
+  'R137_05/12':[
+    {dt:'05/12 08:17',types:['hardware'],sevs:['minor'],text:'Relay 3 (FLIR) not turning on — resolved on its own, 2nd occurrence'},
+    {dt:'05/12 08:32',types:['hardware'],sevs:['moderate'],text:'Mag field errors — cleared but keep coming back'},
+    {dt:'05/12 08:52',types:['software'],sevs:['minor'],text:'Would not take charlie team reassign — had to go to unassigned first'},
+    {dt:'05/13 08:47',types:['software'],sevs:['minor'],text:'PTZ had to be manually turned on via Mission Planner param'},
+    {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'Mission Manager crashed during picket testing'},
+  ],
+
+  'R137_05/13':[
+    {dt:'05/13 08:29',types:['autonomy'],sevs:['minor'],text:'Formation command failed with 2 boats — resend worked'},
+    {dt:'05/13 09:55',types:['autonomy'],sevs:['moderate'],text:'R134 collision to R137 due to collision avoidance'},
+    {dt:'05/13 11:50',types:['software'],sevs:['critical'],text:'Mission Manager crashed during picket testing'},
+    {dt:'05/13 13:01',types:['autonomy'],sevs:['moderate'],text:'Failed formation — contact marked neutral within range, trying to engage it'},
+  ],
+
   'R138_05/11':[
     {dt:'05/11 18:10',types:['hardware'],sevs:['minor'],text:'Continued on ram post stop'},
-    {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation — armed and in loiter. Resending formation put it back in line.'},
+    {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation, yet armed and in loiter'},
+    {dt:'05/12 12:33',types:['autonomy'],sevs:['minor'],text:'Resending formation put it back in line'},
     {dt:'05/13 09:30',types:['hardware'],sevs:['moderate'],text:'Disarmed'},
     {dt:'05/13 09:54',types:['software'],sevs:['minor'],text:'Reduced FLIR framerate to 5fps (from 10) — bitrate limiting caused poor image quality'},
-    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related; no reason found in logs'},
+    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related'},
+    {dt:'05/13 10:05',types:['hardware'],sevs:['moderate'],text:'Not seeing a reason for the disarm in the logs (Carter)'},
   ],
+
   'R138_05/12':[
     {dt:'05/12 12:29',types:['autonomy'],sevs:['moderate'],text:'Not holding the formation, yet armed and in loiter'},
     {dt:'05/12 12:33',types:['autonomy'],sevs:['minor'],text:'Resending formation put it back in line'},
   ],
+
   'R138_05/13':[
     {dt:'05/13 09:30',types:['hardware'],sevs:['moderate'],text:'Disarmed'},
-    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — no reason found in logs'},
+    {dt:'05/13 09:57',types:['hardware'],sevs:['moderate'],text:'Disarmed again — does not seem restart-related; no reason found in logs'},
   ],
-  'R139_05/11':[
-    {dt:'05/12 09:54',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
-    {dt:'05/12 12:27',types:['hardware','hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
+
+  'R139_05/11':[],
+
+  'R139_05/12':[
+    {dt:'05/12 09:54',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason shown in UI'},
+    {dt:'05/12 10:53',types:['autonomy'],sevs:['moderate'],text:'Repeated'},
+    {dt:'05/12 10:55',types:['autonomy'],sevs:['moderate'],text:'Re-armed and re-entered'},
+    {dt:'05/12 12:27',types:['hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
     {dt:'05/12 12:39',types:['software'],sevs:['minor'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
     {dt:'05/12 14:50',types:['hardware'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
   ],
-  'R139_05/12':[
-    {dt:'05/12 09:40',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason'},
-    {dt:'05/12 12:27',types:['hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold. Force armed for recovery.'},
-  ],
+
   'R143_05/11':[
     {dt:'05/11 07:01',types:['hardware'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
     {dt:'05/11 09:00',types:['hardware'],sevs:['moderate'],text:'Bilge impeller grinding — cleared debris but still sounds bad'},
+    {dt:'05/11 13:56',types:['hardware'],sevs:['minor'],text:'69°F Orca temp'},
     {dt:'05/11 14:07',types:['autonomy'],sevs:['moderate'],text:'143 circling in rear of formation — resent play'},
     {dt:'05/11 18:09',types:['hardware'],sevs:['critical'],text:'Large amount of water from hull'},
+    {dt:'05/12 11:10',types:['autonomy'],sevs:['moderate'],text:'Falling out of formation — resent play'},
   ],
-  'R143_05/12':[],
+
+  'R143_05/12':[
+    {dt:'05/12 11:10',types:['autonomy'],sevs:['moderate'],text:'Falling out of formation — resent play'},
+  ],
+
   'R145_05/11':[
-    {dt:'05/11 08:23',types:['hardware'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
-    {dt:'05/11 08:45',types:['hardware'],sevs:['minor'],text:'Bad gyro — drift identified, power cycle resolved'},
-    {dt:'05/11 11:15',types:['hardware'],sevs:['moderate'],text:'R145 had three disarms during launch'},
-    {dt:'05/11 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
+    {dt:'05/11 06:57',types:['hardware'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
+    {dt:'05/11 08:28',types:['hardware'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
+    {dt:'05/11 08:45',types:['hardware'],sevs:['minor'],text:'Bad gyro'},
+    {dt:'05/12 10:39',types:['software'],sevs:['minor'],text:'R145 ran checkout play but UI shows failed'},
+    {dt:'05/12 11:04',types:['software'],sevs:['minor'],text:'Resolved: initial battery usage absolute value bug — charging reported as higher usage. Logging as bug report.'},
+    {dt:'05/12 11:15',types:['hardware'],sevs:['moderate'],text:'R145 had three disarms during launch'},
+    {dt:'05/12 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
+    {dt:'05/13 10:03',types:['software'],sevs:['minor'],text:'Perception recording enabled on 145'},
+    {dt:'05/13 13:37',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
-  'R145_05/12':[],
+
+  'R145_05/12':[
+    {dt:'05/12 10:39',types:['software'],sevs:['minor'],text:'R145 ran checkout play but UI shows failed'},
+    {dt:'05/12 11:04',types:['software'],sevs:['minor'],text:'Resolved: battery absolute value bug — will log as bug report'},
+    {dt:'05/12 11:15',types:['hardware'],sevs:['moderate'],text:'Three disarms during launch'},
+    {dt:'05/12 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
+  ],
+
   'R145_05/13':[
     {dt:'05/13 11:25',types:['autonomy'],sevs:['critical'],text:'Two kinetic boats engaged the hostile — 122 and 145 both engaging when only one should'},
-    {dt:'05/13 11:34',types:['autonomy'],sevs:['critical'],text:'145 was engaging, then 122 joined in. Once this happened 145 started drifting rather than returning to formation.'},
-    {dt:'05/13 12:10',types:['autonomy'],sevs:['moderate'],text:'R145 activated for ramming but did not chase target track. Switched to targeting rampage — vehicle moved.'},
+    {dt:'05/13 11:34',types:['autonomy'],sevs:['critical'],text:'145 was engaging, then 122 joined in — 145 started drifting rather than returning to formation'},
+    {dt:'05/13 12:10',types:['autonomy'],sevs:['moderate'],text:'R145 activated for ramming but did not chase target track — switched to targeting rampage, vehicle moved'},
     {dt:'05/13 12:52',types:['autonomy'],sevs:['moderate'],text:'122 and 145 both engaging again as kinetic boats'},
+    {dt:'05/13 10:03',types:['software'],sevs:['minor'],text:'Perception recording enabled on 145'},
+    {dt:'05/13 13:37',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
+
+  'R146_05/11':[
+    {dt:'05/11 14:12',types:['software'],sevs:['moderate'],text:'Dual-GPS yaw accurate but displayed heading in Mission Planner / UI is wrong'},
+    {dt:'05/11 14:53',types:['software'],sevs:['moderate'],text:'Power cycled — params look correct, tried wiggling bow'},
+    {dt:'05/11 14:57',types:['software'],sevs:['minor'],text:'GPS yaw now consistent with reported boat yaw — gyros likely drifted after sitting ~1hr'},
+    {dt:'05/11 14:41',types:['software'],sevs:['moderate'],text:'Heading jumped 90° while backing down ramp'},
+    {dt:'05/12 10:20',types:['autonomy'],sevs:['moderate'],text:'Would not take checkout play until put on new checkout team'},
+    {dt:'05/12 10:43',types:['software'],sevs:['moderate'],text:'Line formation taken as circle in new UI — now sending line sweep, behaving as expected'},
+    {dt:'05/12 11:23',types:['autonomy'],sevs:['moderate'],text:'Drifting off line formation'},
+    {dt:'05/12 12:11',types:['autonomy'],sevs:['moderate'],text:'Failed formation after 30 mins'},
+    {dt:'05/12 13:30',types:['autonomy'],sevs:['moderate'],text:'Disarmed without permission'},
+    {dt:'05/12 14:26',types:['autonomy'],sevs:['moderate'],text:'Disarmed without permission — 2nd time'},
+    {dt:'05/12 14:58',types:['autonomy'],sevs:['critical'],text:'Disarmed multiple times — needed to be recovered by SB36. Kept armed long enough to drive onto trailer.'},
+  ],
+
+  'R146_05/12':[
+    {dt:'05/12 10:20',types:['autonomy'],sevs:['moderate'],text:'Would not take checkout play until put on new checkout team'},
+    {dt:'05/12 11:23',types:['autonomy'],sevs:['moderate'],text:'Drifting off line formation'},
+    {dt:'05/12 12:11',types:['autonomy'],sevs:['moderate'],text:'Failed formation after 30 mins'},
+    {dt:'05/12 13:30',types:['autonomy'],sevs:['moderate'],text:'Disarmed without permission'},
+    {dt:'05/12 14:58',types:['autonomy'],sevs:['critical'],text:'Disarmed multiple times — recovered by SB36'},
+  ],
+
   'R147_05/11':[
-    {dt:'05/11 11:49',types:['hardware'],sevs:['critical'],text:'GPS going in and out, jumping around. Bow GPS knocked off during recovery.'},
+    {dt:'05/11 11:49',types:['hardware'],sevs:['critical'],text:'GPS going in and out, jumping around — bow GPS knocked off during recovery'},
     {dt:'05/11 12:07',types:['hardware'],sevs:['moderate'],text:'GPS seems stable now — drive around with truck to verify'},
     {dt:'05/11 18:09',types:['hardware'],sevs:['critical'],text:'Large amount of water from hull'},
     {dt:'05/12 07:30',types:['hardware'],sevs:['moderate'],text:'Added sealant to transom bolts'},
+    {dt:'05/12 14:58',types:['hardware'],sevs:['moderate'],text:'GPS lost'},
   ],
+
   'R147_05/12':[
-    {dt:'05/12 11:49',types:['hardware'],sevs:['minor'],text:'147 has WiFi enabled on its Starlink'},
+    {dt:'05/12 11:49',types:['hardware'],sevs:['minor'],text:'R147 has WiFi enabled on its Starlink'},
+    {dt:'05/12 14:58',types:['hardware'],sevs:['moderate'],text:'GPS lost'},
   ],
+
   'R147_05/13':[
     {dt:'05/13 08:49',types:['hardware'],sevs:['moderate'],text:"Can't get into R147 on Mission Planner — using QGC instead. Known issue, also affects R143."},
     {dt:'05/13 08:56',types:['hardware'],sevs:['minor'],text:'Same MP access issue as R134'},
@@ -909,7 +1124,7 @@ function renderReports(){
 // Events marked mayhem=true occurred during or directly before/after Mayhem days
 const FLEET_DATA=[
   {id:'R100', role:'Transit / Dual Battery', url:'https://havocai.atlassian.net/wiki/x/CACPEQ', events:[
-    {date:'1/5/2026',text:'Second battery installed',by:'Dalton',mayhem:false},
+    {date:'1/5/2026',text:'Second battery installed — R100 is configured for dual battery operation',by:'Dalton',mayhem:false},
     {date:'1/12/2026',text:'Replaced Ilmor after boat ran aground — cracked motor mount, bent trim pin, inverter and ICU issues',by:'Dalton',mayhem:false},
     {date:'2/18/2026',text:'Higher power ORCA and shaft testing (Engineering Sample). Swapped ORCA 260199003',by:'Dalton',mayhem:false},
   ]},
@@ -918,8 +1133,13 @@ const FLEET_DATA=[
     {date:'12/10/2025',text:'Prop replaced (damaged before transit to FL, chipped additional during packout)',by:'Reed',mayhem:false},
     {date:'2/9/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
   ]},
-  {id:'R108', role:'Picket', url:'', events:[
+  {id:'R108', role:'Picket / Dual GPS', url:'', events:[
     {date:'5/8/2026',text:'Installed dual GPS kit',by:'Dalton',mayhem:true},
+  ]},
+  {id:'R112', role:'Picket (did not deploy)', url:'', events:[
+    {date:'5/11/2026',text:'Mavlink TX overflow after removing ardupilot.apj + kitbox restart — unable to connect in MP. Held from water.',by:'Alex B',mayhem:true},
+    {date:'5/12/2026',text:'Soft bricked from wrong FW build. Paul flashed it on the pier.',by:'Paul / Vita',mayhem:true},
+    {date:'5/12/2026',text:'Carter Berlind had changed the target release to 0.10.4 for UI testing — caused wrong FW flash. Plan to fix bricking problem requires next kitbox PCB revision.',by:'Paul',mayhem:true},
   ]},
   {id:'R113', role:'Transit / Radar', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294584934', events:[
     {date:'11/20/2025',text:'HMI added from R116. Outboard swapped to new unit E700117. Collision with safety boat damaged gelcoat.',by:'Dalton',mayhem:false},
@@ -927,6 +1147,10 @@ const FLEET_DATA=[
     {date:'2/9/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
     {date:'3/30/2026',text:'Swapped outboard from the 3D printed boat with Ilmor HMI cowling',by:'Dalton',mayhem:false},
     {date:'5/28/2026',text:'Known issue with GPIO pin — moved E-stop to different pin. BTN_PIN = 51 must be set in MP.',by:'Vita',mayhem:true},
+  ]},
+  {id:'R114', role:'Picket (did not deploy)', url:'', events:[
+    {date:'5/8/2026',text:'Cleaned negative surlok connector on Orca (release button sticking open)',by:'Dalton',mayhem:true},
+    {date:'5/11/2026',text:'Did not get on the water during Mayhem. Alex B noted R114 location ~100 and asked if it should join.',by:'Alex B',mayhem:true},
   ]},
   {id:'R117', role:'Transit / Dual GPS', url:'', events:[
     {date:'3/2/2026',text:'Replaced ICU',by:'Dalton',mayhem:false},
@@ -982,11 +1206,14 @@ const FLEET_DATA=[
 ];
 
 const BOAT_ROLES={
-  R100:'Transit · Dual Battery', R105:'Transit', R108:'Picket',
-  R113:'Transit · Radar', R117:'Transit · Dual GPS', R121:'Transit',
+  // Dual GPS config: R121, R122, R116, R117, R145, R146
+  R100:'Transit · Dual Battery', R105:'Transit', R108:'Picket · Dual GPS',
+  R112:'Picket (did not deploy)', R113:'Transit · Radar', R114:'Picket (did not deploy)',
+  R116:'Picket · Dual GPS', R117:'Transit · Dual GPS', R121:'Transit · Dual GPS',
   R122:'Picket · Dual GPS', R134:'Picket · Radar', R135:'Picket · Kraken SDR',
   R136:'Picket · FLIR', R137:'Transit · PTZ', R138:'Picket · FLIR',
-  R139:'Transit', R143:'Transit · PTZ', R145:'Transit · Dual GPS', R147:'Picket',
+  R139:'Transit', R143:'Transit · PTZ', R145:'Transit · Dual GPS',
+  R146:'Picket · Dual GPS', R147:'Picket',
 };
 
 const ROLE_COLORS={Transit:'#1d9e75',Picket:'#378add',Radar:'#ef9f27',PTZ:'#888780'};
