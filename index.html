@@ -313,9 +313,18 @@ const INCIDENTS={
     {time:'13:30',type:'autonomy',sev:'moderate'},   // disarmed without permission
     {time:'14:58',type:'autonomy',sev:'critical'},   // disarmed multiple times, recovered by SB36
   ],  'R143_05/11':[{time:'07:01',type:'hardware',sev:'minor'},{time:'09:00',type:'hardware',sev:'moderate'},{time:'14:07',type:'autonomy',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
-  'R145_05/11':[{time:'08:28',type:'hardware',sev:'moderate'},{time:'08:45',type:'hardware',sev:'minor'},{time:'11:15',type:'hardware',sev:'moderate'},{time:'14:12',type:'hardware',sev:'minor'}],
+  'R145_05/11':[
+    {time:'06:57',type:'hardware',sev:'minor'},     // Starlink configured as Havoc Field — needed Joe Turner permissions
+    {time:'08:28',type:'hardware',sev:'moderate'},  // compass 180° out, dual GPS config
+    {time:'08:45',type:'hardware',sev:'minor'},     // bad gyro
+  ],
   'R147_05/11':[{time:'11:49',type:'hardware',sev:'critical'},{time:'18:09',type:'hardware',sev:'critical'}],
   // ── TUESDAY 05/12 ──
+  'R145_05/12':[
+    {time:'10:39',type:'software',sev:'minor'},     // checkout play showed failed in UI
+    {time:'11:15',type:'hardware',sev:'moderate'},  // three disarms during launch
+    {time:'14:12',type:'hardware',sev:'minor'},     // disarmed without permission
+  ],
   'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'12:48',type:'hardware',sev:'critical'},{time:'14:29',type:'hardware',sev:'critical'}],
   'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'10:18',type:'hardware',sev:'moderate'},{time:'10:56',type:'hardware',sev:'critical'},{time:'11:02',type:'hardware',sev:'critical'},{time:'12:45',type:'hardware',sev:'minor'}],
   'R135_05/12':[{time:'08:01',type:'hardware',sev:'minor'},{time:'10:21',type:'hardware',sev:'moderate'}],
@@ -457,11 +466,6 @@ const THREADS={
     {dt:'05/11 11:21',types:['hardware'],sevs:['moderate'],text:'Did not navigate bridge — auto disarmed on water, re-armed via RC'},
     {dt:'05/11 11:22',types:['hardware'],sevs:['minor'],text:'Gyros not calibrated after re-arming'},
     {dt:'05/11 15:02',types:['hardware'],sevs:['moderate'],text:'Did not navigate under bridge again — collision avoided, needed manual'},
-    {dt:'05/12 11:05',types:['software'],sevs:['moderate'],text:'CFG_FEATURES_ENABLE_DETECTION_TRACKER missed on R117 for ramming config'},
-    {dt:'05/12 11:27',types:['software'],sevs:['moderate'],text:'Globally disabled CDR to allow ram; also disabled obstacle grid'},
-    {dt:'05/12 12:30',types:['autonomy'],sevs:['moderate'],text:'Engage task unexpectedly completing — race condition with autonomous targeting'},
-    {dt:'05/12 14:22',types:['hardware'],sevs:['critical'],text:'Failed to connect to remote on recovery — kitbox cycled at BEDs, voltage at 41V'},
-    {dt:'05/13 08:27',types:['hardware'],sevs:['critical'],text:'Started at 50.2V — hit ~37V, tripped undervoltage protection on battery'},
   ],
 
   'R117_05/12':[
@@ -654,12 +658,6 @@ const THREADS={
     {dt:'05/11 06:57',types:['hardware'],sevs:['minor'],text:'Starlink configured as Havoc Field — needed Joe Turner permissions'},
     {dt:'05/11 08:28',types:['hardware'],sevs:['moderate'],text:'Compass continually 180° out — similar to R117, bringing back to resend dual GPS config'},
     {dt:'05/11 08:45',types:['hardware'],sevs:['minor'],text:'Bad gyro'},
-    {dt:'05/12 10:39',types:['software'],sevs:['minor'],text:'R145 ran checkout play but UI shows failed'},
-    {dt:'05/12 11:04',types:['software'],sevs:['minor'],text:'Resolved: initial battery usage absolute value bug — charging reported as higher usage. Logging as bug report.'},
-    {dt:'05/12 11:15',types:['hardware'],sevs:['moderate'],text:'R145 had three disarms during launch'},
-    {dt:'05/12 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
-    {dt:'05/13 10:03',types:['software'],sevs:['minor'],text:'Perception recording enabled on 145'},
-    {dt:'05/13 13:37',types:['software'],sevs:['minor'],text:'Known bug — comms node crashing when authorizing ATR'},
   ],
 
   'R145_05/12':[
