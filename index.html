@@ -193,7 +193,7 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   <div class="ctrl-sep"></div>
   <span class="ctrl-label">type</span>
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
-  <button class="btn" data-type="mechanical" style="color:#ef9f27;">hardware</button>
+  <button class="btn" data-type="hardware" style="color:#ef9f27;">hardware</button>
   <button class="btn" data-type="software" style="color:#1d9e75;">software</button>
   <div class="search-wrap">
     <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
@@ -279,7 +279,13 @@ const PROP={
 // MINOR    = observation, pre-water note, cosmetic, resolved on own, admin
 const INCIDENTS={
   // ── MONDAY 05/11 ──
-  'R100_05/11':[{time:'06:47',type:'hardware',sev:'minor'},{time:'07:27',type:'hardware',sev:'minor'},{time:'07:50',type:'software',sev:'minor'},{time:'12:19',type:'autonomy',sev:'critical'}],
+  'R100_05/11':[
+    {time:'06:47',type:'hardware',sev:'minor'},
+    {time:'07:27',type:'hardware',sev:'minor'},
+    {time:'07:50',type:'software',sev:'minor'},
+    {time:'12:19',type:'autonomy',sev:'critical'},
+    {time:'16:30',type:'hardware',sev:'critical'}, // voltage mismatch: Grafana 53.5V vs actual ~43V, impacts battery data from 16:30 to end of Mayhem
+  ],
   'R105_05/11':[{time:'08:18',type:'hardware',sev:'minor'},{time:'12:17',type:'autonomy',sev:'moderate'}],
   'R113_05/11':[{time:'08:59',type:'hardware',sev:'minor'},{time:'09:13',type:'hardware',sev:'minor'},{time:'15:17',type:'autonomy',sev:'critical'},{time:'15:49',type:'autonomy',sev:'critical'},{time:'16:03',type:'software',sev:'minor'},{time:'16:13',type:'software',sev:'moderate'},{time:'18:09',type:'hardware',sev:'critical'}],
   'R117_05/11':[{time:'07:50',type:'hardware',sev:'minor'},{time:'08:13',type:'hardware',sev:'moderate'},{time:'08:31',type:'hardware',sev:'critical'},{time:'08:40',type:'hardware',sev:'minor'},{time:'11:21',type:'hardware',sev:'moderate'},{time:'11:22',type:'hardware',sev:'minor'},{time:'15:02',type:'hardware',sev:'moderate'}],
@@ -321,6 +327,13 @@ const INCIDENTS={
   ],
   'R147_05/11':[{time:'11:49',type:'hardware',sev:'critical'},{time:'18:09',type:'hardware',sev:'critical'}],
   // ── TUESDAY 05/12 ──
+  'R108_05/12':[
+    {time:'08:08',type:'software',sev:'minor'},    // DWE streams fixed (issue from 05/11 22:04)
+    {time:'19:57',type:'hardware',sev:'critical'}, // continuous kitbox rebooting — video recorded
+  ],
+  'R108_05/11':[
+    {time:'22:04',type:'software',sev:'minor'},    // DWEs assigned improperly
+  ],
   'R145_05/12':[
     {time:'10:39',type:'software',sev:'minor'},     // checkout play showed failed in UI
     {time:'11:15',type:'hardware',sev:'moderate'},  // three disarms during launch
@@ -349,6 +362,11 @@ const INCIDENTS={
     {time:'14:22',type:'hardware',sev:'critical'},   // failed to connect on recovery, towed to BEDs, 41V
   ],
   // ── WEDNESDAY 05/13 ──
+  'R108_05/13':[
+    {time:'08:32',type:'hardware',sev:'critical'}, // Dan: no data after ~1PM 05/12, voltage steep dive, tripped LV protection
+    {time:'08:51',type:'hardware',sev:'critical'}, // flashing lights on kitbox, not showing in UI — pulled to BEDs
+    {time:'09:19',type:'hardware',sev:'critical'}, // Deven: R108 needs to be looked at, on land at BEDs
+  ],
   'R121_05/13':[
     {time:'08:23',type:'software',sev:'moderate'},  // obstacle grid enabled, collision avoidance, autonomy restart
     {time:'08:52',type:'hardware',sev:'minor'},     // port camera black image
@@ -370,8 +388,8 @@ const THREADS={
     {dt:'05/11 06:47',types:['hardware'],sevs:['minor'],text:'Dual battery — anything special with turning this on?'},
     {dt:'05/11 07:27',types:['hardware'],sevs:['minor'],text:'Stbd aft top hat handle broken'},
     {dt:'05/11 07:50',types:['software'],sevs:['minor'],text:'UI shows failed checkout but ran fine — dual battery may affect automated checks'},
-    {dt:'05/11 10:06',types:['software'],sevs:['minor'],text:"Shouldn't affect checks — innocuous change to enable second battery"},
     {dt:'05/11 12:19',types:['autonomy'],sevs:['critical'],text:'R100 stopped moving and went into loiter'},
+    {dt:'05/11 16:30',types:['hardware'],sevs:['critical'],text:'[Discovered 05/14] Voltage mismatch begins here — Grafana reports 53.5V, actual ~43V on both batteries. Impacts all battery telemetry from 16:30 through end of Mayhem. Root cause: BMS CAN comms issue (bent pins on CAN 3, CAN 2 not outputting). Ilmor voltage chart in Grafana is more accurate. (Jawad / Cory / Dan, 05/14)'},
   ],
 
   'R105_05/11':[
@@ -399,8 +417,10 @@ const THREADS={
   ],
 
   'R108_05/13':[
-    {dt:'05/13 08:51',types:['hardware'],sevs:['critical'],text:'Flashing lights on kitbox on recovery, not showing up in UI'},
+    {dt:'05/13 08:32',types:['hardware'],sevs:['critical'],text:'No data after ~1PM yesterday. Voltage takes a steep dive and may have gone low enough to trip LV protection. (Dan)'},
+    {dt:'05/13 08:51',types:['hardware'],sevs:['critical'],text:'R108 had flashing lights on its kitbox on recovery today. Wasn\'t showing up on the UI. (Jawad)'},
     {dt:'05/13 08:51',types:['hardware'],sevs:['minor'],text:'Demons in it. (Vita)'},
+    {dt:'05/13 09:19',types:['hardware'],sevs:['critical'],text:'R108 needs to be looked at. It\'s on land at BEDS. (Deven)'},
   ],
 
   'R112_05/11':[
@@ -729,7 +749,7 @@ const DAY_BOATS={
     {wave:'Wave 2 — later launch',  boats:['R108','R134','R135','R138','R122','R114','R116','R146','R143','R145','R147']},
   ],
   '05/13':[
-    {wave:'Picket testing', boats:['R100','R113','R121','R122','R134','R137','R138','R145','R147']},
+    {wave:'Picket testing', boats:['R100','R108','R113','R121','R122','R134','R137','R138','R145','R147']},
   ],
 };
 
@@ -773,9 +793,11 @@ function renderDay(day){
     const incidents=INCIDENTS[key]||[];
     const thread=THREADS[key]||[];
 
-    if(!propData) return;
+    // Skip if no propulsion AND no incidents
+    if(!propData && !incidents.length) return;
 
-    const fM=tM(propData.first), lM=tM(propData.last);
+    const fM=propData?tM(propData.first):null;
+    const lM=propData?tM(propData.last):null;
 
     const row=document.createElement('div');
     row.className='boat-row';
@@ -791,16 +813,20 @@ function renderDay(day){
       const sp=((fM-DS)/SP*100).toFixed(2), ep=((lM-DS)/SP*100).toFixed(2);
       inner+=`<span class="wlabel" style="left:${sp}%;">${hm(propData.first)}</span>`;
       inner+=`<span class="wlabel" style="left:${ep}%;transform:translateX(-100%);">${hm(propData.last)}</span>`;
+    } else if(!propData && incidents.length){
+      inner+=`<span style="position:absolute;top:50%;transform:translateY(-50%);left:8px;font-size:9px;color:var(--dim);letter-spacing:0.08em;">NOT ON WATER</span>`;
     }
 
-    propData.segs.forEach(s=>{
-      if(s.state!=='prop') return;
-      const a=tM(s.start), b=tM(s.end);
-      if(!a||!b) return;
-      const ca=Math.max(a,DS), cb=Math.min(b,DE);
-      if(cb<=ca) return;
-      inner+=`<div class="prop-seg" style="left:${pc(ca)};width:${wp(ca,cb)};"></div>`;
-    });
+    if(propData){
+      propData.segs.forEach(s=>{
+        if(s.state!=='prop') return;
+        const a=tM(s.start), b=tM(s.end);
+        if(!a||!b) return;
+        const ca=Math.max(a,DS), cb=Math.min(b,DE);
+        if(cb<=ca) return;
+        inner+=`<div class="prop-seg" style="left:${pc(ca)};width:${wp(ca,cb)};"></div>`;
+      });
+    }
 
     row.innerHTML=`<span class="boat-id">${boatId}</span><div class="track-wrap"><div class="track" id="tr-${key}">${inner}</div></div>`;
     view.appendChild(row);
@@ -832,7 +858,7 @@ function renderDay(day){
         const sevNote=SEV_NOTES[inc.sev]||'';
 
         // filter thread msgs by type + sev + time proximity (±60min)
-        const dotTimeMin=cm;
+        const dotTimeMin=(m!==null?m:cm); // use original unclamped time for thread matching
         const filtered=thread.filter(msg=>{
           if(!msg.types.includes(inc.type)) return false;
           if(!msg.sevs.includes(inc.sev)) return false;
@@ -840,9 +866,9 @@ function renderDay(day){
           const tp=parts[1]?parts[1].split(':').map(Number):null;
           if(!tp) return true;
           const msgMin=tp[0]*60+tp[1];
-          return Math.abs(msgMin-dotTimeMin)<=60;
+          return Math.abs(msgMin-dotTimeMin)<=15;
         });
-        const display=filtered.length?filtered:thread.filter(m=>m.types.includes(inc.type)&&m.sevs.includes(inc.sev));
+        const display=filtered;
 
         let body=display.length
           ?`<div class="tt-cols"><div class="tt-col-h">Time</div><div class="tt-col-h">Message</div></div><div class="tt-body">${display.map(m=>`<div class="tt-row"><div class="tt-cell tt-ts">${m.dt}</div><div class="tt-cell tt-txt">${m.text}</div></div>`).join('')}</div>`
@@ -1074,28 +1100,31 @@ function renderReports(){
       <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
         <div class="cat-group-label" style="color:#e24b4a;">Hardware / Prep</div>
         <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>Dual GPS wiring must be verified pre-launch</strong> — 3 boats lost time to reversed SMA connectors. A simple pre-water checklist item (compass pointing correctly?) would catch this before deployment.<br>
-          · <strong>GPS patch quality control</strong> — R122's patch shorted shield-to-pin. Inspect dual GPS patches before install; 30-day open repair suggests post-event tracking gaps.<br>
-          · <strong>Bow GPS physically vulnerable on recovery</strong> — R147's GPS knocked off on retrieval. Mounting needs to withstand trailer recovery forces.<br>
+          · <strong>GPS wiring and patch quality control need improvement</strong> — Three boats lost time due to reversed SMA connectors, and R122 experienced a GPS patch short failure. Add a pre-launch GPS verification step and inspect dual GPS patches before install to prevent repeat issues.<br>
+          · <strong>Bow GPS physically vulnerable on recovery</strong> — R147's GPS knocked off on retrieval. Mounting needs to withstand recovery forces.<br>
+          · <strong>ORCA safe degradation is expected but creates burden</strong> — Boats slowing at high temp is by design, however when one or more boats fall behind relative to the group it makes it harder for operators to manage the fleet as a whole.<br>
           · <strong>Bilge and hull inspection should be pre-event</strong> — R143 water ingress and bilge debris noted on the day. Pre-Mayhem hull check would reduce same-day pulls.
         </div>
       </div>
       <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
         <div class="cat-group-label" style="color:#ef9f27;">Operations / Recovery</div>
         <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>Disarms are not hard downtime</strong> — boats loiter and are RC re-armable. Default to RC recovery before retrieval.<br>
-          · <strong>R135 ramp incident</strong> — drove up ramp under disarmed autonomous state. Recovery procedures need guidance for disarmed-but-moving boats near the trailer.<br>
+          · <strong>Boats falling off the UI need a visible indicator</strong> — When a vessel drops from the team or UI there is no current alert. An explicit status indicator is needed for operators managing large fleets.<br>
           · <strong>Battery voltage at launch must be enforced</strong> — R117 launched at 50.2V and hit undervoltage ~37V. Minimum launch voltage should be a checkout gate.<br>
-          · <strong>ORCA safe degradation is expected behavior</strong> — teams should know slowing at high temp is by design, not a fault, to avoid premature retrieval.
+          · <strong>Scratched lenses affect EO behavior</strong> — Lens condition impacts electro-optical sensor performance. Lens inspection should be added to the pre-event hardware checklist.<br>
+          · <strong>Slow waypoint transitions with large fleets</strong> — Transitioning between waypoints takes significantly longer with 9 vessels.<br>
+          · <strong>R135 ramp incident</strong> — drove up ramp under disarmed autonomous state. Recovery procedures need guidance for disarmed-but-moving boats near the trailer.
         </div>
       </div>
       <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
         <div class="cat-group-label" style="color:#1d9e75;">Autonomy / Software</div>
         <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
           · <strong>Obstacle grid should be off by default in formation ops</strong> — caused collision avoidance interference in escort plays. Should not be on by default for transit/escort missions.<br>
+          · <strong>Software engineers on site were high-value</strong> — Autonomy and cloud engineering support helped drill down in real time into behaviors like "disarmed," "fell out of team," and "not proceeding to waypoint in transit," identifying root causes such as mavlink TX queue overflow, mavros crashes, and neighbor contact subscription not being enabled.<br>
+          · <strong>Race condition in autonomous targeting</strong> — The targeting behavior does not publish contact loss before the engage behavior has time to lose the track itself, causing the behavior to fail or complete unexpectedly. Needs sequencing fix or explicit handoff signal.<br>
           · <strong>Contact fusion logic needs pre-mission validation</strong> — R122/R145 double-engage and R137 targeting a neutral contact both stem from fused contact association. Test with live contacts before kinetic exercises.<br>
-          · <strong>Mission Manager crash on R137</strong> — no clear trigger. Needs automated restart / heartbeat monitoring before next kinetic exercise.<br>
-          · <strong>Formation drift root cause still unclear</strong> — attributed to control loop issues. Needs formal RCA before next large-scale formation exercise.
+          · <strong>Formation drift at scale</strong> — Rampages drifted from formation, which makes it increasingly difficult to manage large teams. Needs formal RCA before next large-scale formation exercise.<br>
+          · <strong>Mission Manager crash on R137</strong> — no clear trigger. Needs automated restart / heartbeat monitoring before next kinetic exercise.
         </div>
       </div>
       <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
@@ -1128,6 +1157,7 @@ const FLEET_DATA=[
     {date:'1/5/2026',text:'Second battery installed — R100 is configured for dual battery operation',by:'Dalton',mayhem:false},
     {date:'1/12/2026',text:'Replaced Ilmor after boat ran aground — cracked motor mount, bent trim pin, inverter and ICU issues',by:'Dalton',mayhem:false},
     {date:'2/18/2026',text:'Higher power ORCA and shaft testing (Engineering Sample). Swapped ORCA 260199003',by:'Dalton',mayhem:false},
+    {date:'5/11/2026',text:'Voltage mismatch discovered: Grafana reports 53.5V, actual ~43V on both batteries. Impacts battery telemetry from 16:30 on 05/11 through end of Mayhem. Root cause: BMS CAN comms issue — CAN 3 battery has bent pins, CAN 2 not outputting messages. Ilmor voltage chart shows more accurate reading.',by:'Jawad / Cory',mayhem:true},
   ]},
   {id:'R105', role:'Transit', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294584533', events:[
     {date:'11/4/2025',text:'Inverter inside Ilmor shorted causing battery to self-protect — Ilmor swapped',by:'DW',mayhem:false},
@@ -1159,8 +1189,6 @@ const FLEET_DATA=[
   ]},
   {id:'R121', role:'Transit / Dual GPS', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294585004', events:[
     {date:'1/21/2026',text:'Swapped ICU for updated unit (No GPS). Large amount of dried salt found under motor cowlings.',by:'Dalton',mayhem:false},
-    {date:'5/20/2026',text:'Fish Sensor CAN kitbox modification. Swapped barrel switch mount. Replaced HMI to kitbox cable.',by:'',mayhem:true},
-    {date:'5/28/2026',text:'Verified port camera — no issues on inspection. Reseated connection, twisted D+/D- pairs. May have been line interference.',by:'Vita',mayhem:true},
   ]},
   {id:'R122', role:'Picket / Dual GPS', url:'https://havocai.atlassian.net/wiki/spaces/tst/pages/294585052', events:[
     {date:'1/20/2026',text:'DWE camera install',by:'Dalton',mayhem:false},
@@ -1207,7 +1235,6 @@ const FLEET_DATA=[
     {date:'5/12/2026',text:'Failed formation repeatedly, drifting off line. Disarmed multiple times without permission — recovered by SB36.',by:'Kyle',mayhem:true},
   ]},
   {id:'R147', role:'Picket', url:'', events:[
-    {date:'6/10/2026',text:'R147 original LED appeared fried. Spare LED installed — now displaying wrong color.',by:'Jawad',mayhem:true},
   ]},
 ];
 
@@ -1331,7 +1358,7 @@ function renderRepairs(){
           <td>Steering oscillation ("drunk") during transit. Towed in 18:09. Water ingress from hull.</td>
           <td style="font-size:10px;">Unknown — params normal per Paul. Low Orca temp + control loop suspected. CRD / EO phantom recognitions also possible.</td>
           <td>Internal box secured. PID param ATC_STR_RAT_I adjusted. Back on water 05/12 08:26.</td>
-          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~14 hrs</td>
+          <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~17 hrs</td>
           <td><span class="t-badge badge-amber" style="background:rgba(239,159,39,0.12);color:#854f0b;">monitoring — unresolved</span></td>
         </tr>
 
