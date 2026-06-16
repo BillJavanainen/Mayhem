@@ -30,7 +30,7 @@ body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospa
 .leg-sep{width:1px;height:14px;background:var(--border2);margin-right:22px;align-self:center;}
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
 .lsw{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
-.lcircle{border-radius:50%;flex-shrink:0;border:1.5px solid rgba(242,240,234,0.7);}
+.lcircle{border-radius:50%;flex-shrink:0;}
 
 /* CONTROLS */
 .controls{display:flex;align-items:center;gap:7px;margin-bottom:1.25rem;flex-wrap:wrap;}
@@ -171,9 +171,9 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   </div>
   <div class="leg-sep"></div>
   <div class="legend-group">
-    <div class="li"><div class="lcircle" style="width:14px;height:14px;background:#aaa;"></div>critical</div>
-    <div class="li"><div class="lcircle" style="width:9px;height:9px;background:#aaa;"></div>moderate</div>
-    <div class="li"><div class="lcircle" style="width:5px;height:5px;background:#aaa;"></div>minor</div>
+    <div class="li"><div class="lcircle" style="width:5px;height:5px;background:var(--muted);"></div>minor</div>
+    <div class="li"><div class="lcircle" style="width:9px;height:9px;background:var(--muted);"></div>moderate</div>
+    <div class="li"><div class="lcircle" style="width:14px;height:14px;background:var(--muted);"></div>critical</div>
   </div>
   <div class="leg-sep"></div>
   <div class="legend-group">
@@ -186,9 +186,10 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
 <div class="controls">
   <span class="ctrl-label">severity</span>
   <button class="btn on" data-sev="all">all</button>
-  <button class="btn" data-sev="critical" style="color:#e24b4a;border-color:rgba(226,75,74,0.4);">critical</button>
-  <button class="btn" data-sev="moderate" style="color:#fbbf24;border-color:rgba(251,191,36,0.35);">moderate</button>
-  <button class="btn" data-sev="minor">minor</button>
+  <div class="ctrl-sep"></div>
+  <button class="btn" data-sev="critical"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--muted);margin-right:5px;vertical-align:middle;"></span>critical</button>
+  <button class="btn" data-sev="moderate"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--muted);margin-right:5px;vertical-align:middle;"></span>moderate</button>
+  <button class="btn" data-sev="minor"><span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--muted);margin-right:5px;vertical-align:middle;"></span>minor</button>
   <div class="ctrl-sep"></div>
   <span class="ctrl-label">type</span>
   <button class="btn" data-type="autonomy" style="color:#e24b4a;">autonomy</button>
@@ -885,7 +886,9 @@ function applyFilters(){
     });
     const key=`${id}_${activeDay}`;
     const hasInc=(INCIDENTS[key]||[]).length>0;
-    row.classList.toggle('dimmed',!rowVis&&hasInc);
+    const filterActive=activeSev!=='all'||activeType||searchVal;
+    // Dim if: has incidents but none match, OR has no incidents and a filter is active
+    row.classList.toggle('dimmed',(!rowVis&&hasInc)||(filterActive&&!hasInc&&!rowVis));
   });
   document.getElementById('ft-count').textContent=`${shown} INCIDENTS SHOWN · ${activeDay}`;
 }
@@ -1316,10 +1319,10 @@ function renderRepairs(){
           <td class="t-key" style="white-space:nowrap;">R117 R122 R145</td>
           <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11 AM</td>
           <td>Compass 180° reversed — GPS patches wired backwards (SMA connectors swapped)</td>
-          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Dual GPS patches installed opposite. Swap SMA = fix.</td>
+          <td style="font-size:10px;">Dual GPS patches installed opposite. Swap SMA = fix.</td>
           <td>~1 hr per boat once root cause found on first boat</td>
           <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">~1 hr each</td>
-          <td><span class="t-badge badge-done">✓ operational</span></td>
+          <td><span class="t-badge badge-done">operational</span></td>
         </tr>
 
         <tr>
@@ -1359,7 +1362,7 @@ function renderRepairs(){
           <td style="font-size:10px;">Physical GPS antenna displaced on recovery. Transom seal leak.</td>
           <td>GPS verified stable after drive test. Sealant applied to transom bolts 05/12 AM.</td>
           <td style="color:#ef9f27;font-weight:500;white-space:nowrap;">~21 hrs</td>
-          <td><span class="t-badge badge-done">✓ operational</span></td>
+          <td><span class="t-badge badge-done">operational</span></td>
         </tr>
 
         <tr>
@@ -1388,30 +1391,30 @@ function renderRepairs(){
           <td class="t-key">R121 R139 + fleet</td>
           <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11–13</td>
           <td>Multiple autonomous disarms on water mid-mission</td>
-          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Boats loiter/drift on disarm — RC re-armable without retrieval. IP drop likely cause.</td>
+          <td style="font-size:10px;">Boats loiter/drift on disarm — RC re-armable without retrieval. IP drop likely cause.</td>
           <td>Re-armed via RC or force-armed. Obstacle grid disabled (Jeremy, 05/12).</td>
-          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Minutes (RC rearm)</td>
-          <td><span class="t-badge badge-done">✓ operational</span></td>
+          <td style="color:var(--text);font-weight:500;white-space:nowrap;">Minutes (RC rearm)</td>
+          <td><span class="t-badge badge-done">operational</span></td>
         </tr>
 
         <tr>
           <td class="t-key">Fleet</td>
           <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11–13</td>
           <td>Formation drift, escort falling-out, multi-waypoint transit failures</td>
-          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Autonomy control loop issue — not hardware</td>
+          <td style="font-size:10px;">Autonomy control loop issue — not hardware</td>
           <td>Plays reissued per event. TESTCM-1251 Picket Play Development — Done.</td>
-          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Minutes per event</td>
-          <td><span class="t-badge badge-done">✓ TESTCM-1251 Done</span></td>
+          <td style="color:var(--text);font-weight:500;white-space:nowrap;">Minutes per event</td>
+          <td><span class="t-badge badge-done">TESTCM-1251 Done</span></td>
         </tr>
 
         <tr>
           <td class="t-key">R117 + fleet</td>
           <td style="font-size:10px;color:var(--muted);white-space:nowrap;">05/11</td>
           <td>ORCA overheating during long transits with strong currents</td>
-          <td style="font-size:10px;"><span class="t-badge" style="background:rgba(55,138,221,0.1);color:#185fa5;font-size:9px;">✓ Kyle confirmed</span> Safe degradation by design — slows at temp threshold, resumes when cooled</td>
+          <td style="font-size:10px;">Safe degradation by design — slows at temp threshold, resumes when cooled</td>
           <td>Auto-recovery. No retrieval or repair needed.</td>
-          <td style="color:#1d9e75;font-weight:500;white-space:nowrap;">Auto-recovery</td>
-          <td><span class="t-badge badge-done">✓ by design</span></td>
+          <td style="color:var(--text);font-weight:500;white-space:nowrap;">Auto-recovery</td>
+          <td><span class="t-badge badge-done">by design</span></td>
         </tr>
 
         <tr><td colspan="7" class="cat-group-label" style="color:#378add;">Post-Mayhem follow-on repairs</td></tr>
