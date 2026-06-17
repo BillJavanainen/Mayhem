@@ -159,6 +159,7 @@ footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--border);
   <button class="day-tab" data-day="05/12">Tuesday 05/12</button>
   <button class="day-tab" data-day="05/13">Wednesday 05/13</button>
   <button class="day-tab" data-day="reports">Reports &amp; Tickets</button>
+  <button class="day-tab" data-day="lessons">Lessons Learned</button>
   <button class="day-tab" data-day="fleet">Fleet History</button>
   <button class="day-tab" data-day="repairs">Repair Status</button>
 </div>
@@ -295,7 +296,7 @@ const INCIDENTS={
   'R139_05/11':[],  // R139 had no incidents on 05/11 — thread was empty
   'R139_05/12':[
     {time:'09:54',type:'autonomy',sev:'moderate'},   // fell out of team, headed north 200°
-    {time:'12:27',type:'hardware',sev:'critical'},   // disarmed failsafe — no RC receiver
+    {time:'12:27',type:'autonomy',sev:'critical'},   // disarmed failsafe — no RC receiver
     {time:'14:50',type:'hardware',sev:'moderate'},   // SSM battery message, force armed for recovery
   ],
   // R116 — dual GPS issues all day 05/11, ICU bad 05/12
@@ -336,8 +337,8 @@ const INCIDENTS={
   ],
   'R145_05/12':[
     {time:'10:39',type:'software',sev:'minor'},     // checkout play showed failed in UI
-    {time:'11:15',type:'hardware',sev:'moderate'},  // three disarms during launch
-    {time:'14:12',type:'hardware',sev:'minor'},     // disarmed without permission
+    {time:'11:15',type:'autonomy',sev:'moderate'},  // three disarms during launch
+    {time:'14:12',type:'autonomy',sev:'minor'},     // disarmed without permission
   ],
   'R122_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'12:48',type:'hardware',sev:'critical'},{time:'14:29',type:'hardware',sev:'critical'}],
   'R134_05/12':[{time:'09:14',type:'autonomy',sev:'moderate'},{time:'10:06',type:'hardware',sev:'moderate'},{time:'10:18',type:'hardware',sev:'moderate'},{time:'10:56',type:'hardware',sev:'critical'},{time:'11:02',type:'hardware',sev:'critical'},{time:'12:45',type:'hardware',sev:'minor'}],
@@ -657,9 +658,9 @@ const THREADS={
     {dt:'05/12 09:54',types:['autonomy'],sevs:['moderate'],text:'Fell out of team and headed north 200° without reason shown in UI'},
     {dt:'05/12 10:53',types:['autonomy'],sevs:['moderate'],text:'Repeated'},
     {dt:'05/12 10:55',types:['autonomy'],sevs:['moderate'],text:'Re-armed and re-entered'},
-    {dt:'05/12 12:27',types:['hardware'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
+    {dt:'05/12 12:27',types:['autonomy'],sevs:['critical'],text:'Disarmed failsafe — no RC receiver, currently in hold'},
     {dt:'05/12 12:39',types:['software'],sevs:['minor'],text:'All looks good from autonomy — no mavlink TX overflow, no mavros crashes'},
-    {dt:'05/12 14:50',types:['hardware'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
+    {dt:'05/12 14:50',types:['autonomy'],sevs:['moderate'],text:'SSM battery message — force armed for recovery'},
   ],
 
   'R143_05/11':[
@@ -684,8 +685,8 @@ const THREADS={
   'R145_05/12':[
     {dt:'05/12 10:39',types:['software'],sevs:['minor'],text:'R145 ran checkout play but UI shows failed'},
     {dt:'05/12 11:04',types:['software'],sevs:['minor'],text:'Resolved: battery absolute value bug — will log as bug report'},
-    {dt:'05/12 11:15',types:['hardware'],sevs:['moderate'],text:'Three disarms during launch'},
-    {dt:'05/12 14:12',types:['hardware'],sevs:['minor'],text:'Disarmed without permission'},
+    {dt:'05/12 11:15',types:['autonomy'],sevs:['moderate'],text:'Three disarms during launch'},
+    {dt:'05/12 14:12',types:['autonomy'],sevs:['minor'],text:'Disarmed without permission'},
   ],
 
   'R145_05/13':[
@@ -1092,52 +1093,10 @@ function renderReports(){
     `;
   });
 
-  // Lessons learned + Confluence links - append as DOM nodes to avoid innerHTML truncation
+  // Confluence links - append as DOM node to avoid innerHTML truncation
   const extra = document.createElement('div');
   extra.innerHTML = `
-    <div class="rpt-section-title" style="margin-top:1.5rem;">Lessons Learned</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
-      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
-        <div class="cat-group-label" style="color:#e24b4a;">Hardware / Prep</div>
-        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>GPS wiring and patch quality control need improvement</strong> — Three boats lost time due to reversed SMA connectors, and R122 experienced a GPS patch short failure. Add a pre-launch GPS verification step and inspect dual GPS patches before install to prevent repeat issues.<br>
-          · <strong>Bow GPS physically vulnerable on recovery</strong> — R147's GPS knocked off on retrieval. Mounting needs to withstand recovery forces.<br>
-          · <strong>ORCA safe degradation is expected but creates burden</strong> — Boats slowing at high temp is by design, however when one or more boats fall behind relative to the group it makes it harder for operators to manage the fleet as a whole.<br>
-          · <strong>Bilge and hull inspection should be pre-event</strong> — R143 water ingress and bilge debris noted on the day. Pre-Mayhem hull check would reduce same-day pulls.
-        </div>
-      </div>
-      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
-        <div class="cat-group-label" style="color:#ef9f27;">Operations / Recovery</div>
-        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>Boats falling off the UI need a visible indicator</strong> — When a vessel drops from the team or UI there is no current alert. An explicit status indicator is needed for operators managing large fleets.<br>
-          · <strong>Battery voltage at launch must be enforced</strong> — R117 launched at 50.2V and hit undervoltage ~37V. Minimum launch voltage should be a checkout gate.<br>
-          · <strong>Scratched lenses affect EO behavior</strong> — Lens condition impacts electro-optical sensor performance. Lens inspection should be added to the pre-event hardware checklist.<br>
-          · <strong>Slow waypoint transitions with large fleets</strong> — Transitioning between waypoints takes significantly longer with 9 vessels.<br>
-          · <strong>R135 ramp incident</strong> — drove up ramp under disarmed autonomous state. Recovery procedures need guidance for disarmed-but-moving boats near the trailer.
-        </div>
-      </div>
-      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
-        <div class="cat-group-label" style="color:#1d9e75;">Autonomy / Software</div>
-        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>Obstacle grid should be off by default in formation ops</strong> — caused collision avoidance interference in escort plays. Should not be on by default for transit/escort missions.<br>
-          · <strong>Software engineers on site were high-value</strong> — Autonomy and cloud engineering support helped drill down in real time into behaviors like "disarmed," "fell out of team," and "not proceeding to waypoint in transit," identifying root causes such as mavlink TX queue overflow, mavros crashes, and neighbor contact subscription not being enabled.<br>
-          · <strong>Race condition in autonomous targeting</strong> — The targeting behavior does not publish contact loss before the engage behavior has time to lose the track itself, causing the behavior to fail or complete unexpectedly. Needs sequencing fix or explicit handoff signal.<br>
-          · <strong>Contact fusion logic needs pre-mission validation</strong> — R122/R145 double-engage and R137 targeting a neutral contact both stem from fused contact association. Test with live contacts before kinetic exercises.<br>
-          · <strong>Formation drift at scale</strong> — Rampages drifted from formation, which makes it increasingly difficult to manage large teams. Needs formal RCA before next large-scale formation exercise.<br>
-          · <strong>Mission Manager crash on R137</strong> — no clear trigger. Needs automated restart / heartbeat monitoring before next kinetic exercise.
-        </div>
-      </div>
-      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
-        <div class="cat-group-label" style="color:#888780;">Documentation / Process</div>
-        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
-          · <strong>Incident log needs structured timestamps</strong> — repair duration analysis required cross-referencing 4 sources. A structured form (boat, time, issue, fix, back-on-water) would make this trivial.<br>
-          · <strong>TESTCM-829 still In Progress with no description</strong> — umbrella test report for all three Mayhem days has no write-up. Reports should be completed within 48 hrs of event close.<br>
-          · <strong>R135 prop and R122 GPS patch are 30 days open</strong> — follow-on repairs with no fleet history entry. Field-to-hardware handoff needs a tracked ticket, not just a Slack note.<br>
-          · <strong>Logs status page is manually maintained</strong> — automating S3 upload tracking would save post-event admin time.
-        </div>
-      </div>
-    </div>
-    <div class="rpt-section-title" style="margin-top:0.5rem;">Confluence sources</div>
+    <div class="rpt-section-title" style="margin-top:1.5rem;">Confluence sources</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">
       ${CONFLUENCE_PAGES.map(p=>`<a href="${p.url}" target="_blank" style="font-size:11px;color:#378add;text-decoration:none;padding:5px 12px;border:1px solid rgba(55,138,221,0.3);border-radius:3px;background:rgba(55,138,221,0.05);">${p.title} →</a>`).join('')}
     </div>
@@ -1257,6 +1216,67 @@ function roleColor(role){
   return '#888780';
 }
 
+// ── LESSONS LEARNED ──
+function renderLessons(){
+  const view=document.getElementById('day-view');
+  view.innerHTML='';
+  document.querySelector('.controls').style.display='none';
+  document.querySelector('.legend').style.display='none';
+
+  const wrap=document.createElement('div');
+  wrap.className='rpt-wrap';
+  wrap.innerHTML=`
+    <div class="rpt-section-title">Lessons Learned — Mayhem 05/11–05/13</div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:1.25rem;">Compiled from incident data, fleet history, and stakeholder review (Kyle Hartner, Jawad Yousef).</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#e24b4a;">Hardware / Prep</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>GPS wiring and patch quality control need improvement</strong> — Three boats lost time due to reversed SMA connectors, and R122 experienced a GPS patch short failure. Add a pre-launch GPS verification step and inspect dual GPS patches before install to prevent repeat issues.<br>
+          · <strong>Bow GPS physically vulnerable on recovery</strong> — R147's GPS knocked off on retrieval. Mounting needs to withstand recovery forces.<br>
+          · <strong>ORCA safe degradation is expected but creates burden</strong> — Boats slowing at high temp is by design, however when one or more boats fall behind relative to the group it makes it harder for operators to manage the fleet as a whole.<br>
+          · <strong>Bilge and hull inspection should be pre-event</strong> — R143 water ingress and bilge debris noted on the day. Pre-Mayhem hull check would reduce same-day pulls.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#ef9f27;">Operations / Recovery</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Boats falling off the UI need a visible indicator</strong> — When a vessel drops from the team or UI there is no current alert. An explicit status indicator is needed for operators managing large fleets.<br>
+          · <strong>Battery voltage at launch must be enforced</strong> — R117 launched at 50.2V and hit undervoltage ~37V. Minimum launch voltage should be a checkout gate.<br>
+          · <strong>Scratched lenses affect EO behavior</strong> — Lens condition impacts electro-optical sensor performance. Lens inspection should be added to the pre-event hardware checklist.<br>
+          · <strong>Slow waypoint transitions with large fleets</strong> — Transitioning between waypoints takes significantly longer with 9 vessels.<br>
+          · <strong>R135 ramp incident</strong> — drove up ramp under disarmed autonomous state. Recovery procedures need guidance for disarmed-but-moving boats near the trailer.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#1d9e75;">Autonomy / Software</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Obstacle grid should be off by default in formation ops</strong> — caused collision avoidance interference in escort plays. Should not be on by default for transit/escort missions.<br>
+          · <strong>Software engineers on site were high-value</strong> — Autonomy and cloud engineering support helped drill down in real time into behaviors like "disarmed," "fell out of team," and "not proceeding to waypoint in transit," identifying root causes such as mavlink TX queue overflow, mavros crashes, and neighbor contact subscription not being enabled.<br>
+          · <strong>Race condition in autonomous targeting</strong> — The targeting behavior does not publish contact loss before the engage behavior has time to lose the track itself, causing the behavior to fail or complete unexpectedly. Needs sequencing fix or explicit handoff signal.<br>
+          · <strong>Contact fusion logic needs pre-mission validation</strong> — R122/R145 double-engage and R137 targeting a neutral contact both stem from fused contact association. Test with live contacts before kinetic exercises.<br>
+          · <strong>Formation drift at scale</strong> — Rampages drifted from formation, which makes it increasingly difficult to manage large teams. Needs formal RCA before next large-scale formation exercise.<br>
+          · <strong>Mission Manager crash on R137</strong> — no clear trigger. Needs automated restart / heartbeat monitoring before next kinetic exercise.
+        </div>
+      </div>
+      <div style="border:1px solid var(--border2);border-radius:3px;overflow:hidden;">
+        <div class="cat-group-label" style="color:#888780;">Documentation / Process</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--text);line-height:1.8;background:var(--surface2);">
+          · <strong>Incident log needs structured timestamps</strong> — repair duration analysis required cross-referencing 4 sources. A structured form (boat, time, issue, fix, back-on-water) would make this trivial.<br>
+          · <strong>TESTCM-829 still In Progress with no description</strong> — umbrella test report for all three Mayhem days has no write-up. Reports should be completed within 48 hrs of event close.<br>
+          · <strong>R135 prop and R122 GPS patch are 30 days open</strong> — follow-on repairs with no fleet history entry. Field-to-hardware handoff needs a tracked ticket, not just a Slack note.<br>
+          · <strong>Logs status page is manually maintained</strong> — automating S3 upload tracking would save post-event admin time.
+        </div>
+      </div>
+    </div>
+  `;
+  view.appendChild(wrap);
+  document.getElementById('hdr-count').textContent='Lessons Learned · compiled from Mayhem 05/11–05/13';
+  document.getElementById('ft-count').textContent='SOURCES: SLACK · JIRA · FLEET HISTORY · STAKEHOLDER REVIEW';
+}
+
+
+  const view=document.getElementById('day-view');
 function renderFleet(){
   const view=document.getElementById('day-view');
   view.innerHTML='';
@@ -1482,6 +1502,8 @@ document.querySelectorAll('.day-tab').forEach(tab=>{
     closeAll();
     if(tab.dataset.day==='reports'){
       renderReports();
+    } else if(tab.dataset.day==='lessons'){
+      renderLessons();
     } else if(tab.dataset.day==='fleet'){
       renderFleet();
     } else if(tab.dataset.day==='repairs'){
